@@ -1,0 +1,17 @@
+.contact {
+  border-bottom: 1px solid #5c5c5c;
+  height: 140px;
+  flex-shrink: 0;
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .contact {
+    height: 110px;
+  }
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 600px) {
+  .contact {
+    height: 70px;
+  }
+}

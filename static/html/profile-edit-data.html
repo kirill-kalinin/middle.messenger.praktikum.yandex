@@ -7,20 +7,22 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>K-Chat | The Messenger</title>
 
-  <link rel="apple-touch-icon" sizes="180x180" href="images/favicons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="images/favicons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="images/favicons/favicon-16x16.png">
-  <link rel="manifest" href="images/favicons/site.webmanifest">
-  <link rel="mask-icon" href="images/favicons/safari-pinned-tab.svg" color="#5c5c5c">
-  <link rel="shortcut icon" href="images/favicons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="../images/favicons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="../images/favicons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="../images/favicons/favicon-16x16.png">
+  <link rel="manifest" href="../images/favicons/site.webmanifest">
+  <link rel="mask-icon" href="../images/favicons/safari-pinned-tab.svg" color="#5c5c5c">
+  <link rel="shortcut icon" href="../images/favicons/favicon.ico">
   <meta name="msapplication-TileColor" content="#00aba9">
-  <meta name="msapplication-config" content="images/favicons/browserconfig.xml">
+  <meta name="msapplication-config" content="../images/favicons/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
 
   <link rel="stylesheet" href="../styles/main.css">
   <link rel="stylesheet" href="../styles/button.css">
   <link rel="stylesheet" href="../styles/sidebar.css">
   <link rel="stylesheet" href="../styles/profile.css">
+
+  <script src="../scripts/form-handler.js"></script>
 </head>
 
 <body>
@@ -28,7 +30,7 @@
     <div class="profile container bordered-block">
       <aside class="profile__sidebar sidebar">
         <img class="sidebar__logo" src="../images/logo.svg" alt=" ">
-        <a href="" class="profile__sidebar-button button">
+        <a href="chat-select.html" class="profile__sidebar-button button">
           <img class="profile__sidebar-button-img" src="../images/arrow.svg" alt=" "> Назад к чатам
         </a>
         <nav class="sidebar__content">
@@ -53,30 +55,30 @@
           <div class="profile__user-name">Иван</div>
           <img class="profile__user-avatar" src="../images/avatar-placeholder.svg" alt=" ">
         </div>
-        <form class="profile__data">
+        <form class="profile__data" name="profile-data">
           <p class="profile__data-item">
             <label class="profile__data-label">Почта</label>
-            <input class="profile__data-value" type="text" value="user@ya.ru">
+            <input class="profile__data-value" type="text" name="email" value="user@ya.ru">
           </p>
           <p class="profile__data-item">
             <label class="profile__data-label">Логин</label>
-            <input class="profile__data-value" type="text" value="ivanivanov">
+            <input class="profile__data-value" type="text" name="login" value="ivanivanov">
           </p>
           <p class="profile__data-item">
             <label class="profile__data-label">Имя</label>
-            <input class="profile__data-value" type="text" value="Иван">
+            <input class="profile__data-value" type="text" name="first_name" value="Иван">
           </p>
           <p class="profile__data-item">
             <label class="profile__data-label">Фамилия</label>
-            <input class="profile__data-value" type="text" value="Иванов">
+            <input class="profile__data-value" type="text" name="second_name" value="Иванов">
           </p>
           <p class="profile__data-item">
             <label class="profile__data-label">Имя в чате</label>
-            <input class="profile__data-value" type="text" value="Иван">
+            <input class="profile__data-value" type="text" name="display_name" value="Иван">
           </p>
           <p class="profile__data-item">
             <label class="profile__data-label">Телефон</label>
-            <input class="profile__data-value" type="tel" value="+7 (777) 777 77 77">
+            <input class="profile__data-value" type="tel" name="phone" value="+7 (777) 777 77 77">
           </p>
           <div class="profile__buttons">
             <a class="profile__button button" href="profile-main.html">Отмена</a>

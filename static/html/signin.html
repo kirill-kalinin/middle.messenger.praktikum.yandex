@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="../styles/signin.css">
   <link rel="stylesheet" href="../styles/sidebar.css">
   <link rel="stylesheet" href="../styles/form.css">
+
+  <script src="../scripts/form-handler.js"></script>
 </head>
 
 <body>
@@ -35,25 +37,25 @@
         </div>
       </aside>
       <main class="signin__main-block">
-        <form class="signin__form form" action="">
+        <form class="signin__form form" name="signin">
           <p class="form__title">Регистрация</p>
           <label class="form__label">Почта
-            <input class="form__input" type="text" placeholder="Ваш e-mail">
+            <input class="form__input" type="text" name="email" placeholder="Ваш e-mail">
           </label>
           <label class="form__label">Логин
-            <input class="form__input" type="text" placeholder="Ваш логин">
+            <input class="form__input" type="text" name="login" placeholder="Ваш логин">
           </label>
           <label class="form__label">Имя
-            <input class="form__input" type="text" placeholder="Ваше имя">
+            <input class="form__input" type="text" name="first_name" placeholder="Ваше имя">
           </label>
           <label class="form__label">Фамилия
-            <input class="form__input" type="text" placeholder="Ваша фамилия">
+            <input class="form__input" type="text" name="second_name" placeholder="Ваша фамилия">
           </label>
           <label class="form__label">Телефон
-            <input class="form__input" type="tel" placeholder="Ваш телефон">
+            <input class="form__input" type="tel" name="phone" placeholder="Ваш телефон">
           </label>
           <label class="form__label">Пароль
-            <input class="form__input" type="password" placeholder="Придумайте пароль">
+            <input class="form__input" type="password" name="password" placeholder="Придумайте пароль">
           </label>
           <label class="form__label">Пароль (еще раз)
             <input class="form__input" type="password" placeholder="Введите пароль еще раз">

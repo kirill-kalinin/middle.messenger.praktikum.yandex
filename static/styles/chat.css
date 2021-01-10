@@ -1,0 +1,31 @@
+.chat {    
+  display: flex;
+  justify-content: space-between;
+}
+
+.chat__sidebar {
+  width: 40%;
+  margin-right: 20px;
+}
+
+.chat__main-block {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20vh 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .chat__sidebar {
+    margin-right: 16x;
+  }
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 600px) {
+  .chat__sidebar {
+    margin-right: 10px;
+  }
+}

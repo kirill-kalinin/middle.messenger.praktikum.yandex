@@ -12,6 +12,7 @@
 }
 
 .profile__sidebar-button {
+  font-family: 'Roboto', sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -55,7 +56,7 @@
 }
 
 .profile__user-name {
-  font-size: 36px;
+  font-size: 2.25em;
 }
 
 .profile__user-avatar {
@@ -72,17 +73,18 @@
 }
 
 .profile__data-value {
-  font-size: 20px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25em;
   text-align: right;
   border: none;
-  max-width: 60%;
+  max-width: 55%;
 }
 
 .profile__data-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-size: 20px;
+  font-size: 1.25em;
   margin: 4vh 0;
 }
 
@@ -96,27 +98,103 @@
   margin: 5%;
 }
 
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
+.profile__data_password,
+.profile__buttons_password {
+  padding-top: 12vh;
+}
+
+@media screen and (max-width: 800px) {
   .profile__sidebar-button {
-    width: 60%;
+    width: 40%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__sidebar-button {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .profile__main-block {
+    padding: 5vh 0;
+  }
+
+  .profile__data-value {
+    max-width: 40%;
+  }
+
+  .profile__sidebar-button-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profile__header {
+    padding-bottom: 32px;
+  }
+  
+  .profile__user-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile__user-name {
+    font-size: 1.8em;
   }
 
   .profile__data-item,
   .profile__data-value {
-    font-size: 14px;
-  }
-
-  .profile__user-name {
-    font-size: 20px;
+    font-size: 1em;
   }
 
   .profile__button {
-    font-size: 16px;
+    margin: 3%;
+  }
+
+  .profile__data_password,
+  .profile__buttons_password {
+    padding-top: 7vh;
   }
 }
 
-@media screen and (max-height: 800px) {
+@media screen and (max-width: 600px), screen and (max-height: 600px) {
   .profile__main-block {
     padding: 3vh 0;
+  }
+
+  .profile__data-value {
+    max-width: 35%;
+  }
+
+  .profile__sidebar-button-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .profile__header {
+    padding-bottom: 22px;
+  }
+  
+  .profile__user-avatar {
+    width: 55px;
+    height: 55px;
+  }
+
+  .profile__user-name {
+    font-size: 1.2em;
+  }
+
+  .profile__data-item,
+  .profile__data-value {
+    font-size: 0.8em;
+  }
+
+  .profile__button {
+    margin: 2%;
+  }
+  
+  .profile__data_password,
+  .profile__buttons_password {
+    padding-top: 3vh;
   }
 }

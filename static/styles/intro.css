@@ -2,17 +2,19 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   border: 8px solid #eb6670;
 }
 
 .intro__logo {
   width: 172px; 
   height: 184px;
+  margin: 21px;
 }
 
 .intro__text {
   font-size: 42px;
-  margin-left: 42px;
+  margin: 21px;
   background: linear-gradient(90deg, #eb6670 50%, #000000 50%);
   background-clip: text;
   background-size: 200% auto;
