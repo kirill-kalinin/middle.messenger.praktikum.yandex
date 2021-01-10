@@ -1,0 +1,122 @@
+.profile {    
+  display: flex;
+}
+
+.profile__main-block {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10vh 0;
+}
+
+.profile__sidebar-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 35%;
+  text-align: right;
+  line-height: 1.2;
+  background-color: #eb6670;
+}
+
+.profile__sidebar-button-img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+.profile__sidebar-button:hover {
+  color: #eeeeee;
+  border-color: #eeeeee;
+}
+
+.profile__sidebar-button:active {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.profile__sidebar-button:hover .profile__sidebar-button-img {
+  filter: invert(92%);
+}
+
+.profile__sidebar-button:active .profile__sidebar-button-img {
+  filter: invert(100%);
+}
+
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  padding-bottom: 40px;
+  border-bottom: 2px solid #000000;
+}
+
+.profile__user-name {
+  font-size: 36px;
+}
+
+.profile__user-avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.profile__data {
+  width: 75%;
+}
+
+.profile__data-item:focus-within .profile__data-label {
+  color: #eb6670;
+}
+
+.profile__data-value {
+  font-size: 20px;
+  text-align: right;
+  border: none;
+  max-width: 60%;
+}
+
+.profile__data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  margin: 4vh 0;
+}
+
+.profile__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__button {
+  margin: 5%;
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .profile__sidebar-button {
+    width: 60%;
+  }
+
+  .profile__data-item,
+  .profile__data-value {
+    font-size: 14px;
+  }
+
+  .profile__user-name {
+    font-size: 20px;
+  }
+
+  .profile__button {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-height: 800px) {
+  .profile__main-block {
+    padding: 3vh 0;
+  }
+}

@@ -1,0 +1,34 @@
+.intro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 8px solid #eb6670;
+}
+
+.intro__logo {
+  width: 172px; 
+  height: 184px;
+}
+
+.intro__text {
+  font-size: 42px;
+  margin-left: 42px;
+  background: linear-gradient(90deg, #eb6670 50%, #000000 50%);
+  background-clip: text;
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.intro__text_animated {
+  animation-name: intro__text_animated;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-direction: reverse;
+}
+
+@keyframes intro__text_animated {
+  to {
+    background-position: 100%;
+  }
+}

@@ -17,22 +17,31 @@
   <meta name="msapplication-config" content="images/favicons/browserconfig.xml">
   <meta name="theme-color" content="#ffffff">
 
-  <link rel="stylesheet" href="styles/main.css">
-  <link rel="stylesheet" href="styles/intro.css">
-
-  <script src="scripts/intro.js"></script>
+  <link rel="stylesheet" href="../styles/main.css">
+  <link rel="stylesheet" href="../styles/button.css">
+  <link rel="stylesheet" href="../styles/error.css">
+  <link rel="stylesheet" href="../styles/sidebar.css">
 </head>
 
 <body>
-  <noscript>
-    You need to enable JavaScript to run this app.
-  </noscript>
-
   <div class="wrapper">
-    <main class="intro container">
-      <img class="intro__logo" src="images/logo.svg" alt=" ">
-      <h1 class="intro__text">K-Chat</h1>
-    </main>
+    <div class="error container bordered-block">
+      <aside class="error__sidebar sidebar">
+        <img class="sidebar__logo" src="../images/logo.svg" alt=" ">
+        <div class="sidebar__content">
+          <p class="sidebar__alert">Что-то пошло</p>
+          <p class="sidebar__alert">не так!</p>
+        </div>
+      </aside>
+      <main class="error__main-block">
+        <div class="error__title-wrapper">
+          <p class="error__title">Код ошибки</p>
+          <p class="error__code">500</p>
+        </div>
+        <p class="error__description">Попробуйте позже!</p>
+        <a class="error__go-back-button button button_padding-wide" href="chat.html">Назад</a>
+      </main>
+    </div>
   </div>
 </body>
 

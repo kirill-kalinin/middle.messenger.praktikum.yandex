@@ -1,0 +1,27 @@
+.button {
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  color: #000000;
+  border: 4px solid #000000;
+  background-color: #ffffff;
+  padding: 18px;
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.button:hover {
+  color: #eb6670;
+  border-color: #eb6670;
+}
+
+.button:active {
+  color: #e4212b;
+  border-color: #e4212b;
+}
+
+.button_padding-wide {
+  padding-left: 35px;
+  padding-right: 35px;
+}

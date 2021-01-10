@@ -1,0 +1,61 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 70%;
+}
+
+.form__title {
+  font-size: 36px;
+  margin: 0;
+}
+
+.form__label {
+  font-size: 18px;
+  display: block;
+  width: 100%;
+}
+
+.form__label:focus-within {
+  color: #eb6670;
+}
+
+.form__input {
+  font-size: 20px;
+  display: block;
+  border: none;
+  border-bottom: 1px solid #000000;
+  width: 100%;
+}
+
+@media screen and (max-height: 900px) {
+  .form__title {
+    font-size: 28px;
+  }
+
+  .form__label {
+    font-size: 14px;
+  }
+
+  .form__input,
+  .form__submit {
+    font-size: 15px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  .form__title {
+    font-size: 24px;
+  }
+
+  .form__label {
+    font-size: 12px;
+  }
+  
+  .form__input,
+  .form__submit {
+    font-size: 13px;
+  }
+}
