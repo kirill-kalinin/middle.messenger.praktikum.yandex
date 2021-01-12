@@ -77,7 +77,8 @@
   font-size: 1.25em;
   text-align: right;
   border: none;
-  max-width: 55%;
+  overflow: hidden;
+  max-width: 70%;
 }
 
 .profile__data-item {
@@ -121,7 +122,7 @@
   }
 
   .profile__data-value {
-    max-width: 40%;
+    max-width: 65%;
   }
 
   .profile__sidebar-button-img {
@@ -163,7 +164,7 @@
   }
 
   .profile__data-value {
-    max-width: 35%;
+    max-width: 60%;
   }
 
   .profile__sidebar-button-img {

@@ -22,6 +22,8 @@
   <link rel="stylesheet" href="../styles/chat.css">
   <link rel="stylesheet" href="../styles/chat-sidebar.css">
   <link rel="stylesheet" href="../styles/contact.css">
+
+  <script src="../scripts/form-handler.js"></script>
 </head>
 
 <body>
@@ -87,7 +89,7 @@
           </li>
 
           <li class="chat-sidebar__contact">
-            <a class="contact" href="chat-active.html">
+            <a class="contact contact_active" href="chat-active.html">
               <img class="contact__image" src="../images/avatar-placeholder.svg" alt=" ">
               <div class="contact__primary-info">
                 <p class="contact__name">Игорь</p>
@@ -115,8 +117,26 @@
           </li>
         </ul>
       </aside>
-      <main class="chat__main-block bordered-block">
-        <div class="chat__warning">Выберите собеседника из списка<br>или добавьте новый контакт</div>
+      <main class="chat__main-block">
+        <div class="chat__messages bordered-block"></div>
+        <form class="chat__form" name="message">
+          <div class="chat__attach bordered-block">
+            <span class="chat__attach-option">Фото или видео</span>
+            <span class="chat__attach-option-delimiter"></span>
+            <span class="chat__attach-option">Файл</span>
+            <span class="chat__attach-option-delimiter"></span>
+            <span class="chat__attach-option">Локация</span>
+          </div>
+          <div class="chat__new-message bordered-block" name="message">
+            <textarea class="chat__textarea" name="message" placeholder="Сообщение..." maxlength="400"></textarea>
+            <button class="chat__form-button chat__form-button_attach" type="button">
+              <img class="chat__button-image" src="../images/button-attach.svg" alt=" ">
+            </button>
+            <button class="chat__form-button chat__form-button_submit" type="submit">
+              <img class="chat__button-image" src="../images/button-send.svg" alt=" ">
+            </button>
+          </div>
+        </form>
       </main>
     </div>
   </div>

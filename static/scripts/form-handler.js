@@ -18,6 +18,15 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
+  const textArea = form.querySelector('.chat__textarea');
+  if (textArea) {
+    textArea.addEventListener('keyup', function() {
+      if (textArea.scrollHeight > textArea.clientHeight) {
+        textArea.style.height = textArea.scrollHeight + "px";
+      }
+    });
+  }
+
   form.addEventListener('submit', function(e) {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -27,5 +36,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     console.log(e.target.name, Object.fromEntries(formData.entries()));
+
+    // Эмуляция успешного входа/регистрации
+    if (e.target.name === 'login' || e.target.name === 'signin') {
+      const redirect = confirm('Данные формы выведены в консоль. Перейти на страницу выбора собеседника?');
+      if (redirect) {
+        window.location.href = "chat-select.html";
+      }
+    }
   })
 });
