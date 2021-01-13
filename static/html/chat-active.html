@@ -22,8 +22,10 @@
   <link rel="stylesheet" href="../styles/chat.css">
   <link rel="stylesheet" href="../styles/chat-sidebar.css">
   <link rel="stylesheet" href="../styles/contact.css">
+  <link rel="stylesheet" href="../styles/popup.css">
 
   <script src="../scripts/form-handler.js"></script>
+  <script src="../scripts/popup-handler.js"></script>
 </head>
 
 <body>
@@ -118,17 +120,59 @@
         </ul>
       </aside>
       <main class="chat__main-block">
-        <div class="chat__messages bordered-block"></div>
+        <div class="chat__messages bordered-block">
+          <ul class="chat__messages-list">
+            <il class="chat__message-item chat__message-item_own chat__message_image">
+              <p class="chat__message chat__message_own">
+                <img class="chat__message-img" src="https://picsum.photos/200" alt=" ">
+              </p>
+              <p class="chat__date chat__date_own">12:20  |  17.11.20 <img src="../images/mark-as-readed.svg" alt=" "></p>
+            </il>
+            <il class="chat__message-item">
+              <p class="chat__message">
+                Lorem ipsum — классический текст-«рыба»
+                (условный, зачастую бессмысленный текст-заполнитель, вставляемый
+                в макет страницы). Является искажённым отрывком из философского
+                трактата Марка Туллия Цицерона «О пределах добра и зла»,
+                написанного в 45 году до н. э. на латинском языке.
+              </p>
+              <p class="chat__date">12:10  |  17.11.20</p>
+            </il>
+            <il class="chat__message-item chat__message_image">
+              <p class="chat__message">
+                <img class="chat__message-img" src="https://picsum.photos/200" alt=" ">
+              </p>
+              <p class="chat__date">12:18  |  17.11.20</p>
+            </il>
+            <il class="chat__message-item chat__message-item_own">
+              <p class="chat__message chat__message_own">
+                Хорошо
+              </p>
+              <p class="chat__date chat__date_own">12:22  |  17.11.20 <img src="../images/mark-as-readed.svg" alt=" "></p>
+            </il>
+          </ul>
+        </div>
         <form class="chat__form" name="message">
-          <div class="chat__attach bordered-block">
-            <span class="chat__attach-option">Фото или видео</span>
-            <span class="chat__attach-option-delimiter"></span>
-            <span class="chat__attach-option">Файл</span>
-            <span class="chat__attach-option-delimiter"></span>
-            <span class="chat__attach-option">Локация</span>
-          </div>
+          <ul class="chat__attach bordered-block">
+            <li class="chat__attach-option">
+              <label class="chat__attach-label">Фото или видео
+                <input class="chat__attach-input" type="file" name="photo-video" accept="video/*,image/*">
+              </label>
+            </li>
+            <li class="chat__attach-option">
+              <label class="chat__attach-label">Файл
+                <input class="chat__attach-input" type="file" name="file" accept=".doc,.zip">
+              </label>
+            </li>
+            <li class="chat__attach-option">
+              <label class="chat__attach-label">Локация
+                <input class="chat__attach-input" type="file" name="location" accept=".txt">
+              </label>
+            </li>
+          </ul>
           <div class="chat__new-message bordered-block" name="message">
-            <textarea class="chat__textarea" name="message" placeholder="Сообщение..." maxlength="400"></textarea>
+            <textarea class="chat__textarea" cols="1" maxlength="400" 
+              name="message" placeholder="Сообщение..."></textarea>
             <button class="chat__form-button chat__form-button_attach" type="button">
               <img class="chat__button-image" src="../images/button-attach.svg" alt=" ">
             </button>

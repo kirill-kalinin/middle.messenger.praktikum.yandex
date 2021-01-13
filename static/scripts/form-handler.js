@@ -18,12 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  const textArea = form.querySelector('.chat__textarea');
-  if (textArea) {
-    textArea.addEventListener('keyup', function() {
-      if (textArea.scrollHeight > textArea.clientHeight) {
-        textArea.style.height = textArea.scrollHeight + "px";
-      }
+  const attachToMessage = form.querySelector('.chat__form-button_attach');
+  if (attachToMessage) {
+    const attachInputsBlock = form.querySelector('.chat__attach');
+    attachToMessage.addEventListener('click', function() {
+      attachInputsBlock.classList.toggle('chat__attach_visible');
     });
   }
 
