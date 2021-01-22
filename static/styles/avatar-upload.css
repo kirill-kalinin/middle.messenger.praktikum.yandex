@@ -16,6 +16,10 @@
   color: #e4212b;
 }
 
+.avatar-upload__label {
+  cursor: pointer;
+}
+
 .avatar-upload__label,
 .avatar-upload__filename {
   color: #eb6670;
