@@ -1,0 +1,122 @@
+.chat-sidebar {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+.chat-sidebar__toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 88%;
+  margin: 30px 0 18px;
+}
+
+.chat-sidebar__button {
+  cursor: pointer;
+  display: block;
+  background-color: #ffffff;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: 22%;
+}
+
+.chat-sidebar__button-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.chat-sidebar__button:hover .chat-sidebar__button-image {
+  filter: invert(45%) sepia(74%) saturate(767%) hue-rotate(313deg) brightness(104%) contrast(84%);
+}
+
+.chat-sidebar__button:active .chat-sidebar__button-image {
+  filter: invert(14%) sepia(78%) saturate(6086%) hue-rotate(351deg) brightness(97%) contrast(85%);
+}
+
+.chat-sidebar__search {
+  width: 92%;
+  border-top: 5px solid #000000;
+  border-bottom: 5px solid #000000;
+  box-shadow: 0px 4px 5px rgba(255, 255, 255, 0.4);
+  position: relative;
+  z-index: 1;
+}
+
+.chat-sidebar__input {
+  font-family: 'Roboto', sans-serif;
+  color: #eb6670;
+  font-size: 2em;
+  max-width: 92%;
+  border: none;
+  margin: 30px 16px;
+}
+
+.chat-sidebar__input::placeholder {
+  color: initial;
+}
+
+.chat-sidebar__contacts {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  width: 88%;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.chat-sidebar__contacts::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-sidebar__contact {
+  border-bottom: 1px solid #5c5c5c;
+}
+
+.chat-sidebar__contact:last-child {
+  border-bottom: none;
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .chat-sidebar__input {
+    font-size: 1.4em;
+    margin: 24px 8px;
+  }
+
+  .chat-sidebar__toolbar {
+    margin: 24px 0 14px;
+  }
+
+  .chat-sidebar__search {
+    display: flex;
+    border-width: 3px;
+  }
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 600px) {
+  .chat-sidebar__input {
+    font-size: 0.9em;
+    margin: 16px 6px;
+  }
+
+  .chat-sidebar {
+    border-width: 5px;
+  }
+
+  .chat-sidebar__toolbar {
+    margin: 16px 0 10px;
+  }
+
+  .chat-sidebar__search {
+    border-width: 2px;
+  }
+}

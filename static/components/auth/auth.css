@@ -1,0 +1,23 @@
+.auth {    
+  display: flex;
+}
+
+.auth__sidebar {
+  box-sizing: border-box;
+  width: 40%;
+}
+
+.auth__main-block {
+  box-sizing: border-box;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20vh 0;
+}
+
+.auth__main-block_high {
+  overflow-y: auto;
+  padding: 5vh 0;
+}

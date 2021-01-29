@@ -4,7 +4,6 @@
   "description": "Yandex praktikum training project",
   "main": "index.js",
   "scripts": {
-    "live-server": "lite-server --baseDir=./static",
     "static-server": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -24,6 +23,9 @@
   },
   "devDependencies": {
     "express": "^4.17.1",
-    "lite-server": "^2.6.1"
+    "typescript": "^4.1.3"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.6"
   }
 }

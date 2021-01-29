@@ -1,0 +1,278 @@
+.profile {    
+  display: flex;
+}
+
+.profile__sidebar {
+  box-sizing: border-box;
+  width: 40%;
+}
+
+.profile__main-block {
+  box-sizing: border-box;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10vh 0;
+}
+
+.profile__sidebar-button {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  text-align: right;
+  line-height: 1.2;
+  background-color: #eb6670;
+}
+
+.profile__sidebar-button-img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+}
+
+.profile__sidebar-button:hover {
+  color: #eeeeee;
+  border-color: #eeeeee;
+}
+
+.profile__sidebar-button:active {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+.profile__sidebar-button:hover .profile__sidebar-button-img {
+  filter: invert(92%);
+}
+
+.profile__sidebar-button:active .profile__sidebar-button-img {
+  filter: invert(100%);
+}
+
+.profile__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 75%;
+  padding-bottom: 40px;
+  border-bottom: 2px solid #000000;
+}
+
+.profile__user-name {
+  font-size: 2.25em;
+}
+
+.profile__user-avatar {
+  width: 100px;
+  height: 100px;
+}
+
+.profile__data {
+  width: 75%;
+}
+
+.profile__data-item:focus-within .profile__data-label {
+  color: #eb6670;
+}
+
+.profile__data-value {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.25em;
+  text-align: right;
+  border: none;
+  overflow: hidden;
+  max-width: 70%;
+}
+
+.profile__data-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25em;
+  margin: 4vh 0;
+}
+
+.profile__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__button {
+  margin: 5%;
+}
+
+.profile__data_password,
+.profile__buttons_password {
+  padding-top: 12vh;
+}
+
+.profile__data_avatar-upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  flex-grow: 1;
+  width: 75%;
+  text-align: center;
+}
+
+.profile__avatar-uplaod-title {
+  font-size: 1.5em;
+}
+
+.profile__avatar-uplaod-title_error {
+  color: #e4212b;
+}
+
+.profile__avatar-upload-label {
+  cursor: pointer;
+}
+
+.profile__avatar-upload-label,
+.profile__avatar-upload-filename {
+  color: #eb6670;
+  text-decoration: underline;
+  font-size: 1.5em;
+}
+
+.profile__avatar-upload-filename {
+  display: none;
+  text-decoration: none;
+}
+
+.profile__avatar-upload-input {
+  display: none;
+}
+
+.profile__avatar-upload-button-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile__avatar-upload-alert {
+  visibility: hidden;
+  color: #e4212b;
+  font-size: 1.125em;
+}
+
+@media screen and (max-width: 800px) {
+  .profile__sidebar-button {
+    width: 55%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__sidebar-button {
+    width: 50%;
+  }
+}
+
+@media screen and (max-width: 800px), screen and (max-height: 800px) {
+  .profile__main-block {
+    padding: 5vh 0;
+  }
+
+  .profile__data-value {
+    max-width: 65%;
+  }
+
+  .profile__sidebar-button-img {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profile__header {
+    padding-bottom: 32px;
+  }
+  
+  .profile__user-avatar {
+    width: 80px;
+    height: 80px;
+  }
+
+  .profile__user-name {
+    font-size: 1.8em;
+  }
+
+  .profile__data-item,
+  .profile__data-value {
+    font-size: 1em;
+  }
+
+  .profile__button {
+    margin: 3%;
+  }
+
+  .profile__data_password,
+  .profile__buttons_password {
+    padding-top: 7vh;
+  }
+
+  .profile__avatar-uplaod-title,
+  .profile__avatar-upload-label,
+  .profile__avatar-upload-filename {
+    font-size: 1.2em;
+  }
+
+  .profile__avatar-upload-alert {
+    font-size: 0.9em;
+  }
+}
+
+@media screen and (max-width: 600px), screen and (max-height: 600px) {
+  .profile__main-block {
+    padding: 3vh 0;
+  }
+
+  .profile__data-value {
+    max-width: 60%;
+  }
+
+  .profile__sidebar-button-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .profile__header {
+    padding-bottom: 22px;
+  }
+  
+  .profile__user-avatar {
+    width: 55px;
+    height: 55px;
+  }
+
+  .profile__user-name {
+    font-size: 1.2em;
+  }
+
+  .profile__data-item,
+  .profile__data-value {
+    font-size: 0.8em;
+  }
+
+  .profile__button {
+    margin: 2%;
+  }
+  
+  .profile__data_password,
+  .profile__buttons_password {
+    padding-top: 3vh;
+  }
+
+  .profile__avatar-uplaod-title,
+  .profile__avatar-upload-label,
+  .profile__avatar-upload-filename {
+    font-size: 0.8em;
+  }
+
+  .profile__avatar-upload-alert {
+    font-size: 0.75em;
+  }
+}
