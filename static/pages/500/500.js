@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.err500-page', error500);
-  DOM.attachComponent(error500, '.error__sidebar', sidebar);
-  DOM.attachComponent(error500, '.error__button-slot', button);
+  DOM.attachComponent(document, '.err500-page', error500.element);
+  DOM.attachComponent(error500, '.error__sidebar', sidebar.element);
+  DOM.attachComponent(error500, '.error__button-slot', button.element);
 });

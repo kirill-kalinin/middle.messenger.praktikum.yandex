@@ -11,14 +11,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const dummyService = new DummyService();
   const contactsData = dummyService.fetchContacts();
-  const contacts = contactsData.map(data => new Contact(data));
+  const contacts = contactsData.map(data => new Contact(data).element);
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.chat-select-page', chat);
-  DOM.attachComponent(chat, '.chat__sidebar', chatSidebar);
-
-  contacts.forEach(contact => {
-    DOM.attachComponent(chatSidebar, '.chat-sidebar__contacts', contact)
-  })
+  DOM.attachComponent(document, '.chat-select-page', chat.element);
+  DOM.attachComponent(chat, '.chat__sidebar', chatSidebar.element);
+  DOM.attachComponent(chatSidebar, '.chat-sidebar__contacts', contacts);
 });

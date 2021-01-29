@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, ".index-page", intro);
+  DOM.attachComponent(document, ".index-page", intro.element);
 
   window.addEventListener('load', function() {
     intro.setProps({ animate: true })

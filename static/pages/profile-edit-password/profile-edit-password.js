@@ -1,4 +1,5 @@
 import DOMService from '../../scripts/k-react/dom-service.js';
+import FormHandler from '../../scripts/form-handler.js';
 import DummyService from '../../scripts/dummy-service.js';
 import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
@@ -41,8 +42,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.profile-edit-password-page', profile);
-  DOM.attachComponent(profile, '.profile__sidebar', sidebar);
-  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton);
-  DOM.attachComponent(profile, '.profile__buttons', submitButton);
+  DOM.attachComponent(document, '.profile-edit-password-page', profile.element);
+  DOM.attachComponent(profile, '.profile__sidebar', sidebar.element);
+  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton.element);
+  DOM.attachComponent(profile, '.profile__buttons', submitButton.element);
+
+  const formHandler = new FormHandler();
+  formHandler.handleSubmit();
 });

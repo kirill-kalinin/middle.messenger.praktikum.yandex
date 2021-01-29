@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.err404-page', error404);
-  DOM.attachComponent(error404, '.error__sidebar', sidebar);
-  DOM.attachComponent(error404, '.error__button-slot', button);
+  DOM.attachComponent(document, '.err404-page', error404.element);
+  DOM.attachComponent(error404, '.error__sidebar', sidebar.element);
+  DOM.attachComponent(error404, '.error__button-slot', button.element);
 });

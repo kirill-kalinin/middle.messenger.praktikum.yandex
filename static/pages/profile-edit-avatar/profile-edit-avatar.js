@@ -1,4 +1,5 @@
 import DOMService from '../../scripts/k-react/dom-service.js';
+import FormHandler from '../../scripts/form-handler.js';
 import DummyService from '../../scripts/dummy-service.js';
 import AvatarUploadHandler from '../../scripts/avatar-upload-handler.js';
 import Profile from '../../components/profile/profile.js';
@@ -25,11 +26,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.profile-edit-avatar-page', profile);
-  DOM.attachComponent(profile, '.profile__sidebar', sidebar);
-  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton);
-  DOM.attachComponent(profile, '.profile__avatar-upload-button-wrapper', button);
+  DOM.attachComponent(document, '.profile-edit-avatar-page', profile.element);
+  DOM.attachComponent(profile, '.profile__sidebar', sidebar.element);
+  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton.element);
+  DOM.attachComponent(profile, '.profile__avatar-upload-button-wrapper', button.element);
 
   const avatarUploadHandler = new AvatarUploadHandler(profile.element);
   avatarUploadHandler.handle();
+
+  const formHandler = new FormHandler();
+  formHandler.handleSubmit();
 });

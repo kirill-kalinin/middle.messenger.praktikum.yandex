@@ -22,7 +22,7 @@ export default class ChatSidebar extends Block {
       buttonAddContact.addEventListener('click', () => {
         this.popup = new Popup(popupAddContactPreset);
         this._toolbarPopupsHandler('ADD');
-        this.DOMService.attachComponent(document, 'body', this.popup);
+        this.DOMService.attachComponent(document, 'body', this.popup.element);
       });
     }
 
@@ -40,7 +40,7 @@ export default class ChatSidebar extends Block {
             this.popup = new Popup(popupErrorPreset);
             this._toolbarPopupsHandler('ERROR');
           }
-          this.DOMService.attachComponent(document, 'body', this.popup);
+          this.DOMService.attachComponent(document, 'body', this.popup.element);
         }, {once: true});
       });
     }
@@ -48,7 +48,7 @@ export default class ChatSidebar extends Block {
 
   _toolbarPopupsHandler(popupType) {
     const detachPopup = () => {
-      this.DOMService.detachComponent(document.body, this.popup);
+      this.DOMService.detachComponent(document.body, this.popup.element);
       document.removeEventListener('click', this._preventRedirection);
     };
     const closeButton = this.popup.element.querySelector('.popup__close');

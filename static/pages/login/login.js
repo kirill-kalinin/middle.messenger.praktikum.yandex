@@ -1,4 +1,5 @@
 import DOMService from '../../scripts/k-react/dom-service.js';
+import FormHandler from '../../scripts/form-handler.js';
 import Auth from '../../components/auth/auth.js';
 import Form, { formLoginPreset } from '../../components/form/form.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
@@ -28,8 +29,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.login-page', auth);
-  DOM.attachComponent(auth, '.auth__sidebar', sidebar);
-  DOM.attachComponent(auth, '.auth__main-block', loginForm);
-  DOM.attachComponent(loginForm, '.form__submit', buttonSubmit);
+  DOM.attachComponent(document, '.login-page', auth.element);
+  DOM.attachComponent(auth, '.auth__sidebar', sidebar.element);
+  DOM.attachComponent(auth, '.auth__main-block', loginForm.element);
+  DOM.attachComponent(loginForm, '.form__submit', buttonSubmit.element);
+
+  const formHandler = new FormHandler();
+  formHandler.handleSubmit();
 });

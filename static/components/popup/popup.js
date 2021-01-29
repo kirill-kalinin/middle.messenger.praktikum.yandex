@@ -15,7 +15,7 @@ export default class Popup extends Block {
 
   attachButton() {
     const DOM = new DOMService();
-    DOM.attachComponent(this.element, '.popup__button', this.button);
+    DOM.attachComponent(this.element, '.popup__button', this.button.element);
   }
 
   render() {

@@ -7,14 +7,23 @@ export default class DOMService {
       parent.setChild(child, cssSelector);
       target = parent.element;
     }
+
+    let content;
+    if (Array.isArray(child)) {
+      content = document.createDocumentFragment();
+      content.append(...child);
+    } else {
+      content = child;
+    }
+
     const root = target.querySelector(cssSelector);
-    root.appendChild(child.getContent());
+    root.appendChild(content);
   }
 
   detachComponent(parent, child) {
     if (parent instanceof Block) {
       parent.unsetChild(child);
     }
-    child.element.remove();
+    child.remove();
   }
 }

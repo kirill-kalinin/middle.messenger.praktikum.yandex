@@ -90,7 +90,14 @@ export default class Block {
 
   _updateChildren = () => {
     for (let [child, cssSelector] of this._children) {
-      this._element.querySelector(cssSelector).appendChild(child.getContent());
+      let content;
+      if (Array.isArray(child)) {
+        content = document.createDocumentFragment();
+        content.append(...child);
+      } else {
+        content = child;
+      }
+      this._element.querySelector(cssSelector).appendChild(content);
     }
   };
 
@@ -105,10 +112,6 @@ export default class Block {
   }
 
   render() {}
-
-  getContent() {
-    return this._element;
-  }
 
   _makePropsProxy(props) {
     const self = this;
@@ -132,10 +135,10 @@ export default class Block {
   }
 
   show() {
-    this.getContent().style.display = 'block';
+    this._element.style.display = 'block';
   }
 
   hide() {
-    this.getContent().style.display = 'none';
+    this._element.style.display = 'none';
   }
 }

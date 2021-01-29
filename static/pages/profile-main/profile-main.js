@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
   const DOM = new DOMService();
 
-  DOM.attachComponent(document, '.profile-main-page', profile);
-  DOM.attachComponent(profile, '.profile__sidebar', sidebar);
-  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton);
+  DOM.attachComponent(document, '.profile-main-page', profile.element);
+  DOM.attachComponent(profile, '.profile__sidebar', sidebar.element);
+  DOM.attachComponent(sidebar, '.sidebar__button-slot', sidebarButton.element);
 });
