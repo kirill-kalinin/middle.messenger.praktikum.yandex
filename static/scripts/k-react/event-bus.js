@@ -1,34 +1,31 @@
 export default class EventBus {
-  constructor() {
-    this.listeners = {};
-  }
-
-  on(event, callback) {
-    if (!this.listeners[event]) {
-      this.listeners[event] = [];
+    constructor() {
+        this.listeners = {};
     }
-    this.listeners[event].push(callback);
-  }
-
-  off(event, callback) {
-    if (this._isRegistered(event)) {
-      this.listeners[event] = this.listeners[event]
-        .filter(cb => cb !== callback);
+    on(event, callback) {
+        if (!this.listeners[event]) {
+            this.listeners[event] = [];
+        }
+        this.listeners[event].push(callback);
     }
-  }
-
-  emit(event, ...args) {
-    if (this._isRegistered(event)) {
-      this.listeners[event].forEach(callback => {
-        callback(...args);
-      });
+    off(event, callback) {
+        if (this._isRegistered(event)) {
+            this.listeners[event] = this.listeners[event]
+                .filter((cb) => cb !== callback);
+        }
     }
-  }
-  
-  _isRegistered(event) {
-    if (!this.listeners[event]) {
-      throw new Error(`Error: Нет события: ${event}`);
+    emit(event, ...args) {
+        if (this._isRegistered(event)) {
+            this.listeners[event].forEach(callback => {
+                callback(...args);
+            });
+        }
     }
-    return true;
-  }
+    _isRegistered(event) {
+        if (!this.listeners[event]) {
+            throw new Error(`Error: Нет события: ${event}`);
+        }
+        return true;
+    }
 }
+//# sourceMappingURL=event-bus.js.map

@@ -1,9 +1,9 @@
-function rangeRight(start, end, step) {
+function rangeRight(start: number, end?: number, step?: number) {
   return range(start, end, step, true);
 }
 
-function range(start, end, step, isRight) {
-  const result = [];
+function range(start: number, end?: number, step?: number, isRight?: boolean) {
+  const result: number[] = [];
 
   if (end === undefined) {
     end = start;
