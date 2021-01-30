@@ -35,5 +35,5 @@ document.addEventListener('DOMContentLoaded', function() {
   DOM.attachComponent(loginForm, '.form__submit', buttonSubmit.element);
 
   const formHandler = new FormHandler();
-  formHandler.handleSubmit();
+  formHandler.handle();
 });

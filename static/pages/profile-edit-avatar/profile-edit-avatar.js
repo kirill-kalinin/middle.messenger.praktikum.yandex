@@ -35,5 +35,5 @@ document.addEventListener('DOMContentLoaded', function() {
   avatarUploadHandler.handle();
 
   const formHandler = new FormHandler();
-  formHandler.handleSubmit();
+  formHandler.handle();
 });

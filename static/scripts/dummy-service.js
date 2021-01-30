@@ -102,37 +102,49 @@ export default class DummyService {
         label: 'Почта',
         value: 'user@ya.ru',
         inputName: 'email',
-        inputType: 'text'
+        inputType: 'text',
+        validationKey: 'email',
+        validationText: 'Введите корректный адрес почты'
       },
       login: {
         label: 'Логин',
         value: 'ivanivanov',
         inputName: 'login',
-        inputType: 'text'
+        inputType: 'text',
+        validationKey: 'login',
+        validationText: 'От 5 до 20 латинских букв или цифр, первый символ - буква'
       },
       firstName: {
         label: 'Имя',
         value: 'Иван',
         inputName: 'first_name',
-        inputType: 'text'
+        inputType: 'text',
+        validationKey: 'name',
+        validationText: 'Допускается от 2 до 20 букв в имени'
       },
       secondName: {
         label: 'Фамилия',
         value: 'Иванов',
         inputName: 'second_name',
-        inputType: 'text'
+        inputType: 'text',
+        validationKey: 'name',
+        validationText: 'Допускается от 2 до 20 букв в фамилии'
       },
       displayName: {
         label: 'Имя в чате',
         value: 'Иван',
         inputName: 'display_name',
-        inputType: 'text'
+        inputType: 'text',
+        validationKey: 'name',
+        validationText: 'Допускается от 2 до 20 букв для имени в чате'
       },
       phone: {
         label: 'Телефон',
         value: '+7 (777) 777 77 77',
         inputName: 'phone',
-        inputType: 'tel'
+        inputType: 'tel',
+        validationKey: 'tel',
+        validationText: 'Введите корректный номер телефона'
       }
     }
   }

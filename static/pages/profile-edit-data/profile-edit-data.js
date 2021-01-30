@@ -40,5 +40,5 @@ document.addEventListener('DOMContentLoaded', function() {
   DOM.attachComponent(profile, '.profile__buttons', submitButton.element);
 
   const formHandler = new FormHandler();
-  formHandler.handleSubmit();
+  formHandler.handle();
 });

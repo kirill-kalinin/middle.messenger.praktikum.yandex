@@ -93,6 +93,7 @@
   align-items: center;
   font-size: 1.25em;
   margin: 4vh 0;
+  position: relative;
 }
 
 .profile__buttons {

@@ -14,18 +14,25 @@ document.addEventListener('DOMContentLoaded', function() {
     userPasswordFields: {
       oldPassword: {
         label: 'Старый пароль',
-        value: '123123',
-        inputName: 'oldPassword'
+        value: 'фыв123abc',
+        name: 'oldPassword',
+        validationKey: 'password',
+        validationText: 'Введите от 8 до 25 букв или цифр',
       },
       newPassword: {
         label: 'Новый пароль',
-        value: '1231231',
-        inputName: 'newPassword'
+        value: '',
+        name: 'newPassword',
+        validationKey: 'password',
+        validationText: 'Введите от 8 до 25 букв или цифр',
+        equality: true
       },
       repeat: {
         label: 'Повторите пароль',
-        value: '1231231',
-        inputName: ''
+        value: '',
+        name: '',
+        validationText: 'Пароли не совпадают',
+        equality: true
       }
     }
   });
@@ -48,5 +55,5 @@ document.addEventListener('DOMContentLoaded', function() {
   DOM.attachComponent(profile, '.profile__buttons', submitButton.element);
 
   const formHandler = new FormHandler();
-  formHandler.handleSubmit();
+  formHandler.handle();
 });

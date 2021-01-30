@@ -49,6 +49,26 @@ body {
   filter: drop-shadow(2px 3px 4px rgba(0, 0, 0, 0.25));
 }
 
+.invalid-input {
+  outline: 1px solid #e4212b;
+}
+
+.invalid-input-alert {
+  display: none;
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  padding: 0 3px;
+  position: absolute;
+  top: 0;
+  margin: 0;
+  z-index: 1;
+  font-size: 0.8em;
+}
+
+.invalid-input:hover + .invalid-input-alert {
+  display: block;
+}
+
 @media screen and (max-width: 600px), screen and (max-height: 600px) {
   .bordered-block {
     border: 5px solid black;
@@ -56,5 +76,9 @@ body {
 
   .container {    
     height: calc(100vh - 34px);
+  }
+
+  .invalid-input-alert {
+    font-size: 0.7em;
   }
 }

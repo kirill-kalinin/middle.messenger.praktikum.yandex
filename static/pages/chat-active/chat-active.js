@@ -33,5 +33,5 @@ document.addEventListener('DOMContentLoaded', function() {
   DOM.attachComponent(chat, '.chat__messages-list', messages);
 
   const formHandler = new FormHandler();
-  formHandler.handleSubmit();
+  formHandler.handle();
 });

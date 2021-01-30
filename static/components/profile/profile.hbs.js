@@ -23,7 +23,9 @@ export default `
         {{#each userData}}
         <p class="profile__data-item">
           <label class="profile__data-label">{{this.label}}</label>
-          <input class="profile__data-value" type="{{this.inputType}}" name="{{this.inputName}}" value="{{this.value}}">
+          <input class="profile__data-value" type="{{this.inputType}}" name="{{this.inputName}}" value="{{this.value}}"
+            data-validation-key="{{this.validationKey}}">
+          <span class="invalid-input-alert">{{this.validationText}}</span>
         </p>
         {{/each}}
         <div class="profile__buttons"></div>
@@ -35,7 +37,9 @@ export default `
         {{#each userPasswordFields}}
         <p class="profile__data-item">
           <label class="profile__data-label">{{this.label}}</label>
-          <input class="profile__data-value" type="password" name="{{this.name}}" value="{{this.value}}">
+          <input class="profile__data-value" type="password" name="{{this.name}}" value="{{this.value}}"
+            data-validation-key="{{this.validationKey}}" {{#if this.equality}}data-required-equality="true"{{/if}}>
+          <span class="invalid-input-alert">{{this.validationText}}</span>
         </p>
         {{/each}}
         <div class="profile__buttons profile__buttons_password"></div>
