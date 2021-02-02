@@ -79,14 +79,13 @@ export default class Block {
     }
     render() { }
     _makePropsProxy(props) {
-        const self = this;
         const proxyProps = new Proxy(props, {
-            set: function (target, prop, value) {
+            set: (target, prop, value) => {
                 if (typeof prop === 'symbol') {
                     throw new Error('Нельзя использовать символы');
                 }
                 target[prop] = value;
-                self.eventBus().emit(Block.EVENTS.FLOW_CDU);
+                this.eventBus().emit(Block.EVENTS.FLOW_CDU);
                 return true;
             },
             deleteProperty: function () {
