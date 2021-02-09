@@ -6,7 +6,7 @@
   "scripts": {
     "static-server": "node server.js",
     "compileJs": "cd static && rm -rf js && mkdir js && cd .. && tsc",
-    "compileCss": "cd static && rm -rf css && cd .. && postcss src/**/*.css --base src --dir static/css"
+    "bundleCss": "postcss src/source.css -m -o static/css/styles.css"
   },
   "repository": {
     "type": "git",
@@ -31,6 +31,8 @@
     "express": "^4.17.1",
     "postcss": "^8.2.5",
     "postcss-cli": "^8.3.1",
+    "postcss-import": "^14.0.0",
+    "postcss-nested": "^5.0.3",
     "precss": "^4.0.0",
     "typescript": "^4.1.3"
   },

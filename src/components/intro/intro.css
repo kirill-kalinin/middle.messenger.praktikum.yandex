@@ -3,7 +3,7 @@
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-  border: 8px solid #eb6670;
+  border: 8px solid $main;
 }
 
 .intro__logo {
@@ -15,7 +15,7 @@
 .intro__text {
   font-size: 42px;
   margin: 21px;
-  background: linear-gradient(90deg, #eb6670 50%, #000000 50%);
+  background: linear-gradient(90deg, $main 50%, $black 50%);
   background-clip: text;
   background-size: 200% auto;
   -webkit-background-clip: text;

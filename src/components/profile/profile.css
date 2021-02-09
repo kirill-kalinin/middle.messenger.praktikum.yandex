@@ -15,6 +15,26 @@
   align-items: center;
   justify-content: flex-start;
   padding: 10vh 0;
+  @media (--width-md), (--height-md) {
+    padding: 5vh 0;
+  }
+  @media (--width-sm), (--height-sm) {
+    padding: 3vh 0;
+  }
+}
+
+.profile__sidebar-button-img {
+  width: 35px;
+  height: 35px;
+  margin-right: 10px;
+  @media (--width-md), (--height-md) {
+    width: 28px;
+    height: 28px;
+  }
+  @media (--width-sm), (--height-sm) {
+    width: 20px;
+    height: 20px;
+  }
 }
 
 .profile__sidebar-button {
@@ -25,31 +45,27 @@
   width: 40%;
   text-align: right;
   line-height: 1.2;
-  background-color: #eb6670;
-}
-
-.profile__sidebar-button-img {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-}
-
-.profile__sidebar-button:hover {
-  color: #eeeeee;
-  border-color: #eeeeee;
-}
-
-.profile__sidebar-button:active {
-  color: #ffffff;
-  border-color: #ffffff;
-}
-
-.profile__sidebar-button:hover .profile__sidebar-button-img {
-  filter: invert(92%);
-}
-
-.profile__sidebar-button:active .profile__sidebar-button-img {
-  filter: invert(100%);
+  background-color: $main;
+  &:hover {
+    color: #eeeeee;
+    border-color: #eeeeee;
+    & .profile__sidebar-button-img {
+      filter: invert(92%);
+    }
+  }
+  &:active {
+    color: $white;
+    border-color: $white;
+    & .profile__sidebar-button-img {
+      filter: invert(100%);
+    }
+  }
+  @media (--width-md) {
+    width: 55%;
+  }
+  @media (--width-sm) {
+    width: 50%;
+  }
 }
 
 .profile__header {
@@ -58,24 +74,40 @@
   align-items: center;
   width: 75%;
   padding-bottom: 40px;
-  border-bottom: 2px solid #000000;
+  border-bottom: 2px solid $black;
+  @media (--width-md), (--height-md) {
+    padding-bottom: 32px;
+  }
+  @media (--width-sm), (--height-sm) {
+    padding-bottom: 22px;
+  }
 }
 
 .profile__user-name {
   font-size: 2.25em;
+  @media (--width-md), (--height-md) {
+    font-size: 1.8em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 1.2em;
+  }
 }
 
 .profile__user-avatar {
   width: 100px;
   height: 100px;
+  @media (--width-md), (--height-md) {
+    width: 80px;
+    height: 80px;
+  }
+  @media (--width-sm), (--height-sm) {
+    width: 55px;
+    height: 55px;
+  }
 }
 
 .profile__data {
   width: 75%;
-}
-
-.profile__data-item:focus-within .profile__data-label {
-  color: #eb6670;
 }
 
 .profile__data-value {
@@ -85,6 +117,14 @@
   border: none;
   overflow: hidden;
   max-width: 70%;
+  @media (--width-md), (--height-md) {
+    font-size: 1em;
+    max-width: 65%;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.8em;
+    max-width: 60%;
+  }
 }
 
 .profile__data-item {
@@ -94,6 +134,17 @@
   font-size: 1.25em;
   margin: 4vh 0;
   position: relative;
+  &:focus-within {
+    & .profile__data-label {
+      color: $main;
+    }
+  }
+  @media (--width-md), (--height-md) {
+    font-size: 1em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.8em;
+  }
 }
 
 .profile__buttons {
@@ -104,11 +155,23 @@
 
 .profile__button {
   margin: 5%;
+  @media (--width-md), (--height-md) {
+    margin: 3%;
+  }
+  @media (--width-sm), (--height-sm) {
+    margin: 2%;
+  }
 }
 
 .profile__data_password,
 .profile__buttons_password {
   padding-top: 12vh;
+  @media (--width-md), (--height-md) {
+    padding-top: 7vh;
+  }
+  @media (--width-sm), (--height-sm) {
+    padding-top: 3vh;
+  }
 }
 
 .profile__data_avatar-upload {
@@ -121,23 +184,30 @@
   text-align: center;
 }
 
-.profile__avatar-uplaod-title {
+.profile__avatar-uplaod-title,
+.profile__avatar-upload-label,
+.profile__avatar-upload-filename {
   font-size: 1.5em;
+  @media (--width-md), (--height-md) {
+    font-size: 1.2em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.8em;
+  }
 }
 
 .profile__avatar-uplaod-title_error {
-  color: #e4212b;
+  color: $alert;
 }
 
 .profile__avatar-upload-label {
   cursor: pointer;
+  text-decoration: underline;
 }
 
 .profile__avatar-upload-label,
 .profile__avatar-upload-filename {
-  color: #eb6670;
-  text-decoration: underline;
-  font-size: 1.5em;
+  color: $main;
 }
 
 .profile__avatar-upload-filename {
@@ -158,122 +228,12 @@
 
 .profile__avatar-upload-alert {
   visibility: hidden;
-  color: #e4212b;
+  color: $alert;
   font-size: 1.125em;
-}
-
-@media screen and (max-width: 800px) {
-  .profile__sidebar-button {
-    width: 55%;
-  }
-}
-
-@media screen and (max-width: 600px) {
-  .profile__sidebar-button {
-    width: 50%;
-  }
-}
-
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
-  .profile__main-block {
-    padding: 5vh 0;
-  }
-
-  .profile__data-value {
-    max-width: 65%;
-  }
-
-  .profile__sidebar-button-img {
-    width: 28px;
-    height: 28px;
-  }
-
-  .profile__header {
-    padding-bottom: 32px;
-  }
-  
-  .profile__user-avatar {
-    width: 80px;
-    height: 80px;
-  }
-
-  .profile__user-name {
-    font-size: 1.8em;
-  }
-
-  .profile__data-item,
-  .profile__data-value {
-    font-size: 1em;
-  }
-
-  .profile__button {
-    margin: 3%;
-  }
-
-  .profile__data_password,
-  .profile__buttons_password {
-    padding-top: 7vh;
-  }
-
-  .profile__avatar-uplaod-title,
-  .profile__avatar-upload-label,
-  .profile__avatar-upload-filename {
-    font-size: 1.2em;
-  }
-
-  .profile__avatar-upload-alert {
+  @media (--width-md), (--height-md) {
     font-size: 0.9em;
   }
-}
-
-@media screen and (max-width: 600px), screen and (max-height: 600px) {
-  .profile__main-block {
-    padding: 3vh 0;
-  }
-
-  .profile__data-value {
-    max-width: 60%;
-  }
-
-  .profile__sidebar-button-img {
-    width: 20px;
-    height: 20px;
-  }
-
-  .profile__header {
-    padding-bottom: 22px;
-  }
-  
-  .profile__user-avatar {
-    width: 55px;
-    height: 55px;
-  }
-
-  .profile__user-name {
-    font-size: 1.2em;
-  }
-
-  .profile__data-item,
-  .profile__data-value {
-    font-size: 0.8em;
-  }
-
-  .profile__button {
-    margin: 2%;
-  }
-  
-  .profile__data_password,
-  .profile__buttons_password {
-    padding-top: 3vh;
-  }
-
-  .profile__avatar-uplaod-title,
-  .profile__avatar-upload-label,
-  .profile__avatar-upload-filename {
-    font-size: 0.8em;
-  }
-
-  .profile__avatar-upload-alert {
+  @media (--width-sm), (--height-sm) {
     font-size: 0.75em;
   }
 }

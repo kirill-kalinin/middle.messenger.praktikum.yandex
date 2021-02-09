@@ -26,42 +26,30 @@
 .error__title,
 .error__code {
   font-size: 2.25em;
+  @media (--width-md), (--height-md) {
+    font-size: 1.8em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 1.2em;
+  }
 }
 
 .error__description {
   font-size: 1.25em;
+  @media (--width-md), (--height-md) {
+    font-size: 1em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.8em;
+  }
 }
 
 .error__go-back-button {
   padding: 22px 40px;
-}
-
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
-  .error__title,
-  .error__code {
-    font-size: 1.8em;
-  }
-  
-  .error__description {
-    font-size: 1em;
-  }
-
-  .error__go-back-button {
+  @media (--width-md), (--height-md) {
     padding: 18px 32px;
   }
-}
-
-@media screen and (max-width: 600px), screen and (max-height: 600px) {
-  .error__title,
-  .error__code {
-    font-size: 1.2em;
-  }
-  
-  .error__description {
-    font-size: 0.8em;
-  }
-
-  .error__go-back-button {
+  @media (--width-sm), (--height-sm) {
     padding: 12px 22px;
   }
 }

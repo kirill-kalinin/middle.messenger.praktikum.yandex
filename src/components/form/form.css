@@ -10,6 +10,12 @@
 .form__title {
   font-size: 2.25em;
   margin: 0;
+  @media (--width-md), (--height-md) {
+    font-size: 1.8em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 1.2em;
+  }
 }
 
 .form__label {
@@ -17,44 +23,27 @@
   display: block;
   width: 100%;
   position: relative;
-}
-
-.form__label:focus-within {
-  color: #eb6670;
+  &:focus-within {
+    color: $main;
+  }
+  @media (--width-md), (--height-md) {
+    font-size: 0.9em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.75em;
+  }
 }
 
 .form__input {
   font-size: 1.25em;
   display: block;
   border: none;
-  border-bottom: 1px solid #000000;
+  border-bottom: 1px solid $black;
   width: 100%;
-}
-
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
-  .form__title {
-    font-size: 1.8em;
-  }
-  
-  .form__label {
-    font-size: 0.9em;
-  }
-
-  .form__input {
+  @media (--width-md), (--height-md) {
     font-size: 1em;
   }
-}
-
-@media screen and (max-width: 600px), screen and (max-height: 600px) {
-  .form__title {
-    font-size: 1.2em;
-  }
-  
-  .form__label {
-    font-size: 0.75em;
-  }
-
-  .form__input {
+  @media (--width-sm), (--height-sm) {
     font-size: 0.8em;
   }
 }

@@ -3,50 +3,40 @@
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
-  color: #000000;
-  border: 4px solid #000000;
-  background-color: #ffffff;
+  color: $black;
+  border: 4px solid $black;
+  background-color: $white;
   padding: 18px;
   font-size: 1.25em;
   line-height: 1.2;
-}
-
-.button:hover {
-  color: #eb6670;
-  border-color: #eb6670;
-}
-
-.button:active {
-  color: #e4212b;
-  border-color: #e4212b;
+  &:hover {
+    color: $main;
+    border-color: $main;
+  }
+  &:active {
+    color: $alert;
+    border-color: $alert;
+  }
+  @media (--width-md), (--height-md) {
+    border-width: 3px;
+    font-size: 1em;
+    padding: 13px;
+  }
+  @media (--width-sm), (--height-sm) {
+    border-width: 2px;
+    font-size: 0.8em;
+    padding: 10px;
+  }
 }
 
 .button_padding-wide {
   padding-left: 35px;
   padding-right: 35px;
-}
-
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
-  .button {
-    border-width: 3px;
-    font-size: 1em;
-    padding: 13px;
-  }
-
-  .button_padding-wide {
+  @media (--width-md), (--height-md) {
     padding-left: 28px;
     padding-right: 28px;
   }
-}
-
-@media screen and (max-width: 600px), screen and (max-height: 600px) {
-  .button {
-    border-width: 2px;
-    font-size: 0.8em;
-    padding: 10px;
-  }
-
-  .button_padding-wide {
+  @media (--width-sm), (--height-sm) {
     padding-left: 24px;
     padding-right: 24px;
   }

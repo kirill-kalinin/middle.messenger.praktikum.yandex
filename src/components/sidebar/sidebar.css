@@ -1,12 +1,15 @@
 .sidebar {
-  background-color: #eb6670;
+  background-color: $main;
   width: 100%;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  border-right: 8px solid #000000;
+  border-right: 8px solid $black;
+  @media (--width-sm), (--height-sm) {
+    border-right: 5px solid $black;
+  }
 }
 
 .sidebar__content {
@@ -20,39 +23,33 @@
   justify-content: center;
 }
 
-.sidebar__text {
+.sidebar__text,
+.sidebar__alert {
   font-size: 1.125em;
+  @media (--width-md), (--height-md) {
+    font-size: 0.9em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.75em;
+  }
 }
 
 .sidebar__link {
   font-size: 1.25em;
-  color: #000000;
+  color: $black;
   display: inline-block;
-}
-
-.sidebar__link:hover {
-  color: #eeeeee;
-}
-
-.sidebar__link:active {
-  color: #ffffff;
-}
-
-.sidebar__logo {
-  width: 60%;
-}
-
-.sidebar__alert {
-  font-size: 1.125em;
-}
-
-.sidebar__menu {
-  padding: 0;
-}
-
-.sidebar__menu-item {
-  list-style: none;
-  margin-bottom: 3vh;
+  &:hover {
+    color: #eeeeee;
+  }
+  &:active {
+    color: $white;
+  }
+  @media (--width-md), (--height-md) {
+    font-size: 1em;
+  }
+  @media (--width-sm), (--height-sm) {
+    font-size: 0.8em;
+  }
 }
 
 .sidebar__link_menu {
@@ -64,36 +61,21 @@
   text-decoration: underline;
 }
 
-@media screen and (max-width: 800px), screen and (max-height: 800px) {
-  .sidebar__text,
-  .sidebar__alert {
-    font-size: 0.9em;
-  }
-  
-  .sidebar__link {
-    font-size: 1em;
-  }
-
-  .sidebar__logo {
+.sidebar__logo {
+  width: 60%;
+  @media (--width-md), (--height-md) {
     width: 50%;
+  }
+  @media (--width-sm), (--height-sm) {
+    width: 30%;
   }
 }
 
-@media screen and (max-width: 600px), screen and (max-height: 600px) {
-  .sidebar__text,
-  .sidebar__alert {
-    font-size: 0.75em;
-  }
-  
-  .sidebar__link {
-    font-size: 0.8em;
-  }
+.sidebar__menu {
+  padding: 0;
+}
 
-  .sidebar__logo {
-    width: 30%;
-  }
-
-  .sidebar {
-    border-right: 5px solid #000000;
-  }
+.sidebar__menu-item {
+  list-style: none;
+  margin-bottom: 3vh;
 }
