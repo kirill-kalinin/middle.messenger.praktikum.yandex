@@ -6,6 +6,13 @@ import Popup, {
   popupErrorPreset 
 } from '../../components/popup/popup.js';
 import DOMService from '../../core/k-react/dom-service.js';
+import type { BlockProps } from '../../core/types.js';
+
+enum PopupTypes {
+  ADD,
+  REMOVE,
+  ERROR
+}
 
 export default class ChatSidebar extends Block {
   private _DOMService: DOMService;
@@ -24,8 +31,8 @@ export default class ChatSidebar extends Block {
     if (buttonAddContact) {
       buttonAddContact.addEventListener('click', () => {
         this._popup = new Popup(popupAddContactPreset);
-        this._toolbarPopupsHandler('ADD');
-        this._DOMService.attachComponent(document, 'body', this._popup.element);
+        this._toolbarPopupsHandler(PopupTypes.ADD);
+        this._DOMService.attachComponent(this._popup, 'body');
       });
     }
 
@@ -44,20 +51,20 @@ export default class ChatSidebar extends Block {
               throw new Error('Ошибка в шаблоне контакта');
             }
             this._popup = new Popup({...popupRemoveContactPreset, contactToRemove: name});
-            this._toolbarPopupsHandler('REMOVE');
+            this._toolbarPopupsHandler(PopupTypes.REMOVE);
           } else {
             this._popup = new Popup(popupErrorPreset);
-            this._toolbarPopupsHandler('ERROR');
+            this._toolbarPopupsHandler(PopupTypes.ERROR);
           }
-          this._DOMService.attachComponent(document, 'body', this._popup.element);
+          this._DOMService.attachComponent(this._popup, 'body');
         }, {once: true});
       });
     }
   }
 
-  private _toolbarPopupsHandler(popupType: string) {
+  private _toolbarPopupsHandler(popupType: PopupTypes) {
     const detachPopup = (callback?: unknown) => {
-      this._DOMService.detachComponent(document, this._popup.element);
+      this._DOMService.detachComponent(this._popup);
       document.removeEventListener('click', this._preventRedirection);
       if (typeof callback === 'function') {
         callback();
@@ -75,17 +82,17 @@ export default class ChatSidebar extends Block {
     }
 
     switch (popupType) {
-      case 'ADD':
+      case PopupTypes.ADD:
         mainButton.addEventListener('click', () => detachPopup(function() {
           console.log('Здесь будет функция, добавляющая контакт');
         }));
         break;
-      case 'REMOVE':
+      case PopupTypes.REMOVE:
         mainButton.addEventListener('click', () => detachPopup(function() {
           console.log('Здесь будет функция, удаляющая контакт');
         }));
         break;
-      case 'ERROR':
+      case PopupTypes.ERROR:
         mainButton.addEventListener('click', detachPopup);
         break;
       default:

@@ -1,3 +1,5 @@
+import { EventBusListeners } from "../types";
+
 export default class EventBus {
   listeners: EventBusListeners;
 

@@ -1,4 +1,4 @@
-import DOMService from '../../core/k-react/dom-service.js';
+import Page from '../../core/k-react/page.js';
 import FormHandler from '../../core/form-handler.js';
 import DummyService from '../../core/dummy-service.js';
 import Chat from '../../components/chat/chat.js';
@@ -6,12 +6,14 @@ import ChatSidebar from '../../components/chat-sidebar/chat-sidebar.js';
 import Contact from '../../components/contact/contact.js';
 import Message from '../../components/message/message.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', createPage);
+
+function createPage() {
+  const dummyService = new DummyService();
+  
   const chat = new Chat({ chatModeActive: true });
 
   const chatSidebar = new ChatSidebar();
-
-  const dummyService = new DummyService();
 
   const contactsData = dummyService.fetchContacts();
   const activeContactId = dummyService.getActiveContactId();
@@ -19,19 +21,23 @@ document.addEventListener('DOMContentLoaded', function() {
     if (data.id === activeContactId) {
       data.active = true;
     }
-    return new Contact(data).element;
+    return new Contact(data);
   });
 
   const messagesList = dummyService.fetchMessages();
-  const messages = messagesList.map(item => new Message(item).element);
+  const messages = messagesList.map(item => new Message(item));
 
-  const DOM = new DOMService();
+  controlPage(new Page({
+    root: [chat, '.chat-active-page'],
+    chatSidebar: [chatSidebar, '.chat__sidebar', chat],
+    contacts: [contacts, '.chat-sidebar__contacts', chatSidebar],
+    messages: [messages, '.chat__messages-list', chat]
+  }));
+}
 
-  DOM.attachComponent(document, '.chat-active-page', chat.element);
-  DOM.attachComponent(chat, '.chat__sidebar', chatSidebar.element);
-  DOM.attachComponent(chatSidebar, '.chat-sidebar__contacts', contacts);
-  DOM.attachComponent(chat, '.chat__messages-list', messages);
+function controlPage(page: Page) {
+  page.init();
 
   const formHandler = new FormHandler();
   formHandler.handle();
-});
+}

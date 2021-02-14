@@ -1,3 +1,5 @@
+import { Validators } from "./types";
+
 export default class FormHandler {
 
   private _validationRegex: Validators;

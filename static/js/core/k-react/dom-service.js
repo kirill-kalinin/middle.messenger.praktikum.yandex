@@ -1,21 +1,21 @@
 import Block from '../k-react/block.js';
 export default class DOMService {
-    attachComponent(parent, cssSelector, child) {
+    attachComponent(child, cssSelector, parent) {
         let target;
-        if (parent instanceof Block) {
+        if (parent) {
             parent.setChild(child, cssSelector);
             target = parent.element;
         }
         else {
-            target = parent;
+            target = document;
         }
         let content;
         if (Array.isArray(child)) {
             content = document.createDocumentFragment();
-            content.append(...child);
+            child.forEach(block => content.append(block.element));
         }
         else {
-            content = child;
+            content = child.element;
         }
         const root = target.querySelector(cssSelector);
         if (root) {
@@ -25,17 +25,17 @@ export default class DOMService {
             throw new Error(`Не удалость добавить элемент в блок ${cssSelector}`);
         }
     }
-    detachComponent(parent, child) {
-        if (parent instanceof Block) {
+    detachComponent(child, parent) {
+        if (parent) {
             parent.unsetChild(child);
         }
-        if (child instanceof HTMLElement) {
-            child.remove();
+        if (child instanceof Block) {
+            child.element.remove();
         }
         else if (child.length) {
-            const parent = child[0].parentElement;
-            if (parent) {
-                parent.innerHTML = '';
+            const parentElement = child[0].element.parentElement;
+            if (parentElement) {
+                parentElement.innerHTML = '';
             }
         }
     }

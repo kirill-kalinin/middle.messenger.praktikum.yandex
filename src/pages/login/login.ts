@@ -1,39 +1,35 @@
-import DOMService from '../../core/k-react/dom-service.js';
+import Page from '../../core/k-react/page.js';
 import FormHandler from '../../core/form-handler.js';
 import Auth from '../../components/auth/auth.js';
 import Form, { formLoginPreset } from '../../components/form/form.js';
-import Sidebar from '../../components/sidebar/sidebar.js';
+import Sidebar, { sidebarLoginPreset } from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', createPage);
+
+function createPage() {
   const auth = new Auth();
 
-  const loginForm = new Form(formLoginPreset, 'fragment fragment_center');
+  const sidebar = new Sidebar(sidebarLoginPreset);
 
-  const sidebar = new Sidebar({
-    parent: 'login',
-    typeIsPrompt: true,
-    prompt: {
-      question: 'Еще нет аккаунта?',
-      link: {
-        text: 'Создать новый!',
-        href: '/pages/signin/signin.html'
-      }
-    }
-  });
+  const loginForm = new Form(formLoginPreset, 'fragment fragment_center');
 
   const buttonSubmit = new Button({
     text: 'Авторизоваться',
     additionClasses: 'form__submit'
   });
 
-  const DOM = new DOMService();
+  controlPage(new Page({
+    root: [auth, '.login-page'],
+    sidebar: [sidebar, '.auth__sidebar', auth],
+    loginForm: [loginForm, '.auth__main-block', auth],
+    buttonSubmit: [buttonSubmit, '.form__submit', loginForm]
+  }));
+}
 
-  DOM.attachComponent(document, '.login-page', auth.element);
-  DOM.attachComponent(auth, '.auth__sidebar', sidebar.element);
-  DOM.attachComponent(auth, '.auth__main-block', loginForm.element);
-  DOM.attachComponent(loginForm, '.form__submit', buttonSubmit.element);
+function controlPage(page: Page) {
+  page.init();
 
   const formHandler = new FormHandler();
   formHandler.handle();
-});
+}

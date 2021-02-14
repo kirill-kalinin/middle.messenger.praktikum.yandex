@@ -1,3 +1,5 @@
+import Block from "./k-react/block";
+
 interface EventBusListeners {
   [propName: string]: Array<Function>;
 }
@@ -32,13 +34,13 @@ interface SidebarMenu extends BlockProps {
   }[]
 }
 
-type BlockChild = HTMLElement | Array<HTMLElement>;
+type BlockChild = Block | Array<Block>;
+
+interface PageBlocks {
+  root: [Block, string],
+  [childName: string]: [BlockChild, string, Block?]
+}
 
 interface Validators {
   [propName: string]: RegExp
-}
-
-declare module '*.hbs.js' {
-  const Template: string;
-  export default Template;
 }

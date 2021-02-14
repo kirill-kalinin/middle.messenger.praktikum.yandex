@@ -1,10 +1,11 @@
-import DOMService from '../../core/k-react/dom-service.js';
+import Page from '../../core/k-react/page.js';
 import FormHandler from '../../core/form-handler.js';
 import Auth from '../../components/auth/auth.js';
 import Form, { formSigninPreset } from '../../components/form/form.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', createPage);
+function createPage() {
     const auth = new Auth({
         isHigh: true
     });
@@ -24,12 +25,16 @@ document.addEventListener('DOMContentLoaded', function () {
         text: 'Зарегистрироваться',
         additionClasses: 'form__submit'
     });
-    const DOM = new DOMService();
-    DOM.attachComponent(document, '.signin-page', auth.element);
-    DOM.attachComponent(auth, '.auth__sidebar', sidebar.element);
-    DOM.attachComponent(auth, '.auth__main-block', signinForm.element);
-    DOM.attachComponent(signinForm, '.form__submit', buttonSubmit.element);
+    controlPage(new Page({
+        root: [auth, '.signin-page'],
+        sidebar: [sidebar, '.auth__sidebar', auth],
+        signinForm: [signinForm, '.auth__main-block', auth],
+        buttonSubmit: [buttonSubmit, '.form__submit', signinForm]
+    }));
+}
+function controlPage(page) {
+    page.init();
     const formHandler = new FormHandler();
     formHandler.handle();
-});
+}
 //# sourceMappingURL=signin.js.map

@@ -1,8 +1,9 @@
 import EventBus from './event-bus.js';
+import type { BlockChild, BlockMeta, BlockProps } from '../../core/types.js';
 
 const Handlebars = window.Handlebars;
 
-export default class Block {
+export default abstract class Block {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -12,7 +13,7 @@ export default class Block {
 
   private _element: HTMLElement;
   private _meta: BlockMeta;
-  private _children: Map<BlockChild, string>;
+  _children: Map<BlockChild, string>;
 
   props: BlockProps;
   eventBus: () => EventBus;
@@ -83,12 +84,12 @@ export default class Block {
 
   private _updateChildren = () => {
     for (let [child, cssSelector] of this._children) {
-      let content;
+      let content: DocumentFragment | HTMLElement;
       if (Array.isArray(child)) {
         content = document.createDocumentFragment();
-        content.append(...child);
+        child.forEach(block => content.append(block.element));
       } else {
-        content = child;
+        content = child.element;
       }
       const slot = this._element.querySelector(cssSelector);
       if (slot) {

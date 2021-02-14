@@ -13,7 +13,7 @@ export default class Popup extends Block {
     }
     _attachButton() {
         const DOM = new DOMService();
-        DOM.attachComponent(this, '.popup__button', this._button.element);
+        DOM.attachComponent(this._button, '.popup__button', this);
     }
     render() {
         return Template;

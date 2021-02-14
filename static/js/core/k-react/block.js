@@ -19,10 +19,10 @@ export default class Block {
                 let content;
                 if (Array.isArray(child)) {
                     content = document.createDocumentFragment();
-                    content.append(...child);
+                    child.forEach(block => content.append(block.element));
                 }
                 else {
-                    content = child;
+                    content = child.element;
                 }
                 const slot = this._element.querySelector(cssSelector);
                 if (slot) {

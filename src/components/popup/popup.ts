@@ -2,6 +2,7 @@ import Template from '../../../components/popup/popup.hbs.js';
 import Block from '../../core/k-react/block.js';
 import Button from '../../components/button/button.js';
 import DOMService from '../../core/k-react/dom-service.js';
+import type { BlockProps } from '../../core/types.js';
 
 export default class Popup extends Block {
   private _button: Button;
@@ -17,7 +18,7 @@ export default class Popup extends Block {
 
   private _attachButton() {
     const DOM = new DOMService();
-    DOM.attachComponent(this, '.popup__button', this._button.element);
+    DOM.attachComponent(this._button, '.popup__button', this);
   }
 
   render() {

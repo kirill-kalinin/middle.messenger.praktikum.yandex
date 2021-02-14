@@ -1,9 +1,11 @@
-import DOMService from '../../core/k-react/dom-service.js';
+import Page from '../../core/k-react/page.js';
 import Error from '../../components/error/error.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', createPage);
+
+function createPage() {
   const error404 = new Error({
     title: 'Код ошибки',
     code: '404',
@@ -23,9 +25,13 @@ document.addEventListener('DOMContentLoaded', function() {
     additionClass: 'button_padding-wide error__go-back-button'
   });
 
-  const DOM = new DOMService();
+  controlPage(new Page({
+    root: [error404, '.err404-page'],
+    sidebar: [sidebar, '.error__sidebar', error404],
+    button: [button, '.error__button-slot', error404]
+  }));
+}
 
-  DOM.attachComponent(document, '.err404-page', error404.element);
-  DOM.attachComponent(error404, '.error__sidebar', sidebar.element);
-  DOM.attachComponent(error404, '.error__button-slot', button.element);
-});
+function controlPage(page: Page) {
+  page.init();
+}

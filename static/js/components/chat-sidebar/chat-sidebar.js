@@ -2,6 +2,12 @@ import Template from '../../../components/chat-sidebar/chat-sidebar.hbs.js';
 import Block from '../../core/k-react/block.js';
 import Popup, { popupAddContactPreset, popupRemoveContactPreset, popupErrorPreset } from '../../components/popup/popup.js';
 import DOMService from '../../core/k-react/dom-service.js';
+var PopupTypes;
+(function (PopupTypes) {
+    PopupTypes[PopupTypes["ADD"] = 0] = "ADD";
+    PopupTypes[PopupTypes["REMOVE"] = 1] = "REMOVE";
+    PopupTypes[PopupTypes["ERROR"] = 2] = "ERROR";
+})(PopupTypes || (PopupTypes = {}));
 export default class ChatSidebar extends Block {
     constructor(props = {}, className = 'fragment') {
         super('div', className, props);
@@ -14,8 +20,8 @@ export default class ChatSidebar extends Block {
         if (buttonAddContact) {
             buttonAddContact.addEventListener('click', () => {
                 this._popup = new Popup(popupAddContactPreset);
-                this._toolbarPopupsHandler('ADD');
-                this._DOMService.attachComponent(document, 'body', this._popup.element);
+                this._toolbarPopupsHandler(PopupTypes.ADD);
+                this._DOMService.attachComponent(this._popup, 'body');
             });
         }
         if (buttonRemoveContact) {
@@ -34,20 +40,20 @@ export default class ChatSidebar extends Block {
                             throw new Error('Ошибка в шаблоне контакта');
                         }
                         this._popup = new Popup({ ...popupRemoveContactPreset, contactToRemove: name });
-                        this._toolbarPopupsHandler('REMOVE');
+                        this._toolbarPopupsHandler(PopupTypes.REMOVE);
                     }
                     else {
                         this._popup = new Popup(popupErrorPreset);
-                        this._toolbarPopupsHandler('ERROR');
+                        this._toolbarPopupsHandler(PopupTypes.ERROR);
                     }
-                    this._DOMService.attachComponent(document, 'body', this._popup.element);
+                    this._DOMService.attachComponent(this._popup, 'body');
                 }, { once: true });
             });
         }
     }
     _toolbarPopupsHandler(popupType) {
         const detachPopup = (callback) => {
-            this._DOMService.detachComponent(document, this._popup.element);
+            this._DOMService.detachComponent(this._popup);
             document.removeEventListener('click', this._preventRedirection);
             if (typeof callback === 'function') {
                 callback();
@@ -63,17 +69,17 @@ export default class ChatSidebar extends Block {
             return;
         }
         switch (popupType) {
-            case 'ADD':
+            case PopupTypes.ADD:
                 mainButton.addEventListener('click', () => detachPopup(function () {
                     console.log('Здесь будет функция, добавляющая контакт');
                 }));
                 break;
-            case 'REMOVE':
+            case PopupTypes.REMOVE:
                 mainButton.addEventListener('click', () => detachPopup(function () {
                     console.log('Здесь будет функция, удаляющая контакт');
                 }));
                 break;
-            case 'ERROR':
+            case PopupTypes.ERROR:
                 mainButton.addEventListener('click', detachPopup);
                 break;
             default:

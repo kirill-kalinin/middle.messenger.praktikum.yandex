@@ -1,3 +1,5 @@
+import { Contact } from "./types";
+
 export default class DummyService {
 
   fetchContacts(): Array<Contact> {

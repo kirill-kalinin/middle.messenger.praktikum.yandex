@@ -1,5 +1,6 @@
 import Template from '../../../components/chat/chat.hbs.js';
 import Block from '../../core/k-react/block.js';
+import type { BlockProps } from '../../core/types.js';
 
 export default class Chat extends Block {
   constructor(props: BlockProps = {}, className = 'fragment') {

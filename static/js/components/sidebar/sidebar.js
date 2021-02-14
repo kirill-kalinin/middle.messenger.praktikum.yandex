@@ -18,4 +18,15 @@ export const sidebarProfileMenuPreset = {
         { link: '../login/login.html', text: 'Выйти' }
     ]
 };
+export const sidebarLoginPreset = {
+    parent: 'login',
+    typeIsPrompt: true,
+    prompt: {
+        question: 'Еще нет аккаунта?',
+        link: {
+            text: 'Создать новый!',
+            href: '/pages/signin/signin.html'
+        }
+    }
+};
 //# sourceMappingURL=sidebar.js.map
