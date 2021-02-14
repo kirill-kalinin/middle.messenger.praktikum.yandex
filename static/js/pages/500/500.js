@@ -2,8 +2,7 @@ import Page from '../../core/k-react/page.js';
 import Error from '../../components/error/error.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
-document.addEventListener('DOMContentLoaded', createPage);
-function createPage() {
+export default function createPage500() {
     const error500 = new Error({
         title: 'Код ошибки',
         code: '500',
@@ -20,13 +19,15 @@ function createPage() {
         text: 'Назад',
         additionClass: 'button_padding-wide error__go-back-button'
     });
-    controlPage(new Page({
-        root: [error500, '.err500-page'],
-        sidebar: [sidebar, '.error__sidebar', error500],
-        button: [button, '.error__button-slot', error500]
-    }));
+    return new Page({
+        root: error500,
+        children: {
+            sidebar: [sidebar, '.error__sidebar', error500],
+            button: [button, '.error__button-slot', error500]
+        },
+        controller
+    });
 }
-function controlPage(page) {
-    page.init();
+function controller() {
 }
 //# sourceMappingURL=500.js.map

@@ -5,8 +5,7 @@ import AvatarUploadHandler from '../../core/avatar-upload-handler.js';
 import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button.js';
-document.addEventListener('DOMContentLoaded', createPage);
-function createPage() {
+export default function createPageProfileEditAvatar() {
     const dummyService = new DummyService();
     const profile = new Profile({
         header: dummyService.getProfileHeaderData(),
@@ -19,17 +18,18 @@ function createPage() {
         text: 'Изменить',
         additionClass: ''
     }, 'profile__avatar-upload-button');
-    controlPage(new Page({
-        root: [profile, '.profile-edit-avatar-page'],
-        sidebar: [sidebar, '.profile__sidebar', profile],
-        sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
-        uploadButton: [uploadButton, '.profile__avatar-upload-button-wrapper', profile]
-    }));
+    return new Page({
+        root: profile,
+        children: {
+            sidebar: [sidebar, '.profile__sidebar', profile],
+            sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
+            uploadButton: [uploadButton, '.profile__avatar-upload-button-wrapper', profile]
+        },
+        controller
+    });
 }
-function controlPage(page) {
-    page.init();
-    const [profile] = page.blocks.root;
-    const avatarUploadHandler = new AvatarUploadHandler(profile.element);
+function controller(page) {
+    const avatarUploadHandler = new AvatarUploadHandler(page.root.element);
     avatarUploadHandler.handle();
     const formHandler = new FormHandler();
     formHandler.handle();

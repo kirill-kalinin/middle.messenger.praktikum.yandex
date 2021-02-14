@@ -5,9 +5,7 @@ import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button.js';
 
-document.addEventListener('DOMContentLoaded', createPage);
-
-function createPage() {
+export default function createPageProfileEditData() {
   const dummyService = new DummyService();
 
   const profile = new Profile({
@@ -33,19 +31,19 @@ function createPage() {
     additionClass: ''
   }, 'profile__button');
 
-  controlPage(new Page({
-    root: [profile, '.profile-edit-data-page'],
-    sidebar: [sidebar, '.profile__sidebar', profile],
-    sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
-    cancelButton: [cancelButton, '.profile__buttons', profile],
-    submitButton: [submitButton, '.profile__buttons', profile]
-  }));
+  return new Page({
+    root: profile,
+    children: {
+      sidebar: [sidebar, '.profile__sidebar', profile],
+      sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
+      cancelButton: [cancelButton, '.profile__buttons', profile],
+      submitButton: [submitButton, '.profile__buttons', profile]
+    },
+    controller
+  });
 }
 
-function controlPage(page: Page) {
-  page.init();
-
+function controller() {
   const formHandler = new FormHandler();
   formHandler.handle();
 }
-

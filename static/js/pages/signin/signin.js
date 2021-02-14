@@ -4,8 +4,7 @@ import Auth from '../../components/auth/auth.js';
 import Form, { formSigninPreset } from '../../components/form/form.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
-document.addEventListener('DOMContentLoaded', createPage);
-function createPage() {
+export default function createPageSignin() {
     const auth = new Auth({
         isHigh: true
     });
@@ -25,15 +24,17 @@ function createPage() {
         text: 'Зарегистрироваться',
         additionClasses: 'form__submit'
     });
-    controlPage(new Page({
-        root: [auth, '.signin-page'],
-        sidebar: [sidebar, '.auth__sidebar', auth],
-        signinForm: [signinForm, '.auth__main-block', auth],
-        buttonSubmit: [buttonSubmit, '.form__submit', signinForm]
-    }));
+    return new Page({
+        root: auth,
+        children: {
+            sidebar: [sidebar, '.auth__sidebar', auth],
+            signinForm: [signinForm, '.auth__main-block', auth],
+            buttonSubmit: [buttonSubmit, '.form__submit', signinForm]
+        },
+        controller
+    });
 }
-function controlPage(page) {
-    page.init();
+function controller() {
     const formHandler = new FormHandler();
     formHandler.handle();
 }

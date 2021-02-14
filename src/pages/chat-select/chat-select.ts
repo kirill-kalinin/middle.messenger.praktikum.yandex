@@ -4,9 +4,7 @@ import Chat from '../../components/chat/chat.js';
 import ChatSidebar from '../../components/chat-sidebar/chat-sidebar.js';
 import Contact from '../../components/contact/contact.js';
 
-document.addEventListener('DOMContentLoaded', createPage);
-
-function createPage() {
+export default function createPageChatSelect() {
   const chat = new Chat({ chatModeSelect: true });
 
   const chatSidebar = new ChatSidebar();
@@ -15,13 +13,16 @@ function createPage() {
   const contactsData = dummyService.fetchContacts();
   const contacts = contactsData.map(data => new Contact(data));
 
-  controlPage(new Page({
-    root: [chat, '.chat-select-page'],
-    chatSidebar: [chatSidebar, '.chat__sidebar', chat],
-    contacts: [contacts, '.chat-sidebar__contacts', chatSidebar]
-  }));
+  return new Page({
+    root: chat,
+    children: {
+      chatSidebar: [chatSidebar, '.chat__sidebar', chat],
+      contacts: [contacts, '.chat-sidebar__contacts', chatSidebar]
+    },
+    controller
+  });
 }
 
-function controlPage(page: Page) {
-  page.init();
+function controller() {
+  
 }

@@ -1,4 +1,5 @@
 import Block from "./k-react/block";
+import Page from "./k-react/page";
 
 interface EventBusListeners {
   [propName: string]: Array<Function>;
@@ -36,11 +37,22 @@ interface SidebarMenu extends BlockProps {
 
 type BlockChild = Block | Array<Block>;
 
-interface PageBlocks {
-  root: [Block, string],
+interface PageChildren {
   [childName: string]: [BlockChild, string, Block?]
+}
+
+interface PageProps {
+  root: Block,
+  children?: PageChildren,
+  controller: Function
 }
 
 interface Validators {
   [propName: string]: RegExp
 }
+
+interface RouterProps {
+  rootQuery: string;
+}
+
+type PageCreator = () => Page;

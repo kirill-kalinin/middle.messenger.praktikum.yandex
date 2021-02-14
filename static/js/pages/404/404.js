@@ -2,8 +2,7 @@ import Page from '../../core/k-react/page.js';
 import Error from '../../components/error/error.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
-document.addEventListener('DOMContentLoaded', createPage);
-function createPage() {
+export default function createPage404() {
     const error404 = new Error({
         title: 'Код ошибки',
         code: '404',
@@ -20,13 +19,15 @@ function createPage() {
         text: 'Назад',
         additionClass: 'button_padding-wide error__go-back-button'
     });
-    controlPage(new Page({
-        root: [error404, '.err404-page'],
-        sidebar: [sidebar, '.error__sidebar', error404],
-        button: [button, '.error__button-slot', error404]
-    }));
+    return new Page({
+        root: error404,
+        children: {
+            sidebar: [sidebar, '.error__sidebar', error404],
+            button: [button, '.error__button-slot', error404]
+        },
+        controller
+    });
 }
-function controlPage(page) {
-    page.init();
+function controller() {
 }
 //# sourceMappingURL=404.js.map
