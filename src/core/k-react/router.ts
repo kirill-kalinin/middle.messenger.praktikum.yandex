@@ -28,16 +28,27 @@ export default class Router {
   }
 
   start() {
-    window.onpopstate = (event: any) => {
-      this._onRoute(event.currentTarget.location.pathname);
+    this._linksMiddleware();
+    window.onpopstate = () => {
+      this._onRoute(window.location.pathname);
     }
 
     this._onRoute(window.location.pathname);
   }
 
+  _linksMiddleware() {
+    document.addEventListener('click', (e: Event) => {
+      if (e.target instanceof HTMLAnchorElement) {
+        e.preventDefault();
+        this.go(e.target.pathname);
+      }
+    });
+  }
+
   _onRoute(pathname: string) {
     const route = this.getRoute(pathname);
     if (!route) {
+      this._onRoute('/404');
       return;
     }
 

@@ -33,6 +33,7 @@ export default class FormHandler {
     }
     this._form.addEventListener('submit', (e) => {
       e.preventDefault();
+      console.log('handle form ', this._form);
 
       let isFormValid = true;
       this._inputs.forEach(input => {

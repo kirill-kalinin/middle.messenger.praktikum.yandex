@@ -16,14 +16,24 @@ export default class Router {
         return this;
     }
     start() {
-        window.onpopstate = (event) => {
-            this._onRoute(event.currentTarget.location.pathname);
+        this._linksMiddleware();
+        window.onpopstate = () => {
+            this._onRoute(window.location.pathname);
         };
         this._onRoute(window.location.pathname);
+    }
+    _linksMiddleware() {
+        document.addEventListener('click', (e) => {
+            if (e.target instanceof HTMLAnchorElement) {
+                e.preventDefault();
+                this.go(e.target.pathname);
+            }
+        });
     }
     _onRoute(pathname) {
         const route = this.getRoute(pathname);
         if (!route) {
+            this._onRoute('/404');
             return;
         }
         if (this._currentRoute) {

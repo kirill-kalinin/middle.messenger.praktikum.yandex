@@ -1,6 +1,5 @@
 import Page from '../../core/k-react/page.js';
 import Intro from '../../components/intro/intro.js';
-import Router from '../../core/k-react/router.js';
 
 export default function createPageIntro() {
   const intro = new Intro({ animate: false });
@@ -12,12 +11,10 @@ export default function createPageIntro() {
 }
 
 function controller(page: Page) {
-  const router = new Router();
-
   window.addEventListener('load', function() {
-    page.root.setProps({ animate: true })
+    page.root.setProps({ animate: true });
     setTimeout(function() {
-      router.go('/login');
+      page.router.go('/login');
     }, 3000);
   });
 }

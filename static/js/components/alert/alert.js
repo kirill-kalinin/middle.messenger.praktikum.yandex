@@ -1,6 +1,6 @@
-import Template from '../../../components/error/error.hbs.js';
+import Template from '../../../components/alert/alert.hbs.js';
 import Block from '../../core/k-react/block.js';
-export default class Error extends Block {
+export default class Alert extends Block {
     constructor(props = {}, className = 'fragment') {
         super('div', className, props);
     }
@@ -8,4 +8,4 @@ export default class Error extends Block {
         return Template;
     }
 }
-//# sourceMappingURL=error.js.map
+//# sourceMappingURL=alert.js.map

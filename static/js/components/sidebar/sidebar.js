@@ -25,7 +25,18 @@ export const sidebarLoginPreset = {
         question: 'Еще нет аккаунта?',
         link: {
             text: 'Создать новый!',
-            href: '/pages/signin/signin.html'
+            href: '/signin'
+        }
+    }
+};
+export const sidebarSigninPreset = {
+    parent: 'signin',
+    typeIsPrompt: true,
+    prompt: {
+        question: 'Уже есть аккаунт?',
+        link: {
+            text: 'Авторизоваться!',
+            href: '/login'
         }
     }
 };

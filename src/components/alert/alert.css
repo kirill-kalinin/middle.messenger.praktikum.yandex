@@ -1,14 +1,14 @@
-.error {    
+.alert {    
   display: flex;
   height: 100%;
 }
 
-.error__sidebar {
+.alert__sidebar {
   box-sizing: border-box;
   width: 40%;
 }
 
-.error__main-block {
+.alert__main-block {
   box-sizing: border-box;
   width: 60%;
   display: flex;
@@ -19,12 +19,12 @@
   text-align: center;
 }
 
-.error__title-wrapper {
+.alert__title-wrapper {
   text-align: center;
 }
 
-.error__title,
-.error__code {
+.alert__title,
+.alert__code {
   font-size: 2.25em;
   @media (--width-md), (--height-md) {
     font-size: 1.8em;
@@ -34,7 +34,7 @@
   }
 }
 
-.error__description {
+.alert__description {
   font-size: 1.25em;
   @media (--width-md), (--height-md) {
     font-size: 1em;
@@ -44,7 +44,7 @@
   }
 }
 
-.error__go-back-button {
+.alert__go-back-button {
   padding: 22px 40px;
   @media (--width-md), (--height-md) {
     padding: 18px 32px;

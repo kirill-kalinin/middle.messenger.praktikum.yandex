@@ -1,9 +1,5 @@
 export default `
-  {{#if linkBehavior}}
-  <a href="{{link}}" 
-  {{else}}
   <button type="{{#if isSimpleButton}}button{{else}}submit{{/if}}" 
-  {{/if}}
 
   class="button {{additionClass}}">
 
@@ -13,9 +9,5 @@ export default `
 
   {{text}}
 
-  {{#if linkBehavior}}
-  </a>
-  {{else}}
   </button>
-  {{/if}}
 `;

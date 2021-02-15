@@ -1,22 +1,25 @@
 import DOMService from '../../core/k-react/dom-service.js';
+import Router from './router.js';
 import Block from './block.js';
 import type { PageProps, PageChildren } from '../types.js';
 
 export default class Page {
   public root: Block;
   public blocks: PageChildren | undefined;
-  public controller: Function;
-  private _rootQuery: string | undefined;
+  public router: Router;
   private _DOMService: DOMService;
 
   constructor(props: PageProps) {
     this._DOMService = new DOMService();
+    this.router = new Router();
     this.root = props.root;
     this.blocks = props.children;
-    this.controller = props.controller;
+    this._attachBlocks();
+    
+    props.controller(this);
   }
 
-  attachBlocks() {
+  private _attachBlocks() {
     if (!this.blocks) {
       return;
     }
@@ -25,20 +28,11 @@ export default class Page {
     }
   }
 
-  show() {
-    if (!this._rootQuery) {
-      throw new Error('Страница не была корректно инициализирована');
-    }
-    this._DOMService.attachComponent(this.root, this._rootQuery);
-  }
-
-  hide() {
-    this._DOMService.detachComponent(this.root);
-  }
-
-  render(rootQuery: string) {
+  public show(rootQuery: string) {
     this._DOMService.attachComponent(this.root, rootQuery);
-    this.attachBlocks();
-    this.controller(this);
+  }
+
+  public hide() {
+    this._DOMService.detachComponent(this.root);
   }
 }

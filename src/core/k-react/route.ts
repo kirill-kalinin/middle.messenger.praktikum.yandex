@@ -34,10 +34,8 @@ export default class Route {
   render() {
     if (!this._page) {
       this._page = this._pageCreator();
-      this._page.render(this._props.rootQuery);
-      return;
     }
 
-    this._page.show();
+    this._page.show(this._props.rootQuery);
   }
 }

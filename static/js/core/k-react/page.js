@@ -1,12 +1,15 @@
 import DOMService from '../../core/k-react/dom-service.js';
+import Router from './router.js';
 export default class Page {
     constructor(props) {
         this._DOMService = new DOMService();
+        this.router = new Router();
         this.root = props.root;
         this.blocks = props.children;
-        this.controller = props.controller;
+        this._attachBlocks();
+        props.controller(this);
     }
-    attachBlocks() {
+    _attachBlocks() {
         if (!this.blocks) {
             return;
         }
@@ -14,19 +17,11 @@ export default class Page {
             this._DOMService.attachComponent.apply(null, block);
         }
     }
-    show() {
-        if (!this._rootQuery) {
-            throw new Error('Страница не была корректно инициализирована');
-        }
-        this._DOMService.attachComponent(this.root, this._rootQuery);
+    show(rootQuery) {
+        this._DOMService.attachComponent(this.root, rootQuery);
     }
     hide() {
         this._DOMService.detachComponent(this.root);
-    }
-    render(rootQuery) {
-        this._DOMService.attachComponent(this.root, rootQuery);
-        this.attachBlocks();
-        this.controller(this);
     }
 }
 //# sourceMappingURL=page.js.map

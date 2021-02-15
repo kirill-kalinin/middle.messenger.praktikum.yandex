@@ -1,10 +1,10 @@
 @import './main.css';
+@import './components/alert/alert.css';
 @import './components/auth/auth.css';
 @import './components/button/button.css';
 @import './components/chat-sidebar/chat-sidebar.css';
 @import './components/chat/chat.css';
 @import './components/contact/contact.css';
-@import './components/error/error.css';
 @import './components/form/form.css';
 @import './components/intro/intro.css';
 @import './components/message/message.css';
