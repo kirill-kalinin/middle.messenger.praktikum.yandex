@@ -9,7 +9,7 @@ import createPageProfileEditData from './pages/profile-edit-data/profile-edit-da
 import createPageProfileEditPassword from './pages/profile-edit-password/profile-edit-password.js';
 import createPageProfileMain from './pages/profile-main/profile-main.js';
 import createPageSignin from './pages/signin/signin.js';
-import Router from './core/k-react/router.js';
+import Router from './core/router/router.js';
 const appRoutes = [
     ['/', createPageIntro],
     ['/login', createPageLogin],

@@ -1,5 +1,5 @@
 import Page from '../../core/k-react/page.js';
-import DummyService from '../../core/dummy-service.js';
+import DummyService from '../../core/services/dummy-service.js';
 import Chat from '../../components/chat/chat.js';
 import ChatSidebar from '../../components/chat-sidebar/chat-sidebar.js';
 import Contact from '../../components/contact/contact.js';

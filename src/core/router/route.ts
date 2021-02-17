@@ -1,4 +1,4 @@
-import Page from "./page.js";
+import Page from "../k-react/page.js";
 import type { RouterProps, PageCreator } from "../types.js";
 
 export default class Route {

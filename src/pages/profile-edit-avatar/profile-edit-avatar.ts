@@ -1,6 +1,6 @@
 import Page from '../../core/k-react/page.js';
 import FormHandler from '../../core/form-handler.js';
-import DummyService from '../../core/dummy-service.js';
+import DummyService from '../../core/services/dummy-service.js';
 import AvatarUploadHandler from '../../core/avatar-upload-handler.js';
 import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';

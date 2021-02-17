@@ -1,5 +1,6 @@
-import Block from "./k-react/block";
-import Page from "./k-react/page";
+import Block from './k-react/block';
+import Page from './k-react/page';
+import { METHODS } from './services/http-service';
 
 interface EventBusListeners {
   [propName: string]: Array<Function>;
@@ -56,3 +57,22 @@ interface RouterProps {
 }
 
 type PageCreator = () => Page;
+
+type RequestData = string | Document | Blob 
+  | ArrayBufferView | ArrayBuffer | FormData 
+  | URLSearchParams | ReadableStream<Uint8Array> 
+  | null | undefined;
+
+interface RequestOptions {
+  data?: RequestData,
+  timeout?: number
+}
+
+interface RequestOptionsMethodGet {
+  data?: {[param: string]: unknown},
+  timeout?: number
+}
+
+interface RequestOptionsWithMethod extends RequestOptions {
+  method: METHODS
+}

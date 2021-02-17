@@ -1,5 +1,5 @@
 import DOMService from '../../core/k-react/dom-service.js';
-import Router from './router.js';
+import Router from '../router/router.js';
 export default class Page {
     constructor(props) {
         this._DOMService = new DOMService();

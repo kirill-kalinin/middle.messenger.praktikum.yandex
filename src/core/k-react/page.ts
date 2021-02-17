@@ -1,5 +1,5 @@
 import DOMService from '../../core/k-react/dom-service.js';
-import Router from './router.js';
+import Router from '../router/router.js';
 import Block from './block.js';
 import type { PageProps, PageChildren } from '../types.js';
 
