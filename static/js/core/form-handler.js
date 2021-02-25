@@ -1,6 +1,7 @@
+import Router from "./router/router.js";
 export default class FormHandler {
     constructor() {
-        this._queryElements();
+        this._router = new Router();
         this._validationRegex = {
             name: /^[a-zA-Zа-яёА-ЯЁ]{2,20}$/,
             email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -9,45 +10,9 @@ export default class FormHandler {
             tel: /^(\+{1}7{1}|8)\ ?\(?\d{3}\)?\ ?\d{3}[ -]?\d{2}[ -]?\d{2}$/
         };
     }
-    _queryElements() {
-        this._form = document.querySelector('form');
-        if (this._form === null) {
-            return;
-        }
-        this._inputs = Array.from(this._form.querySelectorAll('input'));
-        this._equalDataInputs = this._inputs.filter(input => input.hasAttribute('data-required-equality'));
-    }
-    handle() {
-        if (this._form === null) {
-            return;
-        }
-        this._form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            console.log('handle form ', this._form);
-            let isFormValid = true;
-            this._inputs.forEach(input => {
-                if (!this._isValidInput(input)) {
-                    isFormValid = false;
-                    input.classList.add('invalid-input');
-                }
-            });
-            if (!isFormValid) {
-                return;
-            }
-            if (this._form === null) {
-                return;
-            }
-            const formData = new FormData(this._form);
-            console.log(this._form.name, Object.fromEntries(formData.entries()));
-            // Эмуляция успешного входа/регистрации
-            if (this._form.name === 'login' || this._form.name === 'signin') {
-                const redirect = confirm('Данные формы выведены в консоль. Перейти на страницу выбора собеседника?');
-                if (redirect) {
-                    window.location.href = "/pages/chat-select/chat-select.html";
-                }
-            }
-        });
-        this._inputs.forEach(input => {
+    addValidationListeners(form) {
+        const [inputs, equalDataInputs] = this._queryElements(form);
+        inputs.forEach(input => {
             input.addEventListener('focus', (e) => {
                 if (e.target instanceof HTMLInputElement) {
                     e.target.classList.remove('invalid-input');
@@ -55,24 +20,60 @@ export default class FormHandler {
             });
             input.addEventListener('blur', (e) => {
                 if (e.target instanceof HTMLInputElement) {
-                    if (!this._isValidInput(e.target)) {
+                    if (!this._isValidInput(e.target, equalDataInputs)) {
                         e.target.classList.add('invalid-input');
                     }
                 }
             });
         });
     }
-    _isValidInput(inputElement) {
+    handleSubmit() {
+        document.addEventListener('submit', e => {
+            if (e.target instanceof HTMLFormElement) {
+                e.preventDefault();
+                this._onSubmit(e.target);
+            }
+        });
+    }
+    _onSubmit(form) {
+        const [inputs, equalDataInputs] = this._queryElements(form);
+        console.log('handle form ', form);
+        let isFormValid = true;
+        inputs.forEach(input => {
+            if (!this._isValidInput(input, equalDataInputs)) {
+                isFormValid = false;
+                input.classList.add('invalid-input');
+            }
+        });
+        if (!isFormValid) {
+            return;
+        }
+        const formData = new FormData(form);
+        console.log(form.name, Object.fromEntries(formData.entries()));
+        // Эмуляция успешного входа/регистрации
+        if (form.name === 'login' || form.name === 'signin') {
+            const redirect = confirm('Данные формы выведены в консоль. Перейти на страницу выбора собеседника?');
+            if (redirect) {
+                this._router.go('/chat-select');
+            }
+        }
+    }
+    _isValidInput(inputElement, equalDataInputs) {
         if (!inputElement.dataset.validationKey) {
             if (!inputElement.dataset.requiredEquality) {
                 return true;
             }
             else {
-                return this._equalDataInputs.every(chainedInput => chainedInput.value === inputElement.value);
+                return equalDataInputs.every(chainedInput => chainedInput.value === inputElement.value);
             }
         }
         const regEx = this._validationRegex[inputElement.dataset.validationKey];
         return regEx.test(inputElement.value);
+    }
+    _queryElements(form) {
+        const inputs = Array.from(form.querySelectorAll('input'));
+        const equalDataInputs = inputs.filter(input => input.hasAttribute('data-required-equality'));
+        return [inputs, equalDataInputs];
     }
 }
 //# sourceMappingURL=form-handler.js.map

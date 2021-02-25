@@ -11,6 +11,7 @@ import createPageProfileMain from './pages/profile-main/profile-main.js';
 import createPageSignin from './pages/signin/signin.js';
 
 import Router from './core/router/router.js';
+import FormHandler from './core/form-handler.js';
 
 const appRoutes = [
   ['/', createPageIntro],
@@ -24,9 +25,13 @@ const appRoutes = [
   ['/chat-select', createPageChatSelect],
   ['/404', createPage404],
   ['/500', createPage500],
-]
+];
 
 const router = new Router();
 
 appRoutes.forEach(route => router.use.apply(router, route));
 router.start();
+
+const formHandler = new FormHandler();
+
+formHandler.handleSubmit();

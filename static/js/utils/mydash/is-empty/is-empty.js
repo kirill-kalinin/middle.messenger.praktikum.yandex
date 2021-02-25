@@ -11,4 +11,4 @@ function isEmpty(value) {
     }
     return false;
 }
-//# sourceMappingURL=isEmpty.js.map
+//# sourceMappingURL=is-empty.js.map

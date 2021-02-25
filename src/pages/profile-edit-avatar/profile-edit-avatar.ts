@@ -1,10 +1,9 @@
 import Page from '../../core/k-react/page.js';
-import FormHandler from '../../core/form-handler.js';
 import DummyService from '../../core/services/dummy-service.js';
-import AvatarUploadHandler from '../../core/avatar-upload-handler.js';
 import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button.js';
+import cloneDeep from '../../utils/mydash/clone-deep/clone-deep.js';
 
 export default function createPageProfileEditAvatar() {
   const dummyService = new DummyService();
@@ -14,8 +13,9 @@ export default function createPageProfileEditAvatar() {
     isAvatarUploadMode: true
   });
 
-  sidebarProfileMenuPreset.menuItems[0].active = true;
-  const sidebar = new Sidebar(sidebarProfileMenuPreset);
+  const sidebarPreset = cloneDeep(sidebarProfileMenuPreset);
+  sidebarPreset.menuItems[0].active = true;
+  const sidebar = new Sidebar(sidebarPreset);
 
   const sidebarButton = new Button(profileSidebarButtonPreset, 'fragment fragment_center');
 
@@ -35,10 +35,6 @@ export default function createPageProfileEditAvatar() {
   });
 }
 
-function controller(page: Page) {
-  const avatarUploadHandler = new AvatarUploadHandler(page.root.element);
-  avatarUploadHandler.handle();
+function controller() {
 
-  const formHandler = new FormHandler();
-  formHandler.handle();
 }

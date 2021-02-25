@@ -50,7 +50,7 @@ export default `
         {{#if isAvatarUploadMode}}
         <form class="profile__data profile__data_avatar-upload" name="avatar-upload">
           <p class="profile__avatar-uplaod-title">Загрузите файл</p>
-          <p class="profile__avatar-upload-filename"></p>
+          <p class="profile__avatar-upload-filename" title="Нажмите, чтобы выбрать другое изображение"></p>
           <label class="profile__avatar-upload-label">Выбрать файл на компьютере
             <input class="profile__avatar-upload-input" type="file" name="avatar" accept="image/jpeg">
           </label>

@@ -10,7 +10,7 @@ export default `
       {{#if typeIsPrompt}}
       {{#with prompt}}
       <p class="sidebar__text">{{question}}</p>
-      <a class="sidebar__link" href="{{link/href}}">{{link/text}}</a>
+      <a class="sidebar__link" data-route="{{link/href}}" href="{{link/href}}">{{link/text}}</a>
       {{/with}}
       {{/if}}
 
@@ -24,7 +24,8 @@ export default `
       <ul class="sidebar__menu"></ul>
       {{#each menuItems}}
       <li class="sidebar__menu-item">
-        <a href="{{link}}" class="sidebar__link sidebar__link_menu{{#if active}} sidebar__link_active{{/if}}">
+        <a data-route="{{link}}" href="{{link}}"
+          class="sidebar__link sidebar__link_menu{{#if active}} sidebar__link_active{{/if}}">
           {{text}}
         </a>
       </li>

@@ -1,5 +1,9 @@
 export default `
-  <button type="{{#if isSimpleButton}}button{{else}}submit{{/if}}" 
+  <button type="{{#if isSimpleButton}}button{{else}}submit{{/if}}"
+
+  {{#if route}}
+  data-route="{{route}}"
+  {{/if}}
 
   class="button {{additionClass}}">
 

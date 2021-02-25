@@ -1,5 +1,4 @@
 import Page from '../../core/k-react/page.js';
-import FormHandler from '../../core/form-handler.js';
 import Auth from '../../components/auth/auth.js';
 import Form, { formSigninPreset } from '../../components/form/form.js';
 import Sidebar, { sidebarSigninPreset } from '../../components/sidebar/sidebar.js';
@@ -25,7 +24,5 @@ export default function createPageSignin() {
     });
 }
 function controller() {
-    const formHandler = new FormHandler();
-    formHandler.handle();
 }
 //# sourceMappingURL=signin.js.map

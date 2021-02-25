@@ -1,9 +1,9 @@
 import Page from '../../core/k-react/page.js';
-import FormHandler from '../../core/form-handler.js';
 import DummyService from '../../core/services/dummy-service.js';
 import Profile from '../../components/profile/profile.js';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button.js';
+import cloneDeep from '../../utils/mydash/clone-deep/clone-deep.js';
 export default function createPageProfileEditData() {
     const dummyService = new DummyService();
     const profile = new Profile({
@@ -11,14 +11,15 @@ export default function createPageProfileEditData() {
         isEditInfoMode: true,
         userData: dummyService.getProfileUserData()
     });
-    sidebarProfileMenuPreset.menuItems[1].active = true;
-    const sidebar = new Sidebar(sidebarProfileMenuPreset);
+    const sidebarPreset = cloneDeep(sidebarProfileMenuPreset);
+    sidebarPreset.menuItems[1].active = true;
+    const sidebar = new Sidebar(sidebarPreset);
     const sidebarButton = new Button(profileSidebarButtonPreset, 'fragment fragment_center');
     const cancelButton = new Button({
-        linkBehavior: true,
-        link: '../profile-main/profile-main.html',
         text: 'Отмена',
-        additionClass: ''
+        additionClass: '',
+        isSimpleButton: true,
+        route: '/profile-main'
     }, 'profile__button');
     const submitButton = new Button({
         text: 'Сохранить',
@@ -36,7 +37,5 @@ export default function createPageProfileEditData() {
     });
 }
 function controller() {
-    const formHandler = new FormHandler();
-    formHandler.handle();
 }
 //# sourceMappingURL=profile-edit-data.js.map

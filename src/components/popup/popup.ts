@@ -5,6 +5,7 @@ import DOMService from '../../core/k-react/dom-service.js';
 import type { BlockProps } from '../../core/types.js';
 
 export default class Popup extends Block {
+
   private _button: Button;
 
   constructor(props: BlockProps = {}, className = '') {
@@ -24,6 +25,7 @@ export default class Popup extends Block {
   render() {
     return Template;
   }
+
 }
 
 export const popupAddContactPreset: BlockProps = {

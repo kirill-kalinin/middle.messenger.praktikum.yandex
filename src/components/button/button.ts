@@ -3,6 +3,7 @@ import Block from '../../core/k-react/block.js';
 import type { BlockProps } from '../../core/types.js';
 
 export default class Button extends Block {
+
   constructor(props: BlockProps = {}, className = 'fragment') {
     super('div', className, props);
   }
@@ -10,13 +11,13 @@ export default class Button extends Block {
   render() {
     return Template;
   }
+
 }
 
 export const profileSidebarButtonPreset = {
   isProfileSidebarButton: true,
-  linkBehavior: true,
-  link: '../chat-select/chat-select.html',
   imageSrc: '../../images/arrow.svg',
   text: 'Назад к чатам',
-  additionClass: 'profile__sidebar-button'
+  additionClass: 'profile__sidebar-button',
+  route: '/chat-select'
 };

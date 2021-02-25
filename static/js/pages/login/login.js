@@ -1,5 +1,4 @@
 import Page from '../../core/k-react/page.js';
-import FormHandler from '../../core/form-handler.js';
 import Auth from '../../components/auth/auth.js';
 import Form, { formLoginPreset } from '../../components/form/form.js';
 import Sidebar, { sidebarLoginPreset } from '../../components/sidebar/sidebar.js';
@@ -23,7 +22,5 @@ export default function createPageLogin() {
     });
 }
 function controller() {
-    const formHandler = new FormHandler();
-    formHandler.handle();
 }
 //# sourceMappingURL=login.js.map

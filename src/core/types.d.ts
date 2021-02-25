@@ -76,3 +76,4 @@ interface RequestOptionsMethodGet {
 interface RequestOptionsWithMethod extends RequestOptions {
   method: METHODS
 }
+

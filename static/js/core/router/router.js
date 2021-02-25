@@ -24,9 +24,15 @@ export default class Router {
     }
     _linksMiddleware() {
         document.addEventListener('click', (e) => {
-            if (e.target instanceof HTMLAnchorElement) {
+            if (e.target instanceof HTMLElement && e.target.dataset.route) {
                 e.preventDefault();
-                this.go(e.target.pathname);
+                const route = e.target.dataset.route;
+                if (route === 'BACK') {
+                    this.back();
+                }
+                else {
+                    this.go(route);
+                }
             }
         });
     }

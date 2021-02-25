@@ -6,6 +6,7 @@ import Popup, {
   popupErrorPreset 
 } from '../../components/popup/popup.js';
 import DOMService from '../../core/k-react/dom-service.js';
+import Router from '../../core/router/router.js';
 import type { BlockProps } from '../../core/types.js';
 
 enum PopupTypes {
@@ -15,18 +16,19 @@ enum PopupTypes {
 }
 
 export default class ChatSidebar extends Block {
+
   private _DOMService: DOMService;
+  private _Router: Router;
   private _popup: Popup;
 
   constructor(props: BlockProps = {}, className = 'fragment') {
     super('div', className, props);
-    this._DOMService = new DOMService();
-    this._toolbarButtonsHandler();
   }
 
   private _toolbarButtonsHandler() {
     const buttonAddContact = this.element.querySelector('.chat-sidebar__button_add');
     const buttonRemoveContact = this.element.querySelector('.chat-sidebar__button_remove');
+    const buttonProfile = this.element.querySelector('.chat-sidebar__button_profile');
 
     if (buttonAddContact) {
       buttonAddContact.addEventListener('click', () => {
@@ -58,6 +60,12 @@ export default class ChatSidebar extends Block {
           }
           this._DOMService.attachComponent(this._popup, 'body');
         }, {once: true});
+      });
+    }
+
+    if (buttonProfile) {
+      buttonProfile.addEventListener('click', () => {
+        this._Router.go('/profile-main');
       });
     }
   }
@@ -104,7 +112,18 @@ export default class ChatSidebar extends Block {
     e.preventDefault();
   }
 
+  componentDidMount() {
+    this._DOMService = new DOMService();
+    this._Router = new Router();
+    this._toolbarButtonsHandler();
+  }
+
+  componentDidUpdate() {
+    this._toolbarButtonsHandler();
+  }
+
   render() {
     return Template;
   }
+
 }

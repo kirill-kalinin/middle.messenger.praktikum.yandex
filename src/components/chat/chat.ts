@@ -1,11 +1,14 @@
 import Template from '../../../components/chat/chat.hbs.js';
 import Block from '../../core/k-react/block.js';
+import FormHandler from '../../core/form-handler.js';
 import type { BlockProps } from '../../core/types.js';
 
 export default class Chat extends Block {
+
+  private _formHandler: FormHandler;
+
   constructor(props: BlockProps = {}, className = 'fragment') {
     super('div', className, props);
-    this._hiddenBlockHandler();
   }
 
   private _hiddenBlockHandler() {
@@ -19,7 +22,26 @@ export default class Chat extends Block {
     });
   }
 
+  private _setInputListeners() {
+    const form = this.element.querySelector('form');
+    if (form instanceof HTMLFormElement) {
+      this._formHandler.addValidationListeners(form);
+    }
+  }
+
+  componentDidMount() {
+    this._formHandler = new FormHandler();
+    this._hiddenBlockHandler();
+    this._setInputListeners();
+  }
+
+  componentDidUpdate() {
+    this._hiddenBlockHandler();
+    this._setInputListeners();
+  }
+
   render() {
     return Template;
   }
+
 }

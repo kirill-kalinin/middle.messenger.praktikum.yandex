@@ -2,7 +2,7 @@ export default class DummyService {
     fetchContacts() {
         return [{
                 id: '1',
-                link: '../chat-active/chat-active.html',
+                link: '/chat-active',
                 avatar: '/images/avatar-placeholder.svg',
                 name: 'Олег',
                 message: 'Можно сегодня попробовать еще раз',
@@ -11,7 +11,7 @@ export default class DummyService {
                 readed: false
             }, {
                 id: '2',
-                link: '../chat-active/chat-active.html',
+                link: '/chat-active',
                 avatar: '/images/avatar-placeholder.svg',
                 name: 'Киноклуб',
                 message: 'Вы: стикер',
@@ -20,7 +20,7 @@ export default class DummyService {
                 readed: true
             }, {
                 id: '3',
-                link: '../chat-active/chat-active.html',
+                link: '/chat-active',
                 avatar: '/images/avatar-placeholder.svg',
                 name: 'Павел',
                 message: 'Начал собирать первые 10, все нормально',
@@ -29,7 +29,7 @@ export default class DummyService {
                 readed: false
             }, {
                 id: '4',
-                link: '../chat-active/chat-active.html',
+                link: '/chat-active',
                 avatar: '/images/avatar-placeholder.svg',
                 name: 'Игорь',
                 message: 'Вы: Хорошо',
@@ -38,7 +38,7 @@ export default class DummyService {
                 readed: true
             }, {
                 id: '5',
-                link: '../chat-active/chat-active.html',
+                link: '/chat-active',
                 avatar: '/images/avatar-placeholder.svg',
                 name: 'Евгения',
                 message: 'Спсаибо',

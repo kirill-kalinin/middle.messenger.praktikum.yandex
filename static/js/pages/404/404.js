@@ -15,7 +15,8 @@ export default function createPage404() {
     });
     const button = new Button({
         text: 'Назад',
-        additionClass: 'button_padding-wide alert__go-back-button'
+        additionClass: 'button_padding-wide alert__go-back-button',
+        route: 'BACK'
     });
     return new Page({
         root: alert404,
@@ -26,17 +27,6 @@ export default function createPage404() {
         controller
     });
 }
-function controller(page) {
-    if (!page.blocks) {
-        throw new Error('Ошибка в настройке блоков страницы');
-    }
-    const buttonBlock = page.blocks.button[0];
-    const buttonElement = buttonBlock.element.querySelector('.button');
-    if (!buttonElement) {
-        throw new Error('Ошибка в шаблоне блокa Button');
-    }
-    buttonElement.addEventListener('click', function () {
-        page.router.back();
-    });
+function controller() {
 }
 //# sourceMappingURL=404.js.map

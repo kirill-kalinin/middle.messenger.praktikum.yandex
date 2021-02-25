@@ -10,10 +10,9 @@ export default class Button extends Block {
 }
 export const profileSidebarButtonPreset = {
     isProfileSidebarButton: true,
-    linkBehavior: true,
-    link: '../chat-select/chat-select.html',
     imageSrc: '../../images/arrow.svg',
     text: 'Назад к чатам',
-    additionClass: 'profile__sidebar-button'
+    additionClass: 'profile__sidebar-button',
+    route: '/chat-select'
 };
 //# sourceMappingURL=button.js.map

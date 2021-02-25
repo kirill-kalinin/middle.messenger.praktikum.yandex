@@ -13,10 +13,10 @@ export default abstract class Block {
 
   private _element: HTMLElement;
   private _meta: BlockMeta;
-  _children: Map<BlockChild, string>;
+  private _children: Map<BlockChild, string>;
 
-  props: BlockProps;
-  eventBus: () => EventBus;
+  public props: BlockProps;
+  public eventBus: () => EventBus;
 
   constructor(tagName: string = 'div', className: string = '', props: BlockProps = {}) {
     const eventBus = new EventBus();
@@ -36,7 +36,7 @@ export default abstract class Block {
   }
 
   private _registerEvents(eventBus: EventBus) {
-    eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+    eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
     eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
     eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -47,26 +47,26 @@ export default abstract class Block {
     this._element = this._createDocumentElement(tagName, className);
   }
 
-  init() {
+  private _init() {
     this._createResources();
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
   private _componentDidMount() {
-    this.componentDidMount();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.componentDidMount();
   }
 
-  componentDidMount() {}
+  public componentDidMount() {}
 
   private _componentDidUpdate() {
-    this.componentDidUpdate();
     this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+    this.componentDidUpdate();
   }
 
-  componentDidUpdate() {}
+  public componentDidUpdate() {}
 
-  setProps = (nextProps: BlockProps) => {
+  public setProps = (nextProps: BlockProps) => {
     if (!nextProps) {
       return;
     }
@@ -74,11 +74,11 @@ export default abstract class Block {
     Object.assign(this.props, nextProps);
   };
 
-  setChild = (child: BlockChild, cssSelector: string) => {
+  public setChild = (child: BlockChild, cssSelector: string) => {
     this._children.set(child, cssSelector);
   };
 
-  unsetChild = (child: BlockChild) => {
+  public unsetChild = (child: BlockChild) => {
     this._children.delete(child);
   };
 
@@ -110,7 +110,7 @@ export default abstract class Block {
     this._updateChildren();
   }
 
-  render() {}
+  public render() {}
 
   private _makePropsProxy(props: BlockProps) {
     const proxyProps = new Proxy(props, {
@@ -135,11 +135,11 @@ export default abstract class Block {
     return element;
   }
 
-  show() {
+  public show() {
     this._element.style.display = 'block';
   }
 
-  hide() {
+  public hide() {
     this._element.style.display = 'none';
   }
 }

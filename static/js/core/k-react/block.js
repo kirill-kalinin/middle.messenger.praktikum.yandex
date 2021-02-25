@@ -46,7 +46,7 @@ export default class Block {
         eventBus.emit(Block.EVENTS.INIT);
     }
     _registerEvents(eventBus) {
-        eventBus.on(Block.EVENTS.INIT, this.init.bind(this));
+        eventBus.on(Block.EVENTS.INIT, this._init.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDM, this._componentDidMount.bind(this));
         eventBus.on(Block.EVENTS.FLOW_RENDER, this._render.bind(this));
         eventBus.on(Block.EVENTS.FLOW_CDU, this._componentDidUpdate.bind(this));
@@ -55,18 +55,18 @@ export default class Block {
         const { tagName, className } = this._meta;
         this._element = this._createDocumentElement(tagName, className);
     }
-    init() {
+    _init() {
         this._createResources();
         this.eventBus().emit(Block.EVENTS.FLOW_CDM);
     }
     _componentDidMount() {
-        this.componentDidMount();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.componentDidMount();
     }
     componentDidMount() { }
     _componentDidUpdate() {
-        this.componentDidUpdate();
         this.eventBus().emit(Block.EVENTS.FLOW_RENDER);
+        this.componentDidUpdate();
     }
     componentDidUpdate() { }
     get element() {

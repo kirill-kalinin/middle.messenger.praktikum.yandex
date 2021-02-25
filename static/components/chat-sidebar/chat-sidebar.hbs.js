@@ -7,9 +7,9 @@ export default `
       <button class="chat-sidebar__button chat-sidebar__button_add" type="button">
         <img class="chat-sidebar__button-image" src="/images/toolbar-add.svg" alt=" ">
       </button>
-      <a class="chat-sidebar__button chat-sidebar__button_profile" href="../profile-main/profile-main.html">
+      <button class="chat-sidebar__button chat-sidebar__button_profile" type="button">
         <img class="chat-sidebar__button-image" src="/images/toolbar-profile.svg" alt=" ">
-      </a>
+      </button>
     </div>
     <div class="chat-sidebar__search">
       <input class="chat-sidebar__input" type="text" placeholder="Поиск контактов...">

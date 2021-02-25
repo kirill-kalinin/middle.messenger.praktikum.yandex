@@ -1,5 +1,5 @@
 export default `
-  <a class="contact{{#if active}} contact_active{{/if}}" href="{{link}}">
+  <a class="contact{{#if active}} contact_active{{/if}}" data-route="{{link}}" href="{{link}}">
     <img class="contact__image" src="{{avatar}}" alt=" ">
     <div class="contact__primary-info">
       <p class="contact__name">{{name}}</p>

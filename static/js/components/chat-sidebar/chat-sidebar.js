@@ -2,6 +2,7 @@ import Template from '../../../components/chat-sidebar/chat-sidebar.hbs.js';
 import Block from '../../core/k-react/block.js';
 import Popup, { popupAddContactPreset, popupRemoveContactPreset, popupErrorPreset } from '../../components/popup/popup.js';
 import DOMService from '../../core/k-react/dom-service.js';
+import Router from '../../core/router/router.js';
 var PopupTypes;
 (function (PopupTypes) {
     PopupTypes[PopupTypes["ADD"] = 0] = "ADD";
@@ -11,12 +12,11 @@ var PopupTypes;
 export default class ChatSidebar extends Block {
     constructor(props = {}, className = 'fragment') {
         super('div', className, props);
-        this._DOMService = new DOMService();
-        this._toolbarButtonsHandler();
     }
     _toolbarButtonsHandler() {
         const buttonAddContact = this.element.querySelector('.chat-sidebar__button_add');
         const buttonRemoveContact = this.element.querySelector('.chat-sidebar__button_remove');
+        const buttonProfile = this.element.querySelector('.chat-sidebar__button_profile');
         if (buttonAddContact) {
             buttonAddContact.addEventListener('click', () => {
                 this._popup = new Popup(popupAddContactPreset);
@@ -48,6 +48,11 @@ export default class ChatSidebar extends Block {
                     }
                     this._DOMService.attachComponent(this._popup, 'body');
                 }, { once: true });
+            });
+        }
+        if (buttonProfile) {
+            buttonProfile.addEventListener('click', () => {
+                this._Router.go('/profile-main');
             });
         }
     }
@@ -88,6 +93,14 @@ export default class ChatSidebar extends Block {
     }
     _preventRedirection(e) {
         e.preventDefault();
+    }
+    componentDidMount() {
+        this._DOMService = new DOMService();
+        this._Router = new Router();
+        this._toolbarButtonsHandler();
+    }
+    componentDidUpdate() {
+        this._toolbarButtonsHandler();
     }
     render() {
         return Template;

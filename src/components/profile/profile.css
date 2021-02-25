@@ -201,12 +201,12 @@
 }
 
 .profile__avatar-upload-label {
-  cursor: pointer;
   text-decoration: underline;
 }
 
 .profile__avatar-upload-label,
 .profile__avatar-upload-filename {
+  cursor: pointer;
   color: $main;
 }
 
