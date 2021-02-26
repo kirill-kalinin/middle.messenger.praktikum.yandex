@@ -2,6 +2,7 @@ import Page from '../../core/k-react/page.js';
 import Alert from '../../components/alert/alert.js';
 import Sidebar from '../../components/sidebar/sidebar.js';
 import Button from '../../components/button/button.js';
+import { RouterDirections } from '../../core/router/router.js';
 export default function createPage404() {
     const alert404 = new Alert({
         title: 'Код ошибки',
@@ -16,7 +17,7 @@ export default function createPage404() {
     const button = new Button({
         text: 'Назад',
         additionClass: 'button_padding-wide alert__go-back-button',
-        route: 'BACK'
+        route: RouterDirections.BACK
     });
     return new Page({
         root: alert404,

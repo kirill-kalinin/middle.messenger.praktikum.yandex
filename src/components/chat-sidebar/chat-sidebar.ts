@@ -28,10 +28,12 @@ export default class ChatSidebar extends Block {
   private _toolbarButtonsHandler() {
     const buttonAddContact = this.element.querySelector('.chat-sidebar__button_add');
     const buttonRemoveContact = this.element.querySelector('.chat-sidebar__button_remove');
-    const buttonProfile = this.element.querySelector('.chat-sidebar__button_profile');
 
     if (buttonAddContact) {
       buttonAddContact.addEventListener('click', () => {
+        if (this._Router.isDisabled) {
+          return;
+        }
         this._popup = new Popup(popupAddContactPreset);
         this._toolbarPopupsHandler(PopupTypes.ADD);
         this._DOMService.attachComponent(this._popup, 'body');
@@ -40,7 +42,10 @@ export default class ChatSidebar extends Block {
 
     if (buttonRemoveContact) {
       buttonRemoveContact.addEventListener('click', () => {
-        document.addEventListener('click', this._preventRedirection);
+        if (this._Router.isDisabled) {
+          return;
+        }
+        this._Router.disable();
         alert('Теперь кликните на контакт из списка');
         document.addEventListener('mouseup', (e: Event) => {
           const contact = (e.target as HTMLElement).closest('.contact');
@@ -63,17 +68,12 @@ export default class ChatSidebar extends Block {
       });
     }
 
-    if (buttonProfile) {
-      buttonProfile.addEventListener('click', () => {
-        this._Router.go('/profile-main');
-      });
-    }
   }
 
   private _toolbarPopupsHandler(popupType: PopupTypes) {
     const detachPopup = (callback?: unknown) => {
       this._DOMService.detachComponent(this._popup);
-      document.removeEventListener('click', this._preventRedirection);
+      this._Router.enable();
       if (typeof callback === 'function') {
         callback();
       }
@@ -106,10 +106,6 @@ export default class ChatSidebar extends Block {
       default:
         console.error('Неправильно указан тип поп-апа');
     }
-  }
-
-  private _preventRedirection(e: Event) {
-    e.preventDefault();
   }
 
   componentDidMount() {

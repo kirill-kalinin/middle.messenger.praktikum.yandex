@@ -1,4 +1,9 @@
 import Route from "./route.js";
+export var RouterDirections;
+(function (RouterDirections) {
+    RouterDirections["BACK"] = "BACK";
+    RouterDirections["FORWARD"] = "FORWARD";
+})(RouterDirections || (RouterDirections = {}));
 export default class Router {
     constructor(rootQuery = '.root') {
         if (Router.__instance) {
@@ -8,6 +13,7 @@ export default class Router {
         this.history = window.history;
         this._currentRoute = null;
         this._rootQuery = rootQuery;
+        this._isDisabled = false;
         Router.__instance = this;
     }
     use(pathname, viewCreator) {
@@ -16,28 +22,47 @@ export default class Router {
         return this;
     }
     start() {
-        this._linksMiddleware();
+        this._clicksMiddleware();
         window.onpopstate = () => {
             this._onRoute(window.location.pathname);
         };
         this._onRoute(window.location.pathname);
     }
-    _linksMiddleware() {
+    enable() {
+        this._isDisabled = false;
+    }
+    disable() {
+        this._isDisabled = true;
+    }
+    get isDisabled() {
+        return this._isDisabled;
+    }
+    _clicksMiddleware() {
         document.addEventListener('click', (e) => {
-            if (e.target instanceof HTMLElement && e.target.dataset.route) {
-                e.preventDefault();
-                const route = e.target.dataset.route;
-                if (route === 'BACK') {
-                    this.back();
-                }
-                else {
-                    this.go(route);
+            if (e.target instanceof HTMLElement) {
+                const route = e.target.closest('[data-route]');
+                if (route instanceof HTMLElement && typeof route.dataset.route === 'string') {
+                    e.preventDefault();
+                    if (this._isDisabled) {
+                        return;
+                    }
+                    const link = route.dataset.route;
+                    switch (link) {
+                        case RouterDirections.BACK:
+                            this.back();
+                            break;
+                        case RouterDirections.FORWARD:
+                            this.forward();
+                        default:
+                            this.go(link);
+                            break;
+                    }
                 }
             }
         });
     }
     _onRoute(pathname) {
-        const route = this.getRoute(pathname);
+        const route = this._getRoute(pathname);
         if (!route) {
             this._onRoute('/404');
             return;
@@ -58,7 +83,7 @@ export default class Router {
     forward() {
         this.history.forward();
     }
-    getRoute(pathname) {
+    _getRoute(pathname) {
         return this.routes.find(route => route.match(pathname));
     }
 }

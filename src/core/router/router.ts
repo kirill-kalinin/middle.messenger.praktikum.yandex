@@ -1,12 +1,18 @@
 import Route from "./route.js";
 import type { PageCreator } from "../types.js";
 
+export enum RouterDirections {
+  BACK = 'BACK',
+  FORWARD = 'FORWARD'
+}
+
 export default class Router {
   private static __instance: Router | undefined;
   public routes: Route[];
   public history: History;
   private _currentRoute: Route | null;
   private _rootQuery: string;
+  private _isDisabled: boolean;
 
   constructor(rootQuery: string = '.root') {
     if (Router.__instance) {
@@ -17,18 +23,19 @@ export default class Router {
     this.history = window.history;
     this._currentRoute = null;
     this._rootQuery = rootQuery;
+    this._isDisabled = false;
 
     Router.__instance = this;
   }
 
-  use(pathname: string, viewCreator: PageCreator) {
+  public use(pathname: string, viewCreator: PageCreator) {
     const route = new Route(pathname, viewCreator, { rootQuery: this._rootQuery });
     this.routes.push(route);
     return this;
   }
 
-  start() {
-    this._linksMiddleware();
+  public start() {
+    this._clicksMiddleware();
     window.onpopstate = () => {
       this._onRoute(window.location.pathname);
     }
@@ -36,22 +43,45 @@ export default class Router {
     this._onRoute(window.location.pathname);
   }
 
-  _linksMiddleware() {
+  public enable() {
+    this._isDisabled = false;
+  }
+
+  public disable() {
+    this._isDisabled = true;
+  }
+
+  get isDisabled() {
+    return this._isDisabled;
+  }
+
+  private _clicksMiddleware() {
     document.addEventListener('click', (e: Event) => {
-      if (e.target instanceof HTMLElement && e.target.dataset.route) {
-        e.preventDefault();
-        const route = e.target.dataset.route;
-        if (route === 'BACK') {
-          this.back();
-        } else {
-          this.go(route);
+      if (e.target instanceof HTMLElement) {
+        const route = e.target.closest('[data-route]');
+        if (route instanceof HTMLElement && typeof route.dataset.route === 'string') {
+          e.preventDefault();
+          if (this._isDisabled) {
+            return;
+          }
+          const link = route.dataset.route;
+          switch (link) {
+            case RouterDirections.BACK:
+              this.back();
+              break;
+            case RouterDirections.FORWARD:
+              this.forward();
+            default:
+              this.go(link);
+              break;
+          }
         }
       }
     });
   }
 
-  _onRoute(pathname: string) {
-    const route = this.getRoute(pathname);
+  private _onRoute(pathname: string) {
+    const route = this._getRoute(pathname);
     if (!route) {
       this._onRoute('/404');
       return;
@@ -65,20 +95,20 @@ export default class Router {
     route.render();
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.history.pushState({}, '', pathname);
     this._onRoute(pathname);
   }
 
-  back() {
+  public back() {
     this.history.back();
   }
 
-  forward() {
+  public forward() {
     this.history.forward();
   }
 
-  getRoute(pathname: string) {
+  private _getRoute(pathname: string) {
     return this.routes.find(route => route.match(pathname));
   }
 }

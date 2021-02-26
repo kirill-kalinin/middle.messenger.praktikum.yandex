@@ -16,9 +16,11 @@ export default class ChatSidebar extends Block {
     _toolbarButtonsHandler() {
         const buttonAddContact = this.element.querySelector('.chat-sidebar__button_add');
         const buttonRemoveContact = this.element.querySelector('.chat-sidebar__button_remove');
-        const buttonProfile = this.element.querySelector('.chat-sidebar__button_profile');
         if (buttonAddContact) {
             buttonAddContact.addEventListener('click', () => {
+                if (this._Router.isDisabled) {
+                    return;
+                }
                 this._popup = new Popup(popupAddContactPreset);
                 this._toolbarPopupsHandler(PopupTypes.ADD);
                 this._DOMService.attachComponent(this._popup, 'body');
@@ -26,7 +28,10 @@ export default class ChatSidebar extends Block {
         }
         if (buttonRemoveContact) {
             buttonRemoveContact.addEventListener('click', () => {
-                document.addEventListener('click', this._preventRedirection);
+                if (this._Router.isDisabled) {
+                    return;
+                }
+                this._Router.disable();
                 alert('Теперь кликните на контакт из списка');
                 document.addEventListener('mouseup', (e) => {
                     const contact = e.target.closest('.contact');
@@ -50,16 +55,11 @@ export default class ChatSidebar extends Block {
                 }, { once: true });
             });
         }
-        if (buttonProfile) {
-            buttonProfile.addEventListener('click', () => {
-                this._Router.go('/profile-main');
-            });
-        }
     }
     _toolbarPopupsHandler(popupType) {
         const detachPopup = (callback) => {
             this._DOMService.detachComponent(this._popup);
-            document.removeEventListener('click', this._preventRedirection);
+            this._Router.enable();
             if (typeof callback === 'function') {
                 callback();
             }
@@ -90,9 +90,6 @@ export default class ChatSidebar extends Block {
             default:
                 console.error('Неправильно указан тип поп-апа');
         }
-    }
-    _preventRedirection(e) {
-        e.preventDefault();
     }
     componentDidMount() {
         this._DOMService = new DOMService();

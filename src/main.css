@@ -65,6 +65,10 @@ body {
   }
 }
 
+input {
+  outline: none;
+}
+
 .invalid-input {
   outline: 1px solid $alert;
   &:hover {

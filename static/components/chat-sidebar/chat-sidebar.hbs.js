@@ -7,7 +7,7 @@ export default `
       <button class="chat-sidebar__button chat-sidebar__button_add" type="button">
         <img class="chat-sidebar__button-image" src="/images/toolbar-add.svg" alt=" ">
       </button>
-      <button class="chat-sidebar__button chat-sidebar__button_profile" type="button">
+      <button class="chat-sidebar__button chat-sidebar__button_profile" type="button" data-route="/profile-main">
         <img class="chat-sidebar__button-image" src="/images/toolbar-profile.svg" alt=" ">
       </button>
     </div>
