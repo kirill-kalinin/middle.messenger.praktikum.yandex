@@ -31,11 +31,18 @@ export const popupRemoveContactPreset = {
     title: 'Удалить контакт',
     buttonText: 'Удалить'
 };
-export const popupErrorPreset = {
-    typeIsErrorWarning: true,
+export const popupPromptContactPreset = {
+    typeIsWarning: true,
+    isCloseable: false,
+    title: 'Удаление контакта',
+    warningMessage: 'Теперь кликните на контакт из списка',
+    buttonText: 'Понятно'
+};
+export const popupWarningContactPreset = {
+    typeIsWarning: true,
     isCloseable: false,
     title: 'Ошибка',
-    buttonText: 'Понятно',
-    errorMessage: 'Нужно указать на один из контактов в списке'
+    warningMessage: 'Нужно указать на один из контактов в списке',
+    buttonText: 'Понятно'
 };
 //# sourceMappingURL=popup.js.map

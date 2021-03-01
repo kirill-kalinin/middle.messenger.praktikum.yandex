@@ -12,8 +12,8 @@ export default `
         <p class="popup__alert">Вы действительно хотите удалить контакт?</p>
         <p class="popup__contact-to-remove">{{contactToRemove}}</p>
         {{/if}}
-        {{#if typeIsErrorWarning}}
-        <p class="popup__alert">{{errorMessage}}</p>
+        {{#if typeIsWarning}}
+        <p class="popup__alert">{{warningMessage}}</p>
         {{/if}}
       </div>
       <div class="popup__button"></div>
