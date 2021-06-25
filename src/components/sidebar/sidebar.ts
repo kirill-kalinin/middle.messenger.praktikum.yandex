@@ -1,6 +1,6 @@
-import Template from '../../../components/sidebar/sidebar.hbs.js';
-import Block from '../../core/k-react/block.js';
-import type { BlockProps, SidebarMenu } from '../../core/types.js';
+import Template from '../../../static/components/sidebar/sidebar.hbs.js';
+import Block from '../../core/k-react/block';
+import type { BlockProps, SidebarMenu } from '../../core/types';
 
 export default class Sidebar extends Block {
 

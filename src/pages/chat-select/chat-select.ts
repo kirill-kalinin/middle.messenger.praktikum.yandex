@@ -1,8 +1,8 @@
-import Page from '../../core/k-react/page.js';
-import DummyService from '../../core/services/dummy-service.js';
-import Chat from '../../components/chat/chat.js';
-import ChatSidebar from '../../components/chat-sidebar/chat-sidebar.js';
-import Contact from '../../components/contact/contact.js';
+import Page from '../../core/k-react/page';
+import DummyService from '../../core/services/dummy-service';
+import Chat from '../../components/chat/chat';
+import ChatSidebar from '../../components/chat-sidebar/chat-sidebar';
+import Contact from '../../components/contact/contact';
 
 export default function createPageChatSelect() {
   const chat = new Chat({ chatModeSelect: true });

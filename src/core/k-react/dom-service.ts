@@ -1,5 +1,5 @@
-import Block from '../k-react/block.js';
-import type { BlockChild } from '../../core/types.js';
+import Block from '../k-react/block';
+import type { BlockChild } from '../../core/types';
 
 export default class DOMService {
   attachComponent(child: BlockChild, cssSelector: string, parent?: Block) {

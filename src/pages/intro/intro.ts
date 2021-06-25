@@ -1,5 +1,5 @@
-import Page from '../../core/k-react/page.js';
-import Intro from '../../components/intro/intro.js';
+import Page from '../../core/k-react/page';
+import Intro from '../../components/intro/intro';
 
 export default function createPageIntro() {
   const intro = new Intro({ animate: false });

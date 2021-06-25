@@ -1,3 +1,6 @@
+import ImageUrlButtonAttach from 'url:../../images/button-attach.svg';
+import ImageUrlButtonSend from 'url:../../images/button-send.svg';
+
 export default `
   <div class="wrapper wrapper_wide">
     <div class="chat container container_unbordered">
@@ -33,10 +36,10 @@ export default `
             <textarea class="chat__textarea" cols="1" maxlength="400" 
               name="message" placeholder="Сообщение..."></textarea>
             <button class="chat__form-button chat__form-button_attach" type="button">
-              <img class="chat__button-image" src="/images/button-attach.svg" alt=" ">
+              <img class="chat__button-image" src="${ImageUrlButtonAttach}" alt=" ">
             </button>
             <button class="chat__form-button chat__form-button_submit" type="submit">
-              <img class="chat__button-image" src="/images/button-send.svg" alt=" ">
+              <img class="chat__button-image" src="${ImageUrlButtonSend}" alt=" ">
             </button>
           </div>
         </form>

@@ -1,3 +1,5 @@
+import ImageUrlMark from 'url:../../images/mark-as-readed.svg';
+
 export default `
   <div class="message{{#if isOwn}} message_own{{/if}}{{#if isImage}} message_image{{/if}}">
     <div class="message__content{{#if isOwn}} message__content_own{{/if}}">
@@ -10,7 +12,7 @@ export default `
     </div>
     <p class="message__date{{#if isOwn}} message__date_own{{/if}}">
       {{date}}
-      {{#if isReaded}}<img src="/images/mark-as-readed.svg" alt=" ">{{/if}}
+      {{#if isReaded}}<img src="${ImageUrlMark}" alt=" ">{{/if}}
     </p>
   </div>
 `;

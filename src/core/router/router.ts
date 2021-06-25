@@ -1,5 +1,5 @@
-import Route from "./route.js";
-import type { PageCreator } from "../types.js";
+import Route from "./route";
+import type { PageCreator } from "../types";
 
 export enum RouterDirections {
   BACK = 'BACK',

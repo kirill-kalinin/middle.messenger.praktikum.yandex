@@ -1,6 +1,6 @@
-import Template from '../../../components/message/message.hbs.js';
-import Block from '../../core/k-react/block.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/message/message.hbs.js';
+import Block from '../../core/k-react/block';
+import type { BlockProps } from '../../core/types';
 
 export default class Message extends Block {
 

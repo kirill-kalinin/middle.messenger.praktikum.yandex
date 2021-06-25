@@ -1,10 +1,10 @@
-import Router from "./router/router.js";
-import DOMService from "./k-react/dom-service.js";
+import Router from "./router/router";
+import DOMService from "./k-react/dom-service";
 import Popup, {
   popupRemoveContactPreset,
   popupWarningContactPreset
-} from '../components/popup/popup.js';
-import type { BlockProps } from "./types.js";
+} from '../components/popup/popup';
+import type { BlockProps } from "./types";
 
 export enum PopupTypes {
   CONTACT_ADD,

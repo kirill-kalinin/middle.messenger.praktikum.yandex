@@ -1,4 +1,5 @@
 import { Contact } from "../types";
+import ImageUrlAvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
 
 export default class DummyService {
 
@@ -6,7 +7,7 @@ export default class DummyService {
     return [{
       id: '1',
       link: '/chat-active',
-      avatar: '/images/avatar-placeholder.svg',
+      avatar: ImageUrlAvatarPlaceholder,
       name: 'Олег',
       message: 'Можно сегодня попробовать еще раз',
       counter: 1,
@@ -15,7 +16,7 @@ export default class DummyService {
     }, {
       id: '2',
       link: '/chat-active',
-      avatar: '/images/avatar-placeholder.svg',
+      avatar: ImageUrlAvatarPlaceholder,
       name: 'Киноклуб',
       message: 'Вы: стикер',
       counter: 0,
@@ -24,7 +25,7 @@ export default class DummyService {
     }, {
       id: '3',
       link: '/chat-active',
-      avatar: '/images/avatar-placeholder.svg',
+      avatar: ImageUrlAvatarPlaceholder,
       name: 'Павел',
       message: 'Начал собирать первые 10, все нормально',
       counter: 2,
@@ -33,7 +34,7 @@ export default class DummyService {
     }, {
       id: '4',
       link: '/chat-active',
-      avatar: '/images/avatar-placeholder.svg',
+      avatar: ImageUrlAvatarPlaceholder,
       name: 'Игорь',
       message: 'Вы: Хорошо',
       counter: 0,
@@ -42,7 +43,7 @@ export default class DummyService {
     }, {
       id: '5',
       link: '/chat-active',
-      avatar: '/images/avatar-placeholder.svg',
+      avatar: ImageUrlAvatarPlaceholder,
       name: 'Евгения',
       message: 'Спсаибо',
       counter: 0,
@@ -94,7 +95,7 @@ export default class DummyService {
   getProfileHeaderData() {
     return { 
       name: 'Иван',
-      avatarSrc: '../../images/avatar-placeholder.svg'
+      avatarSrc: ImageUrlAvatarPlaceholder
     }
   }
 

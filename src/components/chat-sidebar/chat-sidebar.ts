@@ -1,9 +1,9 @@
-import Template from '../../../components/chat-sidebar/chat-sidebar.hbs.js';
-import Block from '../../core/k-react/block.js';
-import { popupAddContactPreset, popupPromptContactPreset } from '../../components/popup/popup.js';
-import PopupHandler, { PopupTypes } from '../../core/popup-handler.js';
-import Router from '../../core/router/router.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/chat-sidebar/chat-sidebar.hbs.js';
+import Block from '../../core/k-react/block';
+import { popupAddContactPreset, popupPromptContactPreset } from '../../components/popup/popup';
+import PopupHandler, { PopupTypes } from '../../core/popup-handler';
+import Router from '../../core/router/router';
+import type { BlockProps } from '../../core/types';
 
 export default class ChatSidebar extends Block {
 

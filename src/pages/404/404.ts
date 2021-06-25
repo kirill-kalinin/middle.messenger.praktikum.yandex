@@ -1,8 +1,8 @@
-import Page from '../../core/k-react/page.js';
-import Alert from '../../components/alert/alert.js';
-import Sidebar from '../../components/sidebar/sidebar.js';
-import Button from '../../components/button/button.js';
-import { RouterDirections } from '../../core/router/router.js';
+import Page from '../../core/k-react/page';
+import Alert from '../../components/alert/alert';
+import Sidebar from '../../components/sidebar/sidebar';
+import Button from '../../components/button/button';
+import { RouterDirections } from '../../core/router/router';
 
 export default function createPage404() {
   const alert404 = new Alert({

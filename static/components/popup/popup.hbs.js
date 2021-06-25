@@ -1,3 +1,5 @@
+import ImageUrlClose from 'url:../../images/popup-close.svg';
+
 export default `
   <div class="popup">
     <div class="popup__container">
@@ -18,7 +20,7 @@ export default `
       </div>
       <div class="popup__button"></div>
       {{#if isCloseable}}
-      <img class="popup__close" src="/images/popup-close.svg" alt="X">
+      <img class="popup__close" src="${ImageUrlClose}" alt="X">
       {{/if}}
     </div>
   </div>

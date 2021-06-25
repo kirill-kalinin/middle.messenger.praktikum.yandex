@@ -1,5 +1,5 @@
-import EventBus from './event-bus.js';
-import type { BlockChild, BlockMeta, BlockProps } from '../../core/types.js';
+import EventBus from './event-bus';
+import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 
 const Handlebars = window.Handlebars;
 

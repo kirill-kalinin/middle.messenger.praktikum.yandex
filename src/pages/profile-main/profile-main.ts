@@ -1,8 +1,8 @@
-import Page from '../../core/k-react/page.js';
-import DummyService from '../../core/services/dummy-service.js';
-import Profile from '../../components/profile/profile.js';
-import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar.js';
-import Button, { profileSidebarButtonPreset } from '../../components/button/button.js';
+import Page from '../../core/k-react/page';
+import DummyService from '../../core/services/dummy-service';
+import Profile from '../../components/profile/profile';
+import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar';
+import Button, { profileSidebarButtonPreset } from '../../components/button/button';
 
 export default function createPageProfileMain() {
   const dummyService = new DummyService();

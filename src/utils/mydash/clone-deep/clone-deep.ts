@@ -1,4 +1,4 @@
-import { isArrayOrObject, isArray, isObject } from "../is-array-or-object/is-array-or-object.js";
+import { isArrayOrObject, isArray, isObject } from "../is-array-or-object/is-array-or-object";
 
 export default function cloneDeep(obj: unknown) {
   if (!isArrayOrObject(obj)) {

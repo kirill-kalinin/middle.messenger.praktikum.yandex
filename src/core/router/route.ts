@@ -1,5 +1,5 @@
-import Page from "../k-react/page.js";
-import type { RouterProps, PageCreator } from "../types.js";
+import Page from "../k-react/page";
+import type { RouterProps, PageCreator } from "../types";
 
 export default class Route {
   private _pathname: string;

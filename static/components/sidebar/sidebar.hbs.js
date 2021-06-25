@@ -1,6 +1,8 @@
+import ImageUrlLogo from 'url:../../images/logo.svg';
+
 export default `
   <aside class="sidebar {{parent}}__sidebar">
-    <img class="sidebar__logo" src="/images/logo.svg" alt=" ">
+    <img class="sidebar__logo" src="${ImageUrlLogo}" alt=" ">
 
     {{#if typeIsMenu}}
     <div class="sidebar__button-slot"></div>

@@ -1,14 +1,18 @@
+import ImageUrlToolbarRemove from 'url:../../images/toolbar-remove.svg';
+import ImageUrlToolbarAdd from 'url:../../images/toolbar-add.svg';
+import ImageUrlToolbarProfile from 'url:../../images/toolbar-profile.svg';
+
 export default `
   <div class="chat-sidebar">
     <div class="chat-sidebar__toolbar">
       <button class="chat-sidebar__button chat-sidebar__button_remove" type="button">
-        <img class="chat-sidebar__button-image" src="/images/toolbar-remove.svg" alt=" ">
+        <img class="chat-sidebar__button-image" src="${ImageUrlToolbarRemove}" alt=" ">
       </button>
       <button class="chat-sidebar__button chat-sidebar__button_add" type="button">
-        <img class="chat-sidebar__button-image" src="/images/toolbar-add.svg" alt=" ">
+        <img class="chat-sidebar__button-image" src="${ImageUrlToolbarAdd}" alt=" ">
       </button>
       <button class="chat-sidebar__button chat-sidebar__button_profile" type="button" data-route="/profile-main">
-        <img class="chat-sidebar__button-image" src="/images/toolbar-profile.svg" alt=" ">
+        <img class="chat-sidebar__button-image" src="${ImageUrlToolbarProfile}" alt=" ">
       </button>
     </div>
     <div class="chat-sidebar__search">

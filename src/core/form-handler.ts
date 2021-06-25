@@ -1,6 +1,6 @@
-import Router from "./router/router.js";
-import HTTPService from "./services/http-service.js";
-import type { Validators, RequestOptions } from "./types.js";
+import Router from "./router/router";
+import HTTPService from "./services/http-service";
+import type { Validators, RequestOptions } from "./types";
 
 export default class FormHandler {
 

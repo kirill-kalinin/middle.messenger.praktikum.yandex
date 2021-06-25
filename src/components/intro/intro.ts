@@ -1,7 +1,7 @@
-import Template from '../../../components/intro/intro.hbs.js';
-import Block from '../../core/k-react/block.js';
-import Router from '../../core/router/router.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/intro/intro.hbs.js';
+import Block from '../../core/k-react/block';
+import Router from '../../core/router/router';
+import type { BlockProps } from '../../core/types';
 
 export default class Intro extends Block {
 

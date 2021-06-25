@@ -1,4 +1,4 @@
-import type { RequestOptionsMethodGet, RequestOptions, RequestOptionsWithMethod } from "../types.js";
+import type { RequestOptionsMethodGet, RequestOptions, RequestOptionsWithMethod } from "../types";
 
 export enum METHODS {
   GET = 'GET',

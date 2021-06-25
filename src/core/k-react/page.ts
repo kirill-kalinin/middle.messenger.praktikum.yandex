@@ -1,6 +1,6 @@
-import DOMService from '../../core/k-react/dom-service.js';
-import Block from './block.js';
-import type { PageProps, PageChildren } from '../types.js';
+import DOMService from '../../core/k-react/dom-service';
+import Block from './block';
+import type { PageProps, PageChildren } from '../types';
 
 export default class Page {
   public root: Block;

@@ -1,7 +1,7 @@
-import Template from '../../../components/chat/chat.hbs.js';
-import Block from '../../core/k-react/block.js';
-import FormHandler from '../../core/form-handler.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/chat/chat.hbs.js';
+import Block from '../../core/k-react/block';
+import FormHandler from '../../core/form-handler';
+import type { BlockProps } from '../../core/types';
 
 export default class Chat extends Block {
 

@@ -1,8 +1,8 @@
-import Template from '../../../components/profile/profile.hbs.js';
-import Block from '../../core/k-react/block.js';
-import FormHandler from '../../core/form-handler.js';
-import AvatarUploadHandler from '../../core/avatar-upload-handler.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/profile/profile.hbs.js';
+import Block from '../../core/k-react/block';
+import FormHandler from '../../core/form-handler';
+import AvatarUploadHandler from '../../core/avatar-upload-handler';
+import type { BlockProps } from '../../core/types';
 
 export default class Profile extends Block {
 

@@ -2,13 +2,11 @@
   "name": "k-chat",
   "version": "1.0.0",
   "description": "Yandex praktikum training project",
-  "main": "index.js",
+  "main": "dist/index.html",
   "scripts": {
     "static-server": "node server.js",
-    "compileJs": "cd static && rm -rf js && mkdir js && cd .. && tsc",
-    "bundleCss": "postcss src/source.css -m -o static/css/styles.css",
-    "dev": "./node_modules/.bin/parcel index.html",
-    "build": "./node_modules/.bin/parcel build index.html"
+    "dev": "./node_modules/.bin/parcel static/index.html",
+    "build": "./node_modules/.bin/parcel build static/index.html"
   },
   "repository": {
     "type": "git",
@@ -28,10 +26,12 @@
     "supports es6-module"
   ],
   "devDependencies": {
+    "@parcel/packager-raw-url": "^2.0.0-beta.2",
+    "@parcel/transformer-typescript-tsc": "^2.0.0-alpha.3",
     "autoprefixer": "^10.2.4",
     "cssnano": "^5.0.6",
     "express": "^4.17.1",
-    "parcel": "^2.0.0-nightly.732",
+    "parcel": "^2.0.0-beta.2",
     "postcss": "^8.3.5",
     "postcss-cli": "^8.3.1",
     "postcss-import": "^14.0.0",

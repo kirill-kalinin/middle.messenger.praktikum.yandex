@@ -1,8 +1,8 @@
-import Template from '../../../components/popup/popup.hbs.js';
-import Block from '../../core/k-react/block.js';
-import Button from '../../components/button/button.js';
-import DOMService from '../../core/k-react/dom-service.js';
-import type { BlockProps } from '../../core/types.js';
+import Template from '../../../static/components/popup/popup.hbs.js';
+import Block from '../../core/k-react/block';
+import Button from '../../components/button/button';
+import DOMService from '../../core/k-react/dom-service';
+import type { BlockProps } from '../../core/types';
 
 export default class Popup extends Block {
 

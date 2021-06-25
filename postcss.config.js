@@ -1,5 +1,4 @@
-module.exports = (ctx) => ({
-  map: ctx.options.map,
+module.exports = {
   plugins: [
       require('postcss-import'),
       require('postcss-nested'),
@@ -9,4 +8,4 @@ module.exports = (ctx) => ({
           preset: 'default',
       })
   ],
-});
+};

@@ -1,5 +1,5 @@
-import Block from '../core/k-react/block.js';
-import Page from '../core/k-react/page.js';
+import Block from '../core/k-react/block';
+import Page from '../core/k-react/page';
 
 type ChildSimple = [Block, string, Block];
 type ChileComposite = [Block[], string, Block];
