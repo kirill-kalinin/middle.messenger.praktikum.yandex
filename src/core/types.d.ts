@@ -44,8 +44,7 @@ interface PageChildren {
 
 interface PageProps {
   root: Block,
-  children?: PageChildren,
-  controller: Function
+  children?: PageChildren
 }
 
 interface Validators {
@@ -65,6 +64,7 @@ type RequestData = string | Document | Blob
 
 interface RequestOptions {
   data?: RequestData,
+  headers?: [string, string][],
   timeout?: number
 }
 

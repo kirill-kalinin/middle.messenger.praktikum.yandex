@@ -30,11 +30,6 @@ export default function createPageProfileEditAvatar() {
       sidebar: [sidebar, '.profile__sidebar', profile],
       sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
       uploadButton: [uploadButton, '.profile__avatar-upload-button-wrapper', profile]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

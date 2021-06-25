@@ -18,11 +18,6 @@ export default function createPageChatSelect() {
     children: {
       chatSidebar: [chatSidebar, '.chat__sidebar', chat],
       contacts: [contacts, '.chat-sidebar__contacts', chatSidebar]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-  
 }

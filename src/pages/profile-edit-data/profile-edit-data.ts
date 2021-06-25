@@ -39,11 +39,6 @@ export default function createPageProfileEditData() {
       sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
       cancelButton: [cancelButton, '.profile__buttons', profile],
       submitButton: [submitButton, '.profile__buttons', profile]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

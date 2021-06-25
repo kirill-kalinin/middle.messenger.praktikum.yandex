@@ -24,11 +24,6 @@ export default function createPageSignin() {
       sidebar: [sidebar, '.auth__sidebar', auth],
       signinForm: [signinForm, '.auth__main-block', auth],
       buttonSubmit: [buttonSubmit, '.form__submit', signinForm]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

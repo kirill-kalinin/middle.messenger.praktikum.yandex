@@ -30,11 +30,6 @@ export default function createPageChatActive() {
       chatSidebar: [chatSidebar, '.chat__sidebar', chat],
       contacts: [contacts, '.chat-sidebar__contacts', chatSidebar],
       messages: [messages, '.chat__messages-list', chat]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

@@ -54,11 +54,6 @@ export default function createPageProfileEditPassword() {
       sidebar: [sidebar, '.profile__sidebar', profile],
       sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar],
       submitButton: [submitButton, '.profile__buttons', profile]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

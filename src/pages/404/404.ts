@@ -28,11 +28,6 @@ export default function createPage404() {
     children: {
       sidebar: [sidebar, '.alert__sidebar', alert404],
       button: [button, '.alert__button-slot', alert404]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

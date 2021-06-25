@@ -7,6 +7,8 @@ export enum METHODS {
   DELETE = 'DELETE'
 };
 
+const BASE_URL = 'https://ya-praktikum.tech/api/v2';
+
 export default class HTTPService {
   public get = (url: string, options: RequestOptionsMethodGet = {}) => {
     const queryString = options.data ? url + this._queryStringify(options.data) : url;
@@ -26,12 +28,14 @@ export default class HTTPService {
   }
 
   private _request = async (url: string, options: RequestOptionsWithMethod = {method: METHODS.GET}, timeout = 5000) => {
-    const {method, data} = options;
+    const {method, data, headers} = options;
 
     return new Promise(function(resolve, reject) {
       let xhr = new XMLHttpRequest();
-      xhr.open(method, url);
-      
+      xhr.open(method, BASE_URL + url);
+
+      headers?.forEach(header => xhr.setRequestHeader(...header));
+
       xhr.onload = function() {
         resolve(xhr);
       };

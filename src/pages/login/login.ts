@@ -22,11 +22,6 @@ export default function createPageLogin() {
       sidebar: [sidebar, '.auth__sidebar', auth],
       loginForm: [loginForm, '.auth__main-block', auth],
       buttonSubmit: [buttonSubmit, '.form__submit', loginForm]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

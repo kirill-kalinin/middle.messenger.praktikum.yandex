@@ -1,13 +1,16 @@
 import Router from "./router/router.js";
-import type { Validators } from "./types.js";
+import HTTPService from "./services/http-service.js";
+import type { Validators, RequestOptions } from "./types.js";
 
 export default class FormHandler {
 
   private _router: Router;
+  private _http: HTTPService;
   private _validationRegex: Validators;
 
   constructor() {
     this._router = new Router();
+    this._http = new HTTPService();
     this._validationRegex = {
       name: /^[a-zA-Zа-яёА-ЯЁ]{2,20}$/,
       email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -44,10 +47,8 @@ export default class FormHandler {
     });
   }
 
-  private _onSubmit(form: HTMLFormElement) {
+  private async _onSubmit(form: HTMLFormElement) {
     const [inputs, equalDataInputs] = this._queryElements(form);
-    
-    console.log('handle form ', form);
 
     let isFormValid = true;
     inputs.forEach(input => {
@@ -61,14 +62,38 @@ export default class FormHandler {
     }
 
     const formData = new FormData(form);
-    console.log(form.name, Object.fromEntries(formData.entries()));
+    const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
+    console.log(form.name, jsonData);
 
-    // Эмуляция успешного входа/регистрации
-    if (form.name === 'login' || form.name === 'signin') {
-      const redirect = confirm('Данные формы выведены в консоль. Перейти на страницу выбора собеседника?');
-      if (redirect) {
-        this._router.go('/chat-select');
+    let url: string;
+    switch (form.name) {
+      case 'login':
+        url = '/auth/signin';
+        break;
+      case 'signin':
+        url = '/auth/signup';
+        break;
+      default:
+        console.error('Попытка отправить неизвестную форму', form.name);
+        return;
+    }
+    const options: RequestOptions = {
+      data: jsonData,
+      headers: [
+        ['Content-type', 'application/json; charset=utf-8']
+      ]
+    };
+
+    let response = await this._http.post(url, options);
+
+    if (response instanceof XMLHttpRequest) {
+      console.log('response', response);
+      console.log('status', response.status);
+      if (response.status === 500) {
+        this._router.go('/500');
       }
+    } else {
+      console.error('response is not XMLHttpRequest', response);
     }
   }
 

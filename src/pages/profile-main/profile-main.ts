@@ -22,11 +22,6 @@ export default function createPageProfileMain() {
     children: {
       sidebar: [sidebar, '.profile__sidebar', profile],
       sidebarButton: [sidebarButton, '.sidebar__button-slot', sidebar]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }

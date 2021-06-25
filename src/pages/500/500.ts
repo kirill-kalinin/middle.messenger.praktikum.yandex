@@ -28,11 +28,6 @@ export default function createPage500() {
     children: {
       sidebar: [sidebar, '.alert__sidebar', alert500],
       button: [button, '.alert__button-slot', alert500]
-    },
-    controller
+    }
   });
-}
-
-function controller() {
-
 }
