@@ -5,21 +5,21 @@ import type { BlockProps } from '../../core/types';
 
 export default class Intro extends Block {
 
-  constructor(props: BlockProps = {}, className = 'fragment') {
-    super('div', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'fragment') {
+        super('div', className, props);
+    }
 
-  componentDidMount() {
-    window.addEventListener('load', () => {
-      this.setProps({ animate: true });
-      setTimeout(function() {
-        (new Router()).go('/login');
-      }, 3000);
-    });
-  }
+    componentDidMount(): void {
+        window.addEventListener('load', () => {
+            this.setProps({ animate: true });
+            setTimeout(function() {
+                (new Router()).go('/login');
+            }, 3000);
+        });
+    }
 
-  render() {
-    return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }

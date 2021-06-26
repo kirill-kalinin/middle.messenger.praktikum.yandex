@@ -4,12 +4,12 @@ import type { BlockProps } from '../../core/types';
 
 export default class Contact extends Block {
 
-  constructor(props: BlockProps = {}, className = 'chat-sidebar__contact') {
-    super('li', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'chat-sidebar__contact') {
+        super('li', className, props);
+    }
 
-  render() {
-    return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }

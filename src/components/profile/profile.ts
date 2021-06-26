@@ -10,30 +10,30 @@ export default class Profile extends Block {
   private _avatarUploadHandler: AvatarUploadHandler;
 
   constructor(props: BlockProps = {}, className = 'fragment') {
-    super('div', className, props);
+      super('div', className, props);
   }
 
   private _setInputListeners() {
-    const form = this.element.querySelector('form');
-    if (form instanceof HTMLFormElement) {
-      this._formHandler.addValidationListeners(form);
-    }
+      const form = this.element.querySelector('form');
+      if (form instanceof HTMLFormElement) {
+          this._formHandler.addValidationListeners(form);
+      }
   }
 
-  componentDidMount() {
-    this._formHandler = new FormHandler();
-    this._avatarUploadHandler = new AvatarUploadHandler();
-    this._setInputListeners();
-    this._avatarUploadHandler.handle(this.element);
+  componentDidMount(): void {
+      this._formHandler = new FormHandler();
+      this._avatarUploadHandler = new AvatarUploadHandler();
+      this._setInputListeners();
+      this._avatarUploadHandler.handle(this.element);
   }
 
-  componentDidUpdate() {
-    this._setInputListeners();
-    this._avatarUploadHandler.handle(this.element);
+  componentDidUpdate(): void {
+      this._setInputListeners();
+      this._avatarUploadHandler.handle(this.element);
   }
 
-  render() {
-    return Template;
+  render(): string {
+      return Template;
   }
 
 }

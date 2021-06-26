@@ -10,4 +10,4 @@ export default `
     {{/each}}
     <div class="form__submit"></div>
   </form>
-`
+`;

@@ -9,51 +9,51 @@ export default class Popup extends Block {
   private _button: Button;
 
   constructor(props: BlockProps = {}, className = '') {
-    super('div', className, props);
-    this._button = new Button({
-      text: props.buttonText || 'Ок',
-      additionClass: ''
-    });
-    this._attachButton();
+      super('div', className, props);
+      this._button = new Button({
+          text: props.buttonText || 'Ок',
+          additionClass: ''
+      });
+      this._attachButton();
   }
 
   private _attachButton() {
-    const DOM = new DOMService();
-    DOM.attachComponent(this._button, '.popup__button', this);
+      const DOM = new DOMService();
+      DOM.attachComponent(this._button, '.popup__button', this);
   }
 
-  render() {
-    return Template;
+  render(): string {
+      return Template;
   }
 
 }
 
 export const popupAddContactPreset: BlockProps = {
-  typeIsContactAdd: true,
-  isCloseable: true,
-  title: 'Добавить контакт',
-  buttonText: 'Добавить'
-}
+    typeIsContactAdd: true,
+    isCloseable: true,
+    title: 'Добавить контакт',
+    buttonText: 'Добавить'
+};
 
 export const popupRemoveContactPreset: BlockProps = {
-  typeIsContactRemove: true,
-  isCloseable: true,
-  title: 'Удалить контакт',
-  buttonText: 'Удалить'
-}
+    typeIsContactRemove: true,
+    isCloseable: true,
+    title: 'Удалить контакт',
+    buttonText: 'Удалить'
+};
 
 export const popupPromptContactPreset: BlockProps = {
-  typeIsWarning: true,
-  isCloseable: false,
-  title: 'Удаление контакта',
-  warningMessage: 'Теперь кликните на контакт из списка',
-  buttonText: 'Понятно'
-}
+    typeIsWarning: true,
+    isCloseable: false,
+    title: 'Удаление контакта',
+    warningMessage: 'Теперь кликните на контакт из списка',
+    buttonText: 'Понятно'
+};
 
 export const popupWarningContactPreset: BlockProps = {
-  typeIsWarning: true,
-  isCloseable: false,
-  title: 'Ошибка',
-  warningMessage: 'Нужно указать на один из контактов в списке',
-  buttonText: 'Понятно'
-}
+    typeIsWarning: true,
+    isCloseable: false,
+    title: 'Ошибка',
+    warningMessage: 'Нужно указать на один из контактов в списке',
+    buttonText: 'Понятно'
+};

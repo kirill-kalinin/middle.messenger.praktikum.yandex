@@ -1,21 +1,22 @@
-import { isArrayOrObject, isArray, isObject } from "../is-array-or-object/is-array-or-object";
+import { isArrayOrObject, isArray, isObject } from '../is-array-or-object/is-array-or-object';
 
-export default function cloneDeep(obj: unknown) {
-  if (!isArrayOrObject(obj)) {
-    return obj;
-  }
+export default function cloneDeep(obj: unknown): unknown {
+    if (!isArrayOrObject(obj)) {
+        return obj;
+    }
 
-  let result: any;
-  if (isArray(obj)) {
-    result = [];
-  } else if (isObject(obj)) {
-    result = {};
-  }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let result: any;
+    if (isArray(obj)) {
+        result = [];
+    } else if (isObject(obj)) {
+        result = {};
+    }
 
-  for (let [key, value] of Object.entries(obj)) {
-    result[key] = isArrayOrObject(value)
-      ? cloneDeep(value)
-      : value;
-  }
-  return result;
+    for (const [key, value] of Object.entries(obj)) {
+        result[key] = isArrayOrObject(value)
+            ? cloneDeep(value)
+            : value;
+    }
+    return result;
 }

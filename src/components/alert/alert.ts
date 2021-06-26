@@ -4,12 +4,12 @@ import type { BlockProps } from '../../core/types';
 
 export default class Alert extends Block {
 
-  constructor(props: BlockProps = {}, className = 'fragment') {
-    super('div', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'fragment') {
+        super('div', className, props);
+    }
 
-  render() {
-    return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }

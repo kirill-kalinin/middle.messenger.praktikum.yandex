@@ -7,4 +7,4 @@ export default `
       <h1 class="intro__text{{#if animate}} intro__text_animated{{/if}}">K-Chat</h1>
     </main>
   </div>
-`
+`;

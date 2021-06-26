@@ -5,20 +5,20 @@ import ImageUrlArrow from 'url:../../../static/images/arrow.svg';
 
 export default class Button extends Block {
 
-  constructor(props: BlockProps = {}, className = 'fragment') {
-    super('div', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'fragment') {
+        super('div', className, props);
+    }
 
-  render() {
-    return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }
 
 export const profileSidebarButtonPreset = {
-  isProfileSidebarButton: true,
-  imageSrc: ImageUrlArrow,
-  text: 'Назад к чатам',
-  additionClass: 'profile__sidebar-button',
-  route: '/chat-select'
+    isProfileSidebarButton: true,
+    imageSrc: ImageUrlArrow,
+    text: 'Назад к чатам',
+    additionClass: 'profile__sidebar-button',
+    route: '/chat-select'
 };

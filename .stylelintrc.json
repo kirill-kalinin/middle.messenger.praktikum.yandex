@@ -1,0 +1,12 @@
+{
+  "rules": {
+    "color-hex-case": "lower",
+    "color-named": "never",
+    "color-no-invalid-hex": true,
+    "block-no-empty": true,
+    "no-duplicate-selectors": true
+  },
+  "ignoreFiles": [
+    "dist/*"
+  ]
+}

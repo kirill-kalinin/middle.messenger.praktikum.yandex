@@ -14,21 +14,22 @@ import Router from './core/router/router';
 import FormHandler from './core/form-handler';
 
 const appRoutes = [
-  ['/', createPageIntro],
-  ['/login', createPageLogin],
-  ['/signin', createPageSignin],
-  ['/profile-edit-avatar', createPageProfileEditAvatar],
-  ['/profile-edit-data', createPageProfileEditData],
-  ['/profile-edit-password', createPageProfileEditPassword],
-  ['/profile-main', createPageProfileMain],
-  ['/chat-active', createPageChatActive],
-  ['/chat-select', createPageChatSelect],
-  ['/404', createPage404],
-  ['/500', createPage500],
+    ['/', createPageIntro],
+    ['/login', createPageLogin],
+    ['/signin', createPageSignin],
+    ['/profile-edit-avatar', createPageProfileEditAvatar],
+    ['/profile-edit-data', createPageProfileEditData],
+    ['/profile-edit-password', createPageProfileEditPassword],
+    ['/profile-main', createPageProfileMain],
+    ['/chat-active', createPageChatActive],
+    ['/chat-select', createPageChatSelect],
+    ['/404', createPage404],
+    ['/500', createPage500],
 ];
 
 const router = new Router();
 
+// eslint-disable-next-line prefer-spread
 appRoutes.forEach(route => router.use.apply(router, route));
 router.start();
 

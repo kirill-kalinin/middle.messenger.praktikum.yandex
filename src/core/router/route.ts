@@ -1,5 +1,5 @@
-import Page from "../k-react/page";
-import type { RouterProps, PageCreator } from "../types";
+import Page from '../k-react/page';
+import type { RouterProps, PageCreator } from '../types';
 
 export default class Route {
   private _pathname: string;
@@ -8,34 +8,34 @@ export default class Route {
   private _props: RouterProps;
 
   constructor(pathname: string, viewCreator: PageCreator, props: RouterProps) {
-    this._pathname = pathname;
-    this._pageCreator = viewCreator;
-    this._page = null;
-    this._props = props;
-  }
-
-  navigate(pathname: string) {
-    if (this.match(pathname)) {
       this._pathname = pathname;
-      this.render();
-    }
+      this._pageCreator = viewCreator;
+      this._page = null;
+      this._props = props;
   }
 
-  leave() {
-    if (this._page) {
-      this._page.hide();
-    }
+  navigate(pathname: string): void {
+      if (this.match(pathname)) {
+          this._pathname = pathname;
+          this.render();
+      }
   }
 
-  match(pathname: string) {
-    return pathname === this._pathname;
+  leave(): void {
+      if (this._page) {
+          this._page.hide();
+      }
   }
 
-  render() {
-    if (!this._page) {
-      this._page = this._pageCreator();
-    }
+  match(pathname: string): boolean {
+      return pathname === this._pathname;
+  }
 
-    this._page.show(this._props.rootQuery);
+  render(): void {
+      if (!this._page) {
+          this._page = this._pageCreator();
+      }
+
+      this._page.show(this._props.rootQuery);
   }
 }

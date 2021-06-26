@@ -4,12 +4,12 @@ import type { BlockProps } from '../../core/types';
 
 export default class Message extends Block {
 
-  constructor(props: BlockProps = {}, className = 'chat__message-item') {
-    super('li', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'chat__message-item') {
+        super('li', className, props);
+    }
 
-  render() {
-    return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }
