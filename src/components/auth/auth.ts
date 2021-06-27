@@ -1,4 +1,4 @@
-import Template from '../../../static/components/auth/auth.hbs.js';
+import Template from './auth.hbs.js';
 import Block from '../../core/k-react/block';
 import type { BlockProps } from '../../core/types';
 

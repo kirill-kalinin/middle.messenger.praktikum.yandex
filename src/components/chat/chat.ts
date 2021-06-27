@@ -1,47 +1,47 @@
-import Template from '../../../static/components/chat/chat.hbs.js';
+import Template from './chat.hbs.js';
 import Block from '../../core/k-react/block';
 import FormHandler from '../../core/form-handler';
 import type { BlockProps } from '../../core/types';
 
 export default class Chat extends Block {
 
-  private _formHandler: FormHandler;
+    private _formHandler: FormHandler;
 
-  constructor(props: BlockProps = {}, className = 'fragment') {
-      super('div', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'fragment') {
+        super('div', className, props);
+    }
 
-  private _hiddenBlockHandler() {
-      const attachToMessageButton = this.element.querySelector('.chat__form-button_attach');
-      const attachToMessageInputs = this.element.querySelector('.chat__attach');
-      if (!attachToMessageButton || !attachToMessageInputs) {
-          return;
-      }
-      attachToMessageButton.addEventListener('click', function() {
-          attachToMessageInputs.classList.toggle('chat__attach_visible');
-      });
-  }
+    private _hiddenBlockHandler() {
+        const attachToMessageButton = this.element.querySelector('.chat__form-button_attach');
+        const attachToMessageInputs = this.element.querySelector('.chat__attach');
+        if (!attachToMessageButton || !attachToMessageInputs) {
+            return;
+        }
+        attachToMessageButton.addEventListener('click', function() {
+            attachToMessageInputs.classList.toggle('chat__attach_visible');
+        });
+    }
 
-  private _setInputListeners() {
-      const form = this.element.querySelector('form');
-      if (form instanceof HTMLFormElement) {
-          this._formHandler.addValidationListeners(form);
-      }
-  }
+    private _setInputListeners() {
+        const form = this.element.querySelector('form');
+        if (form instanceof HTMLFormElement) {
+            this._formHandler.addValidationListeners(form);
+        }
+    }
 
-  componentDidMount(): void {
-      this._formHandler = new FormHandler();
-      this._hiddenBlockHandler();
-      this._setInputListeners();
-  }
+    componentDidMount(): void {
+        this._formHandler = new FormHandler();
+        this._hiddenBlockHandler();
+        this._setInputListeners();
+    }
 
-  componentDidUpdate():void {
-      this._hiddenBlockHandler();
-      this._setInputListeners();
-  }
+    componentDidUpdate():void {
+        this._hiddenBlockHandler();
+        this._setInputListeners();
+    }
 
-  render(): string {
-      return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }

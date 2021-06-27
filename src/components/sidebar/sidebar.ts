@@ -1,4 +1,4 @@
-import Template from '../../../static/components/sidebar/sidebar.hbs.js';
+import Template from './sidebar.hbs.js';
 import Block from '../../core/k-react/block';
 import type { BlockProps, SidebarMenu } from '../../core/types';
 

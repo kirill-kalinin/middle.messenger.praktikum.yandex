@@ -1,4 +1,4 @@
-import { Contact } from '../types';
+import { BlockProps, Contact } from '../types';
 import ImageUrlAvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
 
 export default class DummyService {
@@ -52,7 +52,7 @@ export default class DummyService {
         }];
     }
 
-    fetchMessages(): unknown {
+    fetchMessages(): BlockProps[] {
         return [{
             isOwn: true,
             isImage: true,

@@ -1,49 +1,49 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
-  width: 70%;
-  height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 70%;
+    height: 100%;
 }
 
 .form__title {
-  font-size: 2.25em;
-  margin: 0;
-  @media (--width-md), (--height-md) {
-    font-size: 1.8em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 1.2em;
-  }
+    font-size: 2.25em;
+    margin: 0;
+    @media (--width-md), (--height-md) {
+        font-size: 1.8em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 1.2em;
+    }
 }
 
 .form__label {
-  font-size: 1,125em;
-  display: block;
-  width: 100%;
-  position: relative;
-  &:focus-within {
-    color: $main;
-  }
-  @media (--width-md), (--height-md) {
-    font-size: 0.9em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.75em;
-  }
+    font-size: 1,125em;
+    display: block;
+    width: 100%;
+    position: relative;
+    &:focus-within {
+        color: $main;
+    }
+    @media (--width-md), (--height-md) {
+        font-size: 0.9em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.75em;
+    }
 }
 
 .form__input {
-  font-size: 1.25em;
-  display: block;
-  border: none;
-  border-bottom: 1px solid $black;
-  width: 100%;
-  @media (--width-md), (--height-md) {
-    font-size: 1em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-  }
+    font-size: 1.25em;
+    display: block;
+    border: none;
+    border-bottom: 1px solid $black;
+    width: 100%;
+    @media (--width-md), (--height-md) {
+        font-size: 1em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+    }
 }

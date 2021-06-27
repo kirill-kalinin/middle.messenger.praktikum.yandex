@@ -1,4 +1,4 @@
-import Template from '../../../static/components/message/message.hbs.js';
+import Template from './message.hbs.js';
 import Block from '../../core/k-react/block';
 import type { BlockProps } from '../../core/types';
 

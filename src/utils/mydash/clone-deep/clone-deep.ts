@@ -1,6 +1,6 @@
 import { isArrayOrObject, isArray, isObject } from '../is-array-or-object/is-array-or-object';
 
-export default function cloneDeep(obj: unknown): unknown {
+export default function cloneDeep<T>(obj: T): T {
     if (!isArrayOrObject(obj)) {
         return obj;
     }

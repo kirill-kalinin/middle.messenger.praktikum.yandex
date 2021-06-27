@@ -1,4 +1,4 @@
-import Template from '../../../static/components/button/button.hbs.js';
+import Template from './button.hbs.js';
 import Block from '../../core/k-react/block';
 import type { BlockProps } from '../../core/types';
 import ImageUrlArrow from 'url:../../../static/images/arrow.svg';

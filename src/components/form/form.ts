@@ -1,35 +1,35 @@
-import Template from '../../../static/components/form/form.hbs.js';
+import Template from './form.hbs.js';
 import Block from '../../core/k-react/block';
 import FormHandler from '../../core/form-handler';
 import type { BlockProps } from '../../core/types';
 
 export default class Form extends Block {
 
-  private _formHandler: FormHandler;
+    private _formHandler: FormHandler;
 
-  constructor(props: BlockProps = {}, className = 'fragment') {
-      super('div', className, props);
-  }
+    constructor(props: BlockProps = {}, className = 'fragment') {
+        super('div', className, props);
+    }
 
-  private _setInputListeners() {
-      const form = this.element.querySelector('form');
-      if (form instanceof HTMLFormElement) {
-          this._formHandler.addValidationListeners(form);
-      }
-  }
+    private _setInputListeners() {
+        const form = this.element.querySelector('form');
+        if (form instanceof HTMLFormElement) {
+            this._formHandler.addValidationListeners(form);
+        }
+    }
 
-  componentDidMount(): void {
-      this._formHandler = new FormHandler();
-      this._setInputListeners();
-  }
+    componentDidMount(): void {
+        this._formHandler = new FormHandler();
+        this._setInputListeners();
+    }
 
-  componentDidUpdate(): void {
-      this._setInputListeners();
-  }
+    componentDidUpdate(): void {
+        this._setInputListeners();
+    }
 
-  render(): string {
-      return Template;
-  }
+    render(): string {
+        return Template;
+    }
 
 }
 

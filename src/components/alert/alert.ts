@@ -1,4 +1,4 @@
-import Template from '../../../static/components/alert/alert.hbs.js';
+import Template from './alert.hbs.js';
 import Block from '../../core/k-react/block';
 import type { BlockProps } from '../../core/types';
 

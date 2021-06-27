@@ -1,81 +1,81 @@
 .sidebar {
-  background-color: $main;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  border-right: 8px solid $black;
-  @media (--width-sm), (--height-sm) {
-    border-right: 5px solid $black;
-  }
+    background-color: $main;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-right: 8px solid $black;
+    @media (--width-sm), (--height-sm) {
+        border-right: 5px solid $black;
+    }
 }
 
 .sidebar__content {
-  width: 80%;
-  text-align: center;
+    width: 80%;
+    text-align: center;
 }
 
 .sidebar__button-slot {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .sidebar__text,
 .sidebar__alert {
-  font-size: 1.125em;
-  @media (--width-md), (--height-md) {
-    font-size: 0.9em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.75em;
-  }
+    font-size: 1.125em;
+    @media (--width-md), (--height-md) {
+        font-size: 0.9em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.75em;
+    }
 }
 
 .sidebar__link {
-  font-size: 1.25em;
-  color: $black;
-  display: inline-block;
-  &:hover {
-    color: #eeeeee;
-  }
-  &:active {
-    color: $white;
-  }
-  @media (--width-md), (--height-md) {
-    font-size: 1em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-  }
+    font-size: 1.25em;
+    color: $black;
+    display: inline-block;
+    &:hover {
+        color: #eeeeee;
+    }
+    &:active {
+        color: $white;
+    }
+    @media (--width-md), (--height-md) {
+        font-size: 1em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+    }
 }
 
 .sidebar__link_menu {
-  text-decoration: none;
+    text-decoration: none;
 }
 
 .sidebar__link_active {
-  font-weight: bold;
-  text-decoration: underline;
+    font-weight: bold;
+    text-decoration: underline;
 }
 
 .sidebar__logo {
-  width: 60%;
-  @media (--width-md), (--height-md) {
-    width: 50%;
-  }
-  @media (--width-sm), (--height-sm) {
-    width: 30%;
-  }
+    width: 60%;
+    @media (--width-md), (--height-md) {
+        width: 50%;
+    }
+    @media (--width-sm), (--height-sm) {
+        width: 30%;
+    }
 }
 
 .sidebar__menu {
-  padding: 0;
+    padding: 0;
 }
 
 .sidebar__menu-item {
-  list-style: none;
-  margin-bottom: 3vh;
+    list-style: none;
+    margin-bottom: 3vh;
 }

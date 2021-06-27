@@ -1,130 +1,130 @@
 .contact {
-  display: block;
-  text-decoration: none;
-  color: $black;
-  box-sizing: border-box;
-  cursor: pointer;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  height: 140px;
-  flex-shrink: 0;
-  @media (--width-md), (--height-md) {
-    height: 110px;
-  }
-  @media (--width-sm), (--height-sm) {
-    height: 90px;
-  }
+    display: block;
+    text-decoration: none;
+    color: $black;
+    box-sizing: border-box;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    height: 140px;
+    flex-shrink: 0;
+    @media (--width-md), (--height-md) {
+        height: 110px;
+    }
+    @media (--width-sm), (--height-sm) {
+        height: 90px;
+    }
 }
 
 .contact_active {
-  border: 4px solid $main;
-  background-color: #eeeeee;
-  padding: 0 6px;
+    border: 4px solid $main;
+    background-color: #eeeeee;
+    padding: 0 6px;
 }
 
 .contact__image {
-  display: block;
-  width: 100px;
-  @media (--width-md), (--height-md) {
-    width: 70px;
-  }
-  @media (--width-sm), (--height-sm) {
-    display: none;
-  }
+    display: block;
+    width: 100px;
+    @media (--width-md), (--height-md) {
+        width: 70px;
+    }
+    @media (--width-sm), (--height-sm) {
+        display: none;
+    }
 }
 
 .contact__primary-info {
-  flex-grow: 1;
-  margin: 8px 20px;
-  overflow: hidden;
-  @media (--width-md), (--height-md) {
-    margin: 6px 14px;
-  }
-  @media (--width-sm), (--height-sm) {
-    margin-left: 0;
-  }
+    flex-grow: 1;
+    margin: 8px 20px;
+    overflow: hidden;
+    @media (--width-md), (--height-md) {
+        margin: 6px 14px;
+    }
+    @media (--width-sm), (--height-sm) {
+        margin-left: 0;
+    }
 }
 
 .contact__secondary-info {
-  height: 100px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-end;
-  @media (--width-md), (--height-md) {
-    height: 70px;
-  }
-  @media (--width-sm), (--height-sm) {
-    height: 50px;
-  }
+    height: 100px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+    @media (--width-md), (--height-md) {
+        height: 70px;
+    }
+    @media (--width-sm), (--height-sm) {
+        height: 50px;
+    }
 }
 
 .contact__unreaded-counter {
-  box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  background-color: $main;
-  border: 2px solid $black;
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.25em;
-  @media (--width-md), (--height-md) {
-    width: 35px;
-    height: 35px;
-    font-size: 1em;
-  }
-  @media (--width-sm), (--height-sm) {
-    width: 25px;
-    height: 25px;
-    font-size: 0.8em;
-  }
+    box-sizing: border-box;
+    width: 50px;
+    height: 50px;
+    background-color: $main;
+    border: 2px solid $black;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.25em;
+    @media (--width-md), (--height-md) {
+        width: 35px;
+        height: 35px;
+        font-size: 1em;
+    }
+    @media (--width-sm), (--height-sm) {
+        width: 25px;
+        height: 25px;
+        font-size: 0.8em;
+    }
 }
 
 .contact__unreaded-counter_empty {
-  visibility: hidden;
+    visibility: hidden;
 }
 
 .contact__name,
 .contact__last-message,
 .contact__last-date {
-  margin: 0;
-  overflow: hidden;
-  white-space: nowrap;
+    margin: 0;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .contact__name {
-  font-size: 2em;
-  @media (--width-md), (--height-md) {
-    font-size: 1.3em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 1.1em;
-  }
+    font-size: 2em;
+    @media (--width-md), (--height-md) {
+        font-size: 1.3em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 1.1em;
+    }
 }
 
 .contact__last-message {
-  text-overflow: ellipsis;
-  color: #5c5c5c;
-  font-size: 1.25em;
-  @media (--width-md), (--height-md) {
-    font-size: 1em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-  }
+    text-overflow: ellipsis;
+    color: #5c5c5c;
+    font-size: 1.25em;
+    @media (--width-md), (--height-md) {
+        font-size: 1em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+    }
 }
 
 .contact__last-date {
-  text-align: right;
-  font-size: 0.875em;
-  @media (--width-md), (--height-md) {
-    font-size: 0.7em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.6em;
-  }
+    text-align: right;
+    font-size: 0.875em;
+    @media (--width-md), (--height-md) {
+        font-size: 0.7em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.6em;
+    }
 }

@@ -1,36 +1,36 @@
 .intro {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  border: 8px solid $main;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 8px solid $main;
 }
 
 .intro__logo {
-  width: 172px; 
-  height: 184px;
-  margin: 21px;
+    width: 172px; 
+    height: 184px;
+    margin: 21px;
 }
 
 .intro__text {
-  font-size: 42px;
-  margin: 21px;
-  background: linear-gradient(90deg, $main 50%, $black 50%);
-  background-clip: text;
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+    font-size: 42px;
+    margin: 21px;
+    background: linear-gradient(90deg, $main 50%, $black 50%);
+    background-clip: text;
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
 .intro__text_animated {
-  animation-name: intro__text_animated;
-  animation-duration: 3s;
-  animation-timing-function: ease-in-out;
-  animation-direction: reverse;
+    animation-name: intro__text_animated;
+    animation-duration: 3s;
+    animation-timing-function: ease-in-out;
+    animation-direction: reverse;
 }
 
 @keyframes intro__text_animated {
-  to {
-    background-position: 100%;
-  }
+    to {
+        background-position: 100%;
+    }
 }

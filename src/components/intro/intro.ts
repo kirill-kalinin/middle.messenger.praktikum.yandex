@@ -1,4 +1,4 @@
-import Template from '../../../static/components/intro/intro.hbs.js';
+import Template from './intro.hbs.js';
 import Block from '../../core/k-react/block';
 import Router from '../../core/router/router';
 import type { BlockProps } from '../../core/types';

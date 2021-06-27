@@ -1,239 +1,239 @@
 .profile {    
-  display: flex;
+    display: flex;
 }
 
 .profile__sidebar {
-  box-sizing: border-box;
-  width: 40%;
+    box-sizing: border-box;
+    width: 40%;
 }
 
 .profile__main-block {
-  box-sizing: border-box;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 10vh 0;
-  @media (--width-md), (--height-md) {
-    padding: 5vh 0;
-  }
-  @media (--width-sm), (--height-sm) {
-    padding: 3vh 0;
-  }
+    box-sizing: border-box;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 10vh 0;
+    @media (--width-md), (--height-md) {
+        padding: 5vh 0;
+    }
+    @media (--width-sm), (--height-sm) {
+        padding: 3vh 0;
+    }
 }
 
 .profile__sidebar-button-img {
-  width: 35px;
-  height: 35px;
-  margin-right: 10px;
-  @media (--width-md), (--height-md) {
-    width: 28px;
-    height: 28px;
-  }
-  @media (--width-sm), (--height-sm) {
-    width: 20px;
-    height: 20px;
-  }
+    width: 35px;
+    height: 35px;
+    margin-right: 10px;
+    @media (--width-md), (--height-md) {
+        width: 28px;
+        height: 28px;
+    }
+    @media (--width-sm), (--height-sm) {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 .profile__sidebar-button {
-  font-family: 'Roboto', sans-serif;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 40%;
-  text-align: right;
-  line-height: 1.2;
-  background-color: $main;
-  &:hover {
-    color: #eeeeee;
-    border-color: #eeeeee;
-    & .profile__sidebar-button-img {
-      filter: invert(92%);
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 40%;
+    text-align: right;
+    line-height: 1.2;
+    background-color: $main;
+    &:hover {
+        color: #eeeeee;
+        border-color: #eeeeee;
+        & .profile__sidebar-button-img {
+            filter: invert(92%);
+        }
     }
-  }
-  &:active {
-    color: $white;
-    border-color: $white;
-    & .profile__sidebar-button-img {
-      filter: invert(100%);
+    &:active {
+        color: $white;
+        border-color: $white;
+        & .profile__sidebar-button-img {
+            filter: invert(100%);
+        }
     }
-  }
-  @media (--width-md) {
-    width: 55%;
-  }
-  @media (--width-sm) {
-    width: 50%;
-  }
+    @media (--width-md) {
+        width: 55%;
+    }
+    @media (--width-sm) {
+        width: 50%;
+    }
 }
 
 .profile__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 75%;
-  padding-bottom: 40px;
-  border-bottom: 2px solid $black;
-  @media (--width-md), (--height-md) {
-    padding-bottom: 32px;
-  }
-  @media (--width-sm), (--height-sm) {
-    padding-bottom: 22px;
-  }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 75%;
+    padding-bottom: 40px;
+    border-bottom: 2px solid $black;
+    @media (--width-md), (--height-md) {
+        padding-bottom: 32px;
+    }
+    @media (--width-sm), (--height-sm) {
+        padding-bottom: 22px;
+    }
 }
 
 .profile__user-name {
-  font-size: 2.25em;
-  @media (--width-md), (--height-md) {
-    font-size: 1.8em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 1.2em;
-  }
+    font-size: 2.25em;
+    @media (--width-md), (--height-md) {
+        font-size: 1.8em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 1.2em;
+    }
 }
 
 .profile__user-avatar {
-  width: 100px;
-  height: 100px;
-  @media (--width-md), (--height-md) {
-    width: 80px;
-    height: 80px;
-  }
-  @media (--width-sm), (--height-sm) {
-    width: 55px;
-    height: 55px;
-  }
+    width: 100px;
+    height: 100px;
+    @media (--width-md), (--height-md) {
+        width: 80px;
+        height: 80px;
+    }
+    @media (--width-sm), (--height-sm) {
+        width: 55px;
+        height: 55px;
+    }
 }
 
 .profile__data {
-  width: 75%;
+    width: 75%;
 }
 
 .profile__data-value {
-  font-family: 'Roboto', sans-serif;
-  font-size: 1.25em;
-  text-align: right;
-  border: none;
-  overflow: hidden;
-  max-width: 70%;
-  @media (--width-md), (--height-md) {
-    font-size: 1em;
-    max-width: 65%;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-    max-width: 60%;
-  }
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.25em;
+    text-align: right;
+    border: none;
+    overflow: hidden;
+    max-width: 70%;
+    @media (--width-md), (--height-md) {
+        font-size: 1em;
+        max-width: 65%;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+        max-width: 60%;
+    }
 }
 
 .profile__data-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 1.25em;
-  margin: 4vh 0;
-  position: relative;
-  &:focus-within {
-    & .profile__data-label {
-      color: $main;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.25em;
+    margin: 4vh 0;
+    position: relative;
+    &:focus-within {
+        & .profile__data-label {
+            color: $main;
+        }
     }
-  }
-  @media (--width-md), (--height-md) {
-    font-size: 1em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-  }
+    @media (--width-md), (--height-md) {
+        font-size: 1em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+    }
 }
 
 .profile__buttons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile__button {
-  margin: 5%;
-  @media (--width-md), (--height-md) {
-    margin: 3%;
-  }
-  @media (--width-sm), (--height-sm) {
-    margin: 2%;
-  }
+    margin: 5%;
+    @media (--width-md), (--height-md) {
+        margin: 3%;
+    }
+    @media (--width-sm), (--height-sm) {
+        margin: 2%;
+    }
 }
 
 .profile__data_password,
 .profile__buttons_password {
-  padding-top: 12vh;
-  @media (--width-md), (--height-md) {
-    padding-top: 7vh;
-  }
-  @media (--width-sm), (--height-sm) {
-    padding-top: 3vh;
-  }
+    padding-top: 12vh;
+    @media (--width-md), (--height-md) {
+        padding-top: 7vh;
+    }
+    @media (--width-sm), (--height-sm) {
+        padding-top: 3vh;
+    }
 }
 
 .profile__data_avatar-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-around;
-  flex-grow: 1;
-  width: 75%;
-  text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-grow: 1;
+    width: 75%;
+    text-align: center;
 }
 
 .profile__avatar-uplaod-title,
 .profile__avatar-upload-label,
 .profile__avatar-upload-filename {
-  font-size: 1.5em;
-  @media (--width-md), (--height-md) {
-    font-size: 1.2em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.8em;
-  }
+    font-size: 1.5em;
+    @media (--width-md), (--height-md) {
+        font-size: 1.2em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.8em;
+    }
 }
 
 .profile__avatar-uplaod-title_error {
-  color: $alert;
+    color: $alert;
 }
 
 .profile__avatar-upload-label {
-  text-decoration: underline;
+    text-decoration: underline;
 }
 
 .profile__avatar-upload-label,
 .profile__avatar-upload-filename {
-  cursor: pointer;
-  color: $main;
+    cursor: pointer;
+    color: $main;
 }
 
 .profile__avatar-upload-filename {
-  display: none;
-  text-decoration: none;
+    display: none;
+    text-decoration: none;
 }
 
 .profile__avatar-upload-input {
-  display: none;
+    display: none;
 }
 
 .profile__avatar-upload-button-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile__avatar-upload-alert {
-  visibility: hidden;
-  color: $alert;
-  font-size: 1.125em;
-  @media (--width-md), (--height-md) {
-    font-size: 0.9em;
-  }
-  @media (--width-sm), (--height-sm) {
-    font-size: 0.75em;
-  }
+    visibility: hidden;
+    color: $alert;
+    font-size: 1.125em;
+    @media (--width-md), (--height-md) {
+        font-size: 0.9em;
+    }
+    @media (--width-sm), (--height-sm) {
+        font-size: 0.75em;
+    }
 }

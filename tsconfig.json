@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-      "target": "ES2019",
-      "moduleResolution": "Node",
-      "strictNullChecks": true,
-      "sourceMap": true,
-      "noImplicitAny": true,
-      "noUnusedLocals": true,
-      "noUnusedParameters": true,
-      "alwaysStrict": true,
-      "outDir": "static/js"
-   }
+    "target": "ES2019",
+    "moduleResolution": "Node",
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "alwaysStrict": true,
+    "outDir": "static/js"
+  }
 }
