@@ -1,7 +1,7 @@
 import Template from './profile.hbs.js';
 import Block from '../../core/k-react/block';
-import FormHandler from '../../core/form-handler';
-import AvatarUploadHandler from '../../core/avatar-upload-handler';
+import FormHandler from '../../modules/form-handler/form-handler';
+import AvatarUploadHandler from './modules/avatar-upload-handler';
 import type { BlockProps } from '../../core/types';
 
 export default class Profile extends Block {
@@ -24,12 +24,12 @@ export default class Profile extends Block {
         this._formHandler = new FormHandler();
         this._avatarUploadHandler = new AvatarUploadHandler();
         this._setInputListeners();
-        this._avatarUploadHandler.handle(this.element);
+        this._avatarUploadHandler.init(this.element);
     }
 
     componentDidUpdate(): void {
         this._setInputListeners();
-        this._avatarUploadHandler.handle(this.element);
+        this._avatarUploadHandler.update(this.element);
     }
 
     render(): string {

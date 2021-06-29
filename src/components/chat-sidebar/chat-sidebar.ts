@@ -1,7 +1,7 @@
 import Template from './chat-sidebar.hbs.js';
 import Block from '../../core/k-react/block';
 import { popupAddContactPreset, popupPromptContactPreset } from '../../components/popup/popup';
-import PopupHandler, { PopupTypes } from '../../core/popup-handler';
+import PopupHandler, { PopupTypes } from '../../modules/popup-handler/popup-handler';
 import Router from '../../core/router/router';
 import type { BlockProps } from '../../core/types';
 

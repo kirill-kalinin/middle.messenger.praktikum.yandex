@@ -1,10 +1,10 @@
-import Router from './router/router';
-import DOMService from './k-react/dom-service';
+import Router from '../../core/router/router';
+import DOMService from '../../core/k-react/dom-service';
 import Popup, {
     popupRemoveContactPreset,
     popupWarningContactPreset
-} from '../components/popup/popup';
-import type { BlockProps } from './types';
+} from '../../components/popup/popup';
+import type { BlockProps } from '../../core/types';
 
 export enum PopupTypes {
     CONTACT_ADD,
@@ -50,16 +50,19 @@ export default class PopupHandler {
         }
 
         switch (popupType) {
+            
         case PopupTypes.CONTACT_ADD:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
                 console.log('Здесь будет функция, добавляющая контакт');
             }));
             break;
+
         case PopupTypes.CONTACT_REMOVE:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
                 console.log('Здесь будет функция, удаляющая контакт');
             }));
             break;
+
         case PopupTypes.CONTACT_PROMPT:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
                 document.addEventListener('mouseup', (e: Event) => {
@@ -80,9 +83,11 @@ export default class PopupHandler {
                 }, {once: true});
             }));
             break;
+
         case PopupTypes.CONTACT_ERROR:
             mainButton.addEventListener('click', this._detachPopup.bind(this));
             break;
+            
         default:
             console.error('Неправильно указан тип поп-апа');
         }

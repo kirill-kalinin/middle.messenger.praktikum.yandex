@@ -17,9 +17,9 @@ export default `
             {{/if}}
 
             {{#if typeIsAlert}}
-            {{#each alert}}
-            <p class="sidebar__alert">{{this}}</p>
-            {{/each}}
+                {{#each alert}}
+                <p class="sidebar__alert">{{this}}</p>
+                {{/each}}
             {{/if}}
 
             {{#if typeIsMenu}}

@@ -1,6 +1,6 @@
 import Template from './form.hbs.js';
 import Block from '../../core/k-react/block';
-import FormHandler from '../../core/form-handler';
+import FormHandler from '../../modules/form-handler/form-handler';
 import type { BlockProps } from '../../core/types';
 
 export default class Form extends Block {

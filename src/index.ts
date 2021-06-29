@@ -11,7 +11,7 @@ import createPageProfileMain from './pages/profile-main/profile-main';
 import createPageSignin from './pages/signin/signin';
 
 import Router from './core/router/router';
-import FormHandler from './core/form-handler';
+import FormHandler from './modules/form-handler/form-handler';
 
 const appRoutes = [
     ['/', createPageIntro],
