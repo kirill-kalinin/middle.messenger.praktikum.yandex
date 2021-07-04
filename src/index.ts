@@ -8,15 +8,22 @@ import createPageProfileEditAvatar from './pages/profile-edit-avatar/profile-edi
 import createPageProfileEditData from './pages/profile-edit-data/profile-edit-data';
 import createPageProfileEditPassword from './pages/profile-edit-password/profile-edit-password';
 import createPageProfileMain from './pages/profile-main/profile-main';
-import createPageSignin from './pages/signin/signin';
+import createPageSignup from './pages/signup/signup';
+import { PageCreator } from './core/types';
 
 import Router from './core/router/router';
 import FormHandler from './modules/form-handler/form-handler';
 
+import Store from './core/store/store';
+import actions from './core/store/app-stores/main/actions-main';
+import mutations from './core/store/app-stores/main/mutations-main';
+
+export const mainStore = new Store({ actions, mutations });
+
 const appRoutes = [
     ['/', createPageIntro],
     ['/login', createPageLogin],
-    ['/signin', createPageSignin],
+    ['/signup', createPageSignup],
     ['/profile-edit-avatar', createPageProfileEditAvatar],
     ['/profile-edit-data', createPageProfileEditData],
     ['/profile-edit-password', createPageProfileEditPassword],
@@ -29,8 +36,7 @@ const appRoutes = [
 
 const router = new Router();
 
-// eslint-disable-next-line prefer-spread
-appRoutes.forEach(route => router.use.apply(router, route));
+appRoutes.forEach((route: [string, PageCreator]) => router.use(...route));
 router.start();
 
 const formHandler = new FormHandler();

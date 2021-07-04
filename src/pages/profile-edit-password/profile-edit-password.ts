@@ -1,5 +1,5 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../core/services/dummy-service';
+import DummyService from '../../modules/http-services/dummy-service';
 import Profile from '../../components/profile/profile';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button';

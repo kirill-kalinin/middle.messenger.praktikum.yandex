@@ -4,12 +4,12 @@ import Form, { formSigninPreset } from '../../components/form/form';
 import Sidebar, { sidebarSigninPreset } from '../../components/sidebar/sidebar';
 import Button from '../../components/button/button';
 
-export default function createPageSignin(): Page {
+export default function createPageSignup(): Page {
     const auth = new Auth({
         isHigh: true
     });
 
-    const signinForm = new Form(formSigninPreset, 'fragment fragment_center');
+    const signupForm = new Form(formSigninPreset, 'fragment fragment_center');
 
     const sidebar = new Sidebar(sidebarSigninPreset);
 
@@ -22,8 +22,8 @@ export default function createPageSignin(): Page {
         root: auth,
         children: {
             sidebar: [sidebar, '.auth__sidebar', auth],
-            signinForm: [signinForm, '.auth__main-block', auth],
-            buttonSubmit: [buttonSubmit, '.form__submit', signinForm]
+            signupForm: [signupForm, '.auth__main-block', auth],
+            buttonSubmit: [buttonSubmit, '.form__submit', signupForm]
         }
     });
 }

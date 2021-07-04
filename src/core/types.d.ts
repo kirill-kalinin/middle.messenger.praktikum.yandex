@@ -1,6 +1,7 @@
 import Block from './k-react/block';
 import Page from './k-react/page';
-import { METHODS } from './services/http-service';
+import Store from './store/store';
+import { METHODS } from '../modules/http-services/http-service';
 
 interface EventBusListeners {
     [propName: string]: Array<Function>;
@@ -57,6 +58,9 @@ interface RouterProps {
 
 type PageCreator = () => Page;
 
+/**
+ *  HTTP request types
+ */
 type RequestData = string | Document | Blob
     | ArrayBufferView | ArrayBuffer | FormData
     | URLSearchParams | ReadableStream<Uint8Array>
@@ -76,3 +80,26 @@ interface RequestOptionsMethodGet {
 interface RequestOptionsWithMethod extends RequestOptions {
     method: METHODS
 }
+
+/**
+ *  Store types
+ */
+type State = {
+    [data: string]: unknown
+}
+
+type storeParams = {
+    actions: Actions,
+    mutations: Mutations,
+    state?: State
+}
+
+type StoreStatus = 'resting' | 'action' | 'mutation'
+
+type Action = (context: Store, payload: State) => void
+type Actions = { [action: string]: Action }
+
+type Mutation = (state: State, payload: State) => State
+type Mutations = { [mutation: string]: Mutation }
+
+type stateUpdateCallback = (state: State) => unknown

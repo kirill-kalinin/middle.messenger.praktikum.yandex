@@ -1,4 +1,4 @@
-import { BlockProps, Contact } from '../types';
+import { BlockProps, Contact } from '../../core/types';
 import ImageUrlAvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
 
 export default class DummyService {

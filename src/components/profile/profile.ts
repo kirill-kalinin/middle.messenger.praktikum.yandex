@@ -16,7 +16,7 @@ export default class Profile extends Block {
     private _setInputListeners() {
         const form = this.element.querySelector('form');
         if (form instanceof HTMLFormElement) {
-            this._formHandler.addValidationListeners(form);
+            this._formHandler.setValidationListeners(form);
         }
     }
 

@@ -14,7 +14,7 @@ export default class Form extends Block {
     private _setInputListeners() {
         const form = this.element.querySelector('form');
         if (form instanceof HTMLFormElement) {
-            this._formHandler.addValidationListeners(form);
+            this._formHandler.setValidationListeners(form);
         }
     }
 
@@ -57,7 +57,7 @@ export const formLoginPreset: BlockProps = {
 
 export const formSigninPreset: BlockProps = {
     title: 'Регистрация',
-    name: 'signin',
+    name: 'signup',
     fields: [
         {
             label: 'Почта',

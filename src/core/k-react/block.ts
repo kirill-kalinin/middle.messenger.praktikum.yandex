@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import EventBus from './event-bus';
+import EventBus from '../../modules/event-bus/event-bus';
 import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 
 // Подключение через CDN пока нет Webpack, с Parcel сборка получается с багом

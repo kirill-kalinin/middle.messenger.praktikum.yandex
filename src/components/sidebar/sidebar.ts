@@ -32,13 +32,13 @@ export const sidebarLoginPreset: BlockProps = {
         question: 'Еще нет аккаунта?',
         link: {
             text: 'Создать новый!',
-            href: '/signin'
+            href: '/signup'
         }
     }
 };
 
 export const sidebarSigninPreset: BlockProps = {
-    parent: 'signin',
+    parent: 'signup',
     typeIsPrompt: true,
     prompt: {
         question: 'Уже есть аккаунт?',
