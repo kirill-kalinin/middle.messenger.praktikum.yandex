@@ -1,7 +1,16 @@
 import Template from './form.hbs.js';
 import Block from '../../core/k-react/block';
 import FormHandler from '../../modules/form-handler/form-handler';
-import type { BlockProps } from '../../core/types';
+import type { BlockProps, Controllers } from '../../core/types';
+
+import AuthController from '../../controllers/auth-controller';
+
+const authControllerInstance = new AuthController();
+
+const formControllers: Controllers = {
+    login: authControllerInstance.login,
+    signup: authControllerInstance.signup
+};
 
 export default class Form extends Block {
 
@@ -19,7 +28,12 @@ export default class Form extends Block {
     }
 
     componentDidMount(): void {
+        const formName = String(this.props.name);
+        if (!formControllers[formName]) {
+            throw new Error(`Не указан контроллер для формы ${formName}`);
+        }
         this._formHandler = new FormHandler();
+        this._formHandler.subscribeSubmit(formName, formControllers[formName]);
         this._setInputListeners();
     }
 

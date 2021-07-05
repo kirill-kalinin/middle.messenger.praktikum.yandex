@@ -30,7 +30,7 @@ export default class PopupHandler {
         this._DOMService.attachComponent(this._popup, 'body');
     }
 
-    private _detachPopup = (callback?: unknown) => {
+    private _detachPopup = (callback?: Function) => {
         this._DOMService.detachComponent(this._popup);
         this._Router.enable();
         if (typeof callback === 'function') {
@@ -65,22 +65,7 @@ export default class PopupHandler {
 
         case PopupTypes.CONTACT_PROMPT:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
-                document.addEventListener('mouseup', (e: Event) => {
-                    this._Router.disable();
-                    const contact = (e.target as HTMLElement).closest('.contact');
-                    if (contact) {
-                        const contactName = contact.querySelector('.contact__name');
-                        let name;
-                        if (contactName && contactName instanceof HTMLElement) {
-                            name = contactName.innerText;
-                        } else {
-                            throw new Error('Ошибка в шаблоне контакта');
-                        }
-                        this.pushPopup({...popupRemoveContactPreset, contactToRemove: name}, PopupTypes.CONTACT_REMOVE);
-                    } else {
-                        this.pushPopup(popupWarningContactPreset, PopupTypes.CONTACT_ERROR);
-                    }
-                }, {once: true});
+                this._contactSelect();
             }));
             break;
 
@@ -91,6 +76,25 @@ export default class PopupHandler {
         default:
             console.error('Неправильно указан тип поп-апа');
         }
+    }
+
+    private _contactSelect() {
+        document.addEventListener('mouseup', (e: Event) => {
+            this._Router.disable();
+            const contact = (e.target as HTMLElement).closest('.contact');
+            if (contact) {
+                const contactName = contact.querySelector('.contact__name');
+                let name;
+                if (contactName && contactName instanceof HTMLElement) {
+                    name = contactName.innerText;
+                } else {
+                    throw new Error('Ошибка в шаблоне контакта');
+                }
+                this.pushPopup({...popupRemoveContactPreset, contactToRemove: name}, PopupTypes.CONTACT_REMOVE);
+            } else {
+                this.pushPopup(popupWarningContactPreset, PopupTypes.CONTACT_ERROR);
+            }
+        }, {once: true});
     }
 
 }

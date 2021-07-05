@@ -6,7 +6,16 @@ const mainStore = new Store({
     actions,
     mutations,
     state: {
-        userId: null
+        userInfo: {
+            id: null,
+            first_name: null,
+            second_name: null,
+            display_name: null,
+            login: null,
+            email: null,
+            phone: null,
+            avatar: null
+        }
     }
 });
 

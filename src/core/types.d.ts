@@ -14,7 +14,12 @@ interface BlockMeta {
 }
 
 interface BlockProps {
-    [propName: string]: unknown;
+    [propName: string]: unknown,
+    events?: BlockEvents
+}
+
+interface BlockEvents {
+    [event: string]: (e: Event) => unknown;
 }
 
 interface Contact extends BlockProps {
@@ -58,6 +63,10 @@ interface RouterProps {
 
 type PageCreator = () => Page;
 
+type Controllers = {
+    [method: string]: Function
+}
+
 /**
  *  HTTP request types
  */
@@ -79,6 +88,24 @@ interface RequestOptionsMethodGet {
 
 interface RequestOptionsWithMethod extends RequestOptions {
     method: METHODS
+}
+
+/**
+ *  Form models
+ */
+
+interface LoginFormModel {
+    email: string;
+    password: string;
+}
+
+interface SignupFormModel {
+    first_name: string,
+    second_name: string,
+    login: string,
+    email: string,
+    password: string,
+    phone: string
 }
 
 /**

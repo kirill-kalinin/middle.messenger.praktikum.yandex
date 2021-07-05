@@ -14,11 +14,7 @@ import { PageCreator } from './core/types';
 import Router from './core/router/router';
 import FormHandler from './modules/form-handler/form-handler';
 
-import Store from './core/store/store';
-import actions from './core/store/app-stores/main/actions-main';
-import mutations from './core/store/app-stores/main/mutations-main';
-
-export const mainStore = new Store({ actions, mutations });
+import mainStore from './core/store/app-stores/main/store-main';
 
 const appRoutes = [
     ['/', createPageIntro],
@@ -35,10 +31,10 @@ const appRoutes = [
 ];
 
 const router = new Router();
-
 appRoutes.forEach((route: [string, PageCreator]) => router.use(...route));
 router.start();
 
 const formHandler = new FormHandler();
-
 formHandler.handleSubmit();
+
+console.log(mainStore.getState().userInfo);

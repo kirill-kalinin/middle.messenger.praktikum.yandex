@@ -25,11 +25,11 @@ export default class FormHandler {
         FormHandler.__instance = this;
     }
 
-    public subscribe(formName: string, callback: Function): void {
+    public subscribeSubmit(formName: string, callback: Function): void {
         this._eventBus().on(formName, callback);
     }
 
-    public unsubscribe(formName: string, callback: Function): void {
+    public unsubscribeSubmit(formName: string, callback: Function): void {
         this._eventBus().off(formName, callback);
     }
 
@@ -76,7 +76,6 @@ export default class FormHandler {
 
         const formData = new FormData(form);
         const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
-        console.log(form.name, jsonData);
 
         this._eventBus().emit(form.name, jsonData);
     }

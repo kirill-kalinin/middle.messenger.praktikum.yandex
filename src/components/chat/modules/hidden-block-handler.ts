@@ -19,7 +19,7 @@ export default class HiddenBlockHandler {
         this.init(chatElement);
     }
 
-    _handler(): void {
+    _handler = (): void => {
         this._inputs && this._inputs.classList.toggle('chat__attach_visible');
     }
 

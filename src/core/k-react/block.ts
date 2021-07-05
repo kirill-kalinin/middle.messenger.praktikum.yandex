@@ -104,14 +104,32 @@ export default abstract class Block {
         }
     };
 
+    private _addEvents(): void {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach(eventName => {
+            this._element.addEventListener(eventName, events[eventName]);
+        });
+    }
+
+    private _removeEvents(): void {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach(eventName => {
+            this._element.removeEventListener(eventName, events[eventName]);
+        });
+    }
+
     get element(): HTMLElement {
         return this._element;
     }
 
     private _render() {
         const block = this.render();
+        this._removeEvents();
         this._element.innerHTML = Handlebars.compile(block)(this.props);
         this._updateChildren();
+        this._addEvents();
     }
 
     public render(): string | void {}
