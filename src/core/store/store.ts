@@ -1,8 +1,6 @@
 import EventBus from '../../modules/event-bus/event-bus';
 import merge from '../../utils/mydash/merge/merge';
-import { Actions, Mutations, State, StoreStatus, storeParams, stateUpdateCallback } from '../types';
-
-const STATE_CHANGED = 'STATE_CHANGED';
+import { Actions, Mutations, State, StoreStatus, StoreParams, Selector } from '../types';
 
 export default class Store {
     private _actions: Actions;
@@ -11,7 +9,7 @@ export default class Store {
     private _status: StoreStatus;
     private _eventBus: () => EventBus;
 
-    constructor(params: storeParams) {
+    constructor(params: StoreParams) {
         const eventBus = new EventBus();
 
         this._actions = params.actions;
@@ -28,7 +26,7 @@ export default class Store {
 
                 console.log(`State changed: ${key}: ${value}`);
 
-                this._eventBus().emit(STATE_CHANGED, this._state);
+                this._eventBus().emit(key, this._state);
                 if (this._status !== 'mutation') {
                     console.warn(`Следует использовать mutation для изменения ${key}`);
                 }
@@ -40,7 +38,7 @@ export default class Store {
 
         // debug
         Object.defineProperty(window, 'getState', {
-            get: () => this.getState()
+            get: () => this.getState
         });
     }
 
@@ -73,15 +71,15 @@ export default class Store {
         return true;
     }
 
-    public getState(): State {
+    public get getState(): State {
         return this._state;
     }
 
-    public subscribe(callback: stateUpdateCallback): void {
-        this._eventBus().on(STATE_CHANGED, callback);
+    public subscribe(changedKey: string, callback: Selector): void {
+        this._eventBus().on(changedKey, callback);
     }
 
-    public unsubscribe(callback: stateUpdateCallback): void {
-        this._eventBus().off(STATE_CHANGED, callback);
+    public unsubscribe(changedKey: string, callback: Selector): void {
+        this._eventBus().off(changedKey, callback);
     }
 }

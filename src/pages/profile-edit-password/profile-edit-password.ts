@@ -1,40 +1,21 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../modules/http-services/dummy-service';
 import Profile from '../../components/profile/profile';
 import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar';
 import Button, { profileSidebarButtonPreset } from '../../components/button/button';
+
 import cloneDeep from '../../utils/mydash/clone-deep/clone-deep';
+import ProfileDataService from '../../modules/profile-data-service/profile-data-service';
+
+import mainStore from '../../core/store/app-stores/main/store-main';
+import { MainStoreState } from '../../core/types';
 
 export default function createPageProfileEditPassword(): Page {
-    const dummyService = new DummyService();
+    const mainStoreInitialState = mainStore.getState as MainStoreState;
 
     const profile = new Profile({
-        header: dummyService.getProfileHeaderData(),
         isEditPasswordMode: true,
-        userPasswordFields: {
-            oldPassword: {
-                label: 'Старый пароль',
-                value: 'фыв123abc',
-                name: 'oldPassword',
-                validationKey: 'password',
-                validationText: 'Введите от 8 до 25 букв или цифр',
-            },
-            newPassword: {
-                label: 'Новый пароль',
-                value: '',
-                name: 'newPassword',
-                validationKey: 'password',
-                validationText: 'Введите от 8 до 25 букв или цифр',
-                equality: true
-            },
-            repeat: {
-                label: 'Повторите пароль',
-                value: '',
-                name: '',
-                validationText: 'Пароли не совпадают',
-                equality: true
-            }
-        }
+        header: ProfileDataService.getHeader(mainStoreInitialState.userInfo),
+        userPasswordFields: ProfileDataService.getPasswordForm()
     });
 
     const sidebarPreset = cloneDeep(sidebarProfileMenuPreset);

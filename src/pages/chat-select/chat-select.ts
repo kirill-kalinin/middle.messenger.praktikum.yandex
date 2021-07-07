@@ -1,17 +1,19 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../modules/http-services/dummy-service';
 import Chat from '../../components/chat/chat';
 import ChatSidebar from '../../components/chat-sidebar/chat-sidebar';
 import Contact from '../../components/contact/contact';
 
+import mainStore from '../../core/store/app-stores/main/store-main';
+import { MainStoreState } from '../../core/types';
+
 export default function createPageChatSelect(): Page {
+    const mainStoreInitialState = mainStore.getState as MainStoreState;
+
     const chat = new Chat({ chatModeSelect: true });
 
     const chatSidebar = new ChatSidebar();
 
-    const dummyService = new DummyService();
-    const contactsData = dummyService.fetchContacts();
-    const contacts = contactsData.map(data => new Contact(data));
+    const contacts = mainStoreInitialState.contacts.map(contact => new Contact(contact));
 
     return new Page({
         root: chat,

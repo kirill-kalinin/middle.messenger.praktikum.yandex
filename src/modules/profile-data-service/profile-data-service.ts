@@ -1,0 +1,92 @@
+import { UserInfo } from "../../core/types";
+
+export default class ProfileDataService {
+
+    public static getHeader(userInfo: UserInfo) {
+        return { 
+            name: userInfo.display_name,
+            avatarSrc: userInfo.avatar
+        }
+    }
+
+    public static configureMainForm(userInfo: UserInfo) {
+        return {
+            email: {
+                label: 'Почта',
+                value: userInfo.email,
+                inputName: 'email',
+                inputType: 'text',
+                validationKey: 'email',
+                validationText: 'Введите корректный адрес почты'
+            },
+            login: {
+                label: 'Логин',
+                value: userInfo.login,
+                inputName: 'login',
+                inputType: 'text',
+                validationKey: 'login',
+                validationText: 'От 5 до 20 латинских букв или цифр, первый символ - буква'
+            },
+            firstName: {
+                label: 'Имя',
+                value: userInfo.first_name,
+                inputName: 'first_name',
+                inputType: 'text',
+                validationKey: 'name',
+                validationText: 'Допускается от 2 до 20 букв в имени'
+            },
+            secondName: {
+                label: 'Фамилия',
+                value: userInfo.second_name,
+                inputName: 'second_name',
+                inputType: 'text',
+                validationKey: 'name',
+                validationText: 'Допускается от 2 до 20 букв в фамилии'
+            },
+            displayName: {
+                label: 'Имя в чате',
+                value: userInfo.display_name,
+                inputName: 'display_name',
+                inputType: 'text',
+                validationKey: 'name',
+                validationText: 'Допускается от 2 до 20 букв для имени в чате'
+            },
+            phone: {
+                label: 'Телефон',
+                value: userInfo.phone,
+                inputName: 'phone',
+                inputType: 'tel',
+                validationKey: 'tel',
+                validationText: 'Введите корректный номер телефона'
+            }
+        }
+    }
+
+    public static getPasswordForm() {
+        return {
+            oldPassword: {
+                label: 'Старый пароль',
+                value: '',
+                name: '',
+                validationKey: 'password',
+                validationText: 'Введите от 8 до 25 букв или цифр',
+            },
+            newPassword: {
+                label: 'Новый пароль',
+                value: '',
+                name: 'newPassword',
+                validationKey: 'password',
+                validationText: 'Введите от 8 до 25 букв или цифр',
+                equality: true
+            },
+            repeat: {
+                label: 'Повторите пароль',
+                value: '',
+                name: '',
+                validationText: 'Пароли не совпадают',
+                equality: true
+            }
+        }
+    }
+
+}

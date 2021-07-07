@@ -1,28 +1,35 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../modules/http-services/dummy-service';
 import Chat from '../../components/chat/chat';
 import ChatSidebar from '../../components/chat-sidebar/chat-sidebar';
 import Contact from '../../components/contact/contact';
 import Message from '../../components/message/message';
 
+import mainStore from '../../core/store/app-stores/main/store-main';
+import messagesStore from '../../core/store/app-stores/main/store-main';
+import { MainStoreState, MessagesStoreState } from '../../core/types';
+
 export default function createPageChatActive(): Page {
-    const dummyService = new DummyService();
-  
+    const mainStoreInitialState = mainStore.getState as MainStoreState;
+    const messagesStoreInitialState = messagesStore.getState as MessagesStoreState;
+
     const chat = new Chat({ chatModeActive: true });
 
     const chatSidebar = new ChatSidebar();
 
-    const contactsData = dummyService.fetchContacts();
-    const activeContactId = dummyService.getActiveContactId();
-    const contacts = contactsData.map(data => {
-        if (data.id === activeContactId) {
-            data.active = true;
+    const contactsData = mainStoreInitialState.contacts;
+    const activeContactId = mainStoreInitialState.activeContactId;
+    const contacts = contactsData.map(contact => {
+        if (contact.id === activeContactId) {
+            contact.active = true;
         }
-        return new Contact(data);
+        return new Contact(contact);
     });
 
-    const messagesList = dummyService.fetchMessages();
-    const messages = messagesList.map(item => new Message(item));
+    const messagesList = messagesStoreInitialState;
+    let messages: Message[] = [];
+    if (typeof activeContactId === 'string') {
+        messages = messagesList[activeContactId].map(item => new Message(item));
+    }
 
     return new Page({
         root: chat,

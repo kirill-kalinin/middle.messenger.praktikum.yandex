@@ -22,6 +22,17 @@ interface BlockEvents {
     [event: string]: (e: Event) => unknown;
 }
 
+interface UserInfo extends BlockProps {
+    id: string | null,
+    first_name: string,
+    second_name: string,
+    display_name: string,
+    login: string,
+    email: string,
+    phone: string,
+    avatar: string | null
+}
+
 interface Contact extends BlockProps {
     id: string,
     link: string,
@@ -32,6 +43,15 @@ interface Contact extends BlockProps {
     date: string,
     readed: boolean,
     active?: boolean
+}
+
+interface Message extends BlockProps {
+    isOwn: boolean,
+    isImage: boolean,
+    isReaded: boolean,
+    imgSrc: string,
+    text: string,
+    date: string
 }
 
 interface SidebarMenu extends BlockProps {
@@ -115,10 +135,10 @@ type State = {
     [data: string]: unknown
 }
 
-type storeParams = {
+type StoreParams = {
     actions: Actions,
     mutations: Mutations,
-    state?: State
+    state: State
 }
 
 type StoreStatus = 'resting' | 'action' | 'mutation'
@@ -129,4 +149,23 @@ type Actions = { [action: string]: Action }
 type Mutation = (state: State, payload: State) => State
 type Mutations = { [mutation: string]: Mutation }
 
-type stateUpdateCallback = (state: State) => unknown
+type Selector = (state: State) => BlockProps
+type Selectors = { [selector: string]: Selector }
+
+interface MainStoreParams extends StoreParams {
+    state: MainStoreState
+}
+
+interface MainStoreState extends State {
+    userInfo: UserInfo,
+    contacts: Contact[],
+    activeContactId: string | null
+}
+
+interface MessagesStoreParams extends StoreParams {
+    state: MessagesStoreState
+}
+
+interface MessagesStoreState extends State {
+    [contactId: string]: Message[]
+}
