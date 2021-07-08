@@ -10,7 +10,7 @@ export enum PopupTypes {
     CONTACT_ADD,
     CONTACT_REMOVE,
     CONTACT_PROMPT,
-    CONTACT_ERROR
+    ERROR
 }
 
 export default class PopupHandler {
@@ -69,7 +69,7 @@ export default class PopupHandler {
             }));
             break;
 
-        case PopupTypes.CONTACT_ERROR:
+        case PopupTypes.ERROR:
             mainButton.addEventListener('click', this._detachPopup.bind(this));
             break;
             
@@ -92,9 +92,19 @@ export default class PopupHandler {
                 }
                 this.pushPopup({...popupRemoveContactPreset, contactToRemove: name}, PopupTypes.CONTACT_REMOVE);
             } else {
-                this.pushPopup(popupWarningContactPreset, PopupTypes.CONTACT_ERROR);
+                this.pushPopup(popupWarningContactPreset, PopupTypes.ERROR);
             }
         }, {once: true});
+    }
+
+    public getErrorWarningPreset(message: string | number) {
+        return {
+            typeIsWarning: true,
+            isCloseable: false,
+            title: 'Ошибка',
+            warningMessage: message,
+            buttonText: 'Ок'
+        }
     }
 
 }

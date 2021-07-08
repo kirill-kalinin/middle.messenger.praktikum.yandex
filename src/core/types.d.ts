@@ -23,7 +23,7 @@ interface BlockEvents {
 }
 
 interface UserInfo extends BlockProps {
-    id: string | null,
+    id: number | null,
     first_name: string,
     second_name: string,
     display_name: string,
@@ -34,7 +34,7 @@ interface UserInfo extends BlockProps {
 }
 
 interface Contact extends BlockProps {
-    id: string,
+    id: number,
     link: string,
     avatar: string,
     name: string,
@@ -98,6 +98,7 @@ type RequestData = string | Document | Blob
 interface RequestOptions {
     data?: RequestData,
     headers?: [string, string][],
+    credentials?: boolean,
     timeout?: number
 }
 
@@ -108,24 +109,6 @@ interface RequestOptionsMethodGet {
 
 interface RequestOptionsWithMethod extends RequestOptions {
     method: METHODS
-}
-
-/**
- *  Form models
- */
-
-interface LoginFormModel {
-    email: string;
-    password: string;
-}
-
-interface SignupFormModel {
-    first_name: string,
-    second_name: string,
-    login: string,
-    email: string,
-    password: string,
-    phone: string
 }
 
 /**
@@ -159,7 +142,7 @@ interface MainStoreParams extends StoreParams {
 interface MainStoreState extends State {
     userInfo: UserInfo,
     contacts: Contact[],
-    activeContactId: string | null
+    activeContactId: number | null
 }
 
 interface MessagesStoreParams extends StoreParams {
@@ -167,5 +150,5 @@ interface MessagesStoreParams extends StoreParams {
 }
 
 interface MessagesStoreState extends State {
-    [contactId: string]: Message[]
+    [contactId: number]: Message[]
 }

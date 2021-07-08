@@ -1,6 +1,6 @@
 import { Actions } from '../../../types';
 
-const actions: Actions = {
+const messagesActions: Actions = {
     addChat(context, payload) {
         context.commit('addChat', payload);
     },
@@ -9,4 +9,4 @@ const actions: Actions = {
     }
 };
 
-export default actions;
+export default messagesActions;

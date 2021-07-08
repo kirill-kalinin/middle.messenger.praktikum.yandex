@@ -27,7 +27,7 @@ export default function createPageChatActive(): Page {
 
     const messagesList = messagesStoreInitialState;
     let messages: Message[] = [];
-    if (typeof activeContactId === 'string') {
+    if (typeof activeContactId === 'string' && messagesList[activeContactId]) {
         messages = messagesList[activeContactId].map(item => new Message(item));
     }
 

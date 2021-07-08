@@ -1,6 +1,6 @@
 import { Mutations } from '../../../types';
 
-const mutations: Mutations = {
+const messagesMutations: Mutations = {
     addChat(state, payload) {
         console.log('Make some changes in state with payload', payload);
         return state;
@@ -11,4 +11,4 @@ const mutations: Mutations = {
     }
 };
 
-export default mutations;
+export default messagesMutations;

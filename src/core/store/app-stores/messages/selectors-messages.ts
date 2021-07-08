@@ -1,9 +1,9 @@
 import { BlockProps, Selectors, State } from "../../../types";
 
-const selectors: Selectors = {
+const messagesSelectors: Selectors = {
     getUserInfo(state: State): BlockProps {
         return state as BlockProps;
     }
 };
 
-export default selectors;
+export default messagesSelectors;

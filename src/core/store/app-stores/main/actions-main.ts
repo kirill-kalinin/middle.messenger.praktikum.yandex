@@ -1,12 +1,9 @@
 import { Actions } from '../../../types';
 
-const actions: Actions = {
-    addChat(context, payload) {
-        context.commit('addChat', payload);
-    },
-    removeChat(context, payload) {
-        context.commit('removeChat', payload);
+const mainActions: Actions = {
+    setUserInfo(context, payload) {
+        context.commit('setUserInfo', payload);
     }
 };
 
-export default actions;
+export default mainActions;

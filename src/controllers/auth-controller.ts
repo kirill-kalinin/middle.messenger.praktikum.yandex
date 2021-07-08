@@ -1,44 +1,75 @@
 import AuthAPI from '../api/auth-api';
-import { LoginFormModel, SignupFormModel } from '../core/types';
+import mainStore from '../core/store/app-stores/main/store-main';
+import mainActions from '../core/store/app-stores/main/actions-main';
+import RouteSwitcher from '../modules/route-switcher/route-switcher';
+import PopupHandler from '../modules/popup-handler/popup-handler';
 
 const authAPI = new AuthAPI();
+const routeSwitcher = new RouteSwitcher();
+const popupHandler = new PopupHandler();
 
 export default class AuthController {
-    public async login(data: LoginFormModel): Promise<unknown> {
+    public async login(jsonData: string): Promise<void> {
         try {
-            console.log('fire login controller', data);
-            return Promise.resolve('test');
+            const responce = await authAPI.login(jsonData);
+            if (responce.status === 200) {
+                this.getUserInfo() && routeSwitcher.redirectChats();
+            } else {
+                this._handleBadResponce(responce);
+            }
         } catch (error) {
-            // TO DO YOUR DEALS WITH ERROR
+            popupHandler.getErrorWarningPreset(error.message);
         }
     }
 
-    public async signup(data: SignupFormModel): Promise<unknown> {
+    public async signup(jsonData: string): Promise<void> {
         try {
-            console.log('fire signup controller', data);
-            return Promise.resolve('test');
+            const responce = await authAPI.signup(jsonData);
+            if (responce.status === 200) {
+                this.getUserInfo() && routeSwitcher.redirectChats();
+            } else {
+                this._handleBadResponce(responce);
+            }
         } catch (error) {
-            // TO DO YOUR DEALS WITH ERROR
+            popupHandler.getErrorWarningPreset(error.message);
         }
     }
 
-    public async getUserInfo(): Promise<unknown> {
+    public async getUserInfo(): Promise<boolean | undefined> {
         try {
-            console.log('fire get-user-info controller');
             const responce = await authAPI.getUserInfo();
-            return responce;
+            if (responce.status === 200 && responce.responseType === 'json') {
+                mainActions.setUserInfo(mainStore, JSON.parse(responce as unknown as string));
+                return true;
+            } else {
+                this._handleBadResponce(responce);
+                return false;
+            }
         } catch (error) {
-            // TO DO YOUR DEALS WITH ERROR
+            popupHandler.getErrorWarningPreset(error.message);
         }
     }
 
-    public async logout(): Promise<unknown> {
+    public async logout(): Promise<void> {
         try {
-            console.log('fire logout controller');
             const responce = await authAPI.logout();
-            return responce;
+            if (responce.status === 200) {
+                location.reload();
+            } else {
+                this._handleBadResponce(responce);
+            }
         } catch (error) {
-            // TO DO YOUR DEALS WITH ERROR
+            popupHandler.getErrorWarningPreset(error.message);
+        }
+    }
+
+    private _handleBadResponce(responce: XMLHttpRequest): void {
+        if (responce.status === 500) {
+            routeSwitcher.redirect500();
+        } else if (responce.status === 400) {
+            popupHandler.getErrorWarningPreset(`Некорректный запрос к серверу, код ошибки ${responce.status}`);
+        } else if (responce.status === 401) {
+            popupHandler.getErrorWarningPreset(`Требуется авторизация, код ошибки ${responce.status}`);
         }
     }
 }

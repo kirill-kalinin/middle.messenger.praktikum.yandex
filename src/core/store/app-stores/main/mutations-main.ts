@@ -1,14 +1,9 @@
 import { Mutations } from '../../../types';
 
-const mutations: Mutations = {
-    addChat(state, payload) {
-        console.log('Make some changes in state with payload', payload);
-        return state;
-    },
-    removeChat(state, payload) {
-        console.log('Make some changes in state with payload', payload);
-        return state;
+const mainMutations: Mutations = {
+    setUserInfo(_state, payload) {
+        return { userInfo: payload };
     }
 };
 
-export default mutations;
+export default mainMutations;

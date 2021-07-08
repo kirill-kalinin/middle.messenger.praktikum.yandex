@@ -14,8 +14,6 @@ import { PageCreator } from './core/types';
 import Router from './core/router/router';
 import FormHandler from './modules/form-handler/form-handler';
 
-import mainStore from './core/store/app-stores/main/store-main';
-
 const appRoutes = [
     ['/', createPageIntro],
     ['/login', createPageLogin],
@@ -36,5 +34,3 @@ router.start();
 
 const formHandler = new FormHandler();
 formHandler.handleSubmit();
-
-console.log(mainStore.getState().userInfo);

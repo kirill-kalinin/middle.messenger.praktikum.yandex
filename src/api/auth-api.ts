@@ -3,11 +3,11 @@ import HTTPService from '../modules/http-services/http-service';
 const authAPIInstance = new HTTPService();
 
 export default class AuthAPI {
-    getUserInfo(): Promise<unknown> {
+    getUserInfo(): Promise<XMLHttpRequest> {
         return authAPIInstance.get('/auth/user');
     }
 
-    login(jsonData: string): Promise<unknown> {
+    login(jsonData: string): Promise<XMLHttpRequest> {
         return authAPIInstance.post('/auth/signin', {
             data: jsonData, 
             headers: [
@@ -16,7 +16,7 @@ export default class AuthAPI {
         });
     }
 
-    signup(jsonData: string): Promise<unknown> {
+    signup(jsonData: string): Promise<XMLHttpRequest> {
         return authAPIInstance.post('/auth/signup', {
             data: jsonData, 
             headers: [
@@ -25,7 +25,7 @@ export default class AuthAPI {
         });
     }
 
-    logout(): Promise<unknown> {
+    logout(): Promise<XMLHttpRequest> {
         return authAPIInstance.post('/auth/logout');
     }
 }
