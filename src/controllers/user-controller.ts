@@ -1,61 +1,45 @@
 import BaseController from './base-controller';
-import AuthAPI from '../api/auth-api';
+import UserAPI from '../api/user-api';
 import mainStore from '../core/store/app-stores/main/store-main';
 import mainActions from '../core/store/app-stores/main/actions-main';
 
-const authAPI = new AuthAPI();
+const userAPI = new UserAPI();
 
-export default class AuthController extends BaseController {
-    public async login(formData: FormData): Promise<void> {
+export default class UserController extends BaseController {
+    public async changeProfile(formData: FormData): Promise<void> {
         try {
-            const responce = await authAPI.login(formData);
-            console.log(responce);
-            if (responce.status === 200) {
-                this.getUserInfo() && this.redirectChats();
-            } else {
-                this.handleBadResponce(responce);
-            }
-        } catch (error) {
-            this.pushErrorWarning(error.message);
-        }
-    }
-
-    public async signup(formData: FormData): Promise<void> {
-        try {
-            const responce = await authAPI.signup(formData);
-            console.log(responce);
-            if (responce.status === 200) {
-                this.getUserInfo() && this.redirectChats();
-            } else {
-                this.handleBadResponce(responce);
-            }
-        } catch (error) {
-            this.pushErrorWarning(error.message);
-        }
-    }
-
-    public async getUserInfo(): Promise<boolean | undefined> {
-        try {
-            const responce = await authAPI.getUserInfo();
+            const responce = await userAPI.changeProfile(formData);
             console.log(responce);
             if (responce.status === 200) {
                 mainActions.setUserInfo(mainStore, JSON.parse(responce.response));
-                return true;
             } else {
                 this.handleBadResponce(responce);
-                return false;
             }
         } catch (error) {
             this.pushErrorWarning(error.message);
         }
     }
 
-    public async logout(): Promise<void> {
+    public async changeAvatar(formData: FormData): Promise<void> {
         try {
-            const responce = await authAPI.logout();
+            const responce = await userAPI.changeAvatar(formData);
             console.log(responce);
             if (responce.status === 200) {
-                location.reload();
+                mainActions.setUserInfo(mainStore, JSON.parse(responce.response));
+            } else {
+                this.handleBadResponce(responce);
+            }
+        } catch (error) {
+            this.pushErrorWarning(error.message);
+        }
+    }
+
+    public async changePassword(formData: FormData): Promise<void> {
+        try {
+            const responce = await userAPI.changePassword(formData);
+            console.log(responce);
+            if (responce.status === 200) {
+                this.pushSuccesWarning();
             } else {
                 this.handleBadResponce(responce);
             }

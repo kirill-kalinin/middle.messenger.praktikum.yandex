@@ -12,7 +12,7 @@ const BASE_URL = 'https://ya-praktikum.tech/api/v2';
 export default class HTTPService {
     public get = (url: string, options: RequestOptionsMethodGet = {}): Promise<XMLHttpRequest> => {
         const queryString = options.data ? url + this._queryStringify(options.data) : url;
-        return this._request(queryString, {method: METHODS.GET}, options.timeout);
+        return this._request(queryString, {credentials: options.credentials, method: METHODS.GET}, options.timeout);
     }
 
     public put = (url: string, options: RequestOptions = {}): Promise<XMLHttpRequest> => {

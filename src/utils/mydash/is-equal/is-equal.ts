@@ -1,7 +1,7 @@
-import { isObject, PlainObject } from "../is-array-or-object/is-array-or-object";
+import { isObject, PlainObject } from '../is-array-or-object/is-array-or-object';
 
 export default function isEqual(a: PlainObject, b: PlainObject): boolean {
-    for (let key in a) {
+    for (const key in a) {
         let result;
         if (isObject(a[key]) && isObject(b[key])) {
             result = isEqual(a[key] as PlainObject<unknown>, b[key] as PlainObject<unknown>);

@@ -14,6 +14,7 @@ export default function createPageProfileEditData(): Page {
 
     const profile = new Profile({
         isEditInfoMode: true,
+        formName: 'profile',
         header: ProfileDataService.getHeader(mainStoreInitialState.userInfo),
         userData: ProfileDataService.configureMainForm(mainStoreInitialState.userInfo)
     });

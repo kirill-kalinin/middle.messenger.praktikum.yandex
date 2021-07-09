@@ -104,6 +104,7 @@ interface RequestOptions {
 
 interface RequestOptionsMethodGet {
     data?: { [param: string]: unknown },
+    credentials?: boolean,
     timeout?: number
 }
 
@@ -134,6 +135,8 @@ type Mutations = { [mutation: string]: Mutation }
 
 type Selector = (state: State) => BlockProps
 type Selectors = { [selector: string]: Selector }
+
+type StateUpdateCallback = (state: State) => void
 
 interface MainStoreParams extends StoreParams {
     state: MainStoreState

@@ -8,8 +8,8 @@ import AuthController from '../../controllers/auth-controller';
 const authControllerInstance = new AuthController();
 
 const formControllers: Controllers = {
-    login: authControllerInstance.login,
-    signup: authControllerInstance.signup
+    login: authControllerInstance.login.bind(authControllerInstance),
+    signup: authControllerInstance.signup.bind(authControllerInstance)
 };
 
 export default class Form extends Block {
@@ -29,12 +29,11 @@ export default class Form extends Block {
 
     componentDidMount(): void {
         const formName = String(this.props.name);
-        if (!formControllers[formName]) {
-            throw new Error(`Не указан контроллер для формы ${formName}`);
-        }
         this._formHandler = new FormHandler();
-        this._formHandler.subscribeSubmit(formName, formControllers[formName]);
         this._setInputListeners();
+        if (formControllers[formName]) {
+            this._formHandler.subscribeSubmit(formName, formControllers[formName]);
+        }
     }
 
     componentDidUpdate(): void {

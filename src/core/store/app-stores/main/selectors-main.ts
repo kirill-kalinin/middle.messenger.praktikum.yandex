@@ -1,8 +1,12 @@
-import { BlockProps, Selectors, State } from "../../../types";
+import ProfileDataService from '../../../../modules/profile-data-service/profile-data-service';
+import { BlockProps, Selectors, State, UserInfo } from '../../../types';
 
 const mainSelectors: Selectors = {
-    getUserInfo(state: State): BlockProps {
-        return state as BlockProps;
+    getProfileInfo(state: State): BlockProps {
+        return {
+            header: ProfileDataService.getHeader(state.userInfo as UserInfo),
+            userData: ProfileDataService.configureMainForm(state.userInfo as UserInfo)
+        };
     }
 };
 

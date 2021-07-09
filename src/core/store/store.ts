@@ -1,6 +1,6 @@
 import EventBus from '../../modules/event-bus/event-bus';
 import merge from '../../utils/mydash/merge/merge';
-import { Actions, Mutations, State, StoreStatus, StoreParams, Selector } from '../types';
+import { Actions, Mutations, State, StoreStatus, StoreParams, StateUpdateCallback } from '../types';
 
 export default class Store {
     private _actions: Actions;
@@ -37,8 +37,11 @@ export default class Store {
         });
 
         // debug
-        Object.defineProperty(window, 'getState', {
-            get: () => this.getState
+        Object.defineProperty(window, 'store', {
+            get: () => ({
+                listeners: this._eventBus().listeners,
+                store: this
+            })
         });
     }
 
@@ -75,11 +78,11 @@ export default class Store {
         return this._state;
     }
 
-    public subscribe(changedKey: string, callback: Selector): void {
+    public subscribe(changedKey: string, callback: StateUpdateCallback): void {
         this._eventBus().on(changedKey, callback);
     }
 
-    public unsubscribe(changedKey: string, callback: Selector): void {
+    public unsubscribe(changedKey: string, callback: StateUpdateCallback): void {
         this._eventBus().off(changedKey, callback);
     }
 }

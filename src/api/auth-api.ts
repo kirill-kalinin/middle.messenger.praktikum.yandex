@@ -4,21 +4,25 @@ const authAPIInstance = new HTTPService();
 
 export default class AuthAPI {
     getUserInfo(): Promise<XMLHttpRequest> {
-        return authAPIInstance.get('/auth/user');
+        return authAPIInstance.get('/auth/user', {
+            credentials: true
+        });
     }
 
-    login(jsonData: string): Promise<XMLHttpRequest> {
+    login(formData: FormData): Promise<XMLHttpRequest> {
         return authAPIInstance.post('/auth/signin', {
-            data: jsonData, 
+            data: JSON.stringify(Object.fromEntries(formData.entries())),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]
         });
     }
 
-    signup(jsonData: string): Promise<XMLHttpRequest> {
+    signup(formData: FormData): Promise<XMLHttpRequest> {
         return authAPIInstance.post('/auth/signup', {
-            data: jsonData, 
+            data: JSON.stringify(Object.fromEntries(formData.entries())),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]
@@ -26,6 +30,8 @@ export default class AuthAPI {
     }
 
     logout(): Promise<XMLHttpRequest> {
-        return authAPIInstance.post('/auth/logout');
+        return authAPIInstance.post('/auth/logout', {
+            credentials: true
+        });
     }
 }

@@ -5,7 +5,7 @@ export default class DummyService {
 
     fetchContacts(): Array<Contact> {
         return [{
-            id: '1',
+            id: 1,
             link: '/chat-active',
             avatar: ImageUrlAvatarPlaceholder,
             name: 'Олег',
@@ -14,7 +14,7 @@ export default class DummyService {
             date: '10:49',
             readed: false
         }, {
-            id: '2',
+            id: 2,
             link: '/chat-active',
             avatar: ImageUrlAvatarPlaceholder,
             name: 'Киноклуб',
@@ -23,7 +23,7 @@ export default class DummyService {
             date: '12:00',
             readed: true
         }, {
-            id: '3',
+            id: 3,
             link: '/chat-active',
             avatar: ImageUrlAvatarPlaceholder,
             name: 'Павел',
@@ -32,7 +32,7 @@ export default class DummyService {
             date: '15:12',
             readed: false
         }, {
-            id: '4',
+            id: 4,
             link: '/chat-active',
             avatar: ImageUrlAvatarPlaceholder,
             name: 'Игорь',
@@ -41,7 +41,7 @@ export default class DummyService {
             date: 'Среда',
             readed: true
         }, {
-            id: '5',
+            id: 5,
             link: '/chat-active',
             avatar: ImageUrlAvatarPlaceholder,
             name: 'Евгения',

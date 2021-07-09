@@ -75,9 +75,7 @@ export default class FormHandler {
         }
 
         const formData = new FormData(form);
-        const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
-
-        this._eventBus().emit(form.name, jsonData);
+        this._eventBus().emit(form.name, formData);
     }
 
     private _isValidInput(inputElement: HTMLInputElement, equalDataInputs: Array<HTMLInputElement>) {

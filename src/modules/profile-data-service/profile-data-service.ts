@@ -1,15 +1,20 @@
-import { UserInfo } from "../../core/types";
+import { BlockProps, UserInfo } from '../../core/types';
+import ImageUrlAvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
+
+const AVATAR_BASE_URL = 'https://ya-praktikum.tech/api/v2/resources/';
 
 export default class ProfileDataService {
 
-    public static getHeader(userInfo: UserInfo) {
+    public static getHeader(userInfo: UserInfo): BlockProps {
         return { 
-            name: userInfo.display_name,
-            avatarSrc: userInfo.avatar
-        }
+            name: userInfo.display_name || userInfo.first_name,
+            avatarSrc: userInfo.avatar 
+                ? `${AVATAR_BASE_URL}${userInfo.avatar}` 
+                : ImageUrlAvatarPlaceholder
+        };
     }
 
-    public static configureMainForm(userInfo: UserInfo) {
+    public static configureMainForm(userInfo: UserInfo): BlockProps {
         return {
             email: {
                 label: 'Почта',
@@ -59,10 +64,10 @@ export default class ProfileDataService {
                 validationKey: 'tel',
                 validationText: 'Введите корректный номер телефона'
             }
-        }
+        };
     }
 
-    public static getPasswordForm() {
+    public static getPasswordForm(): BlockProps {
         return {
             oldPassword: {
                 label: 'Старый пароль',
@@ -86,7 +91,7 @@ export default class ProfileDataService {
                 validationText: 'Пароли не совпадают',
                 equality: true
             }
-        }
+        };
     }
 
 }

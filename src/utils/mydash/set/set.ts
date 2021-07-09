@@ -1,4 +1,4 @@
-import { isObject, PlainObject } from "../is-array-or-object/is-array-or-object";
+import { isObject, PlainObject } from '../is-array-or-object/is-array-or-object';
 
 type Indexed<T = unknown> = {
     [key in string]: T;

@@ -13,6 +13,7 @@ import { PageCreator } from './core/types';
 
 import Router from './core/router/router';
 import FormHandler from './modules/form-handler/form-handler';
+import AuthController from './controllers/auth-controller';
 
 const appRoutes = [
     ['/', createPageIntro],
@@ -34,3 +35,13 @@ router.start();
 
 const formHandler = new FormHandler();
 formHandler.handleSubmit();
+
+
+// debug
+const authControllerInstance = new AuthController();
+
+Object.defineProperty(window, 'logout', {
+    value: authControllerInstance.logout
+});
+
+authControllerInstance.getUserInfo();

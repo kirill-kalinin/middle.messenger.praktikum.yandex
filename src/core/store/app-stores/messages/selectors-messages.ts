@@ -1,4 +1,4 @@
-import { BlockProps, Selectors, State } from "../../../types";
+import { BlockProps, Selectors, State } from '../../../types';
 
 const messagesSelectors: Selectors = {
     getUserInfo(state: State): BlockProps {

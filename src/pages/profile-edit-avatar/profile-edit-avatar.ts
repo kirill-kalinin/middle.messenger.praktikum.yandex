@@ -14,6 +14,7 @@ export default function createPageProfileEditAvatar(): Page {
 
     const profile = new Profile({
         isAvatarUploadMode: true,
+        formName: 'avatar',
         header: ProfileDataService.getHeader(mainStoreInitialState.userInfo),
     });
 

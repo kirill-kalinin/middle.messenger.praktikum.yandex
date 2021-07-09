@@ -14,6 +14,7 @@ export default function createPageProfileEditPassword(): Page {
 
     const profile = new Profile({
         isEditPasswordMode: true,
+        formName: 'password',
         header: ProfileDataService.getHeader(mainStoreInitialState.userInfo),
         userPasswordFields: ProfileDataService.getPasswordForm()
     });
