@@ -1,4 +1,5 @@
 import Route from './route';
+import mainStore from '../store/app-stores/main/store-main';
 import type { PageCreator } from '../types';
 
 export enum RouterDirections {
@@ -13,6 +14,8 @@ export default class Router {
     private _currentRoute: Route | null;
     private _rootQuery: string;
     private _isDisabled: boolean;
+    private _isUserLoggedIn: unknown;
+    private _isChatSelected: boolean;
 
     constructor(rootQuery = '.root') {
         if (Router.__instance) {
@@ -24,12 +27,23 @@ export default class Router {
         this._currentRoute = null;
         this._rootQuery = rootQuery;
         this._isDisabled = false;
+        this._isUserLoggedIn = mainStore.state.isLoggedIn;
+        this._isChatSelected = mainStore.state.activeContactId !== null;
+
+        mainStore.subscribe('isLoggedIn', newState => {
+            this._isUserLoggedIn = newState.isLoggedIn;
+            this._currentRoute && this._isValidRoute(this._currentRoute);
+        });
+        mainStore.subscribe('activeContactId', newState => {
+            this._isChatSelected = newState.activeContactId !== null;
+            this._currentRoute && this._isValidRoute(this._currentRoute);
+        });
 
         Router.__instance = this;
     }
 
-    public use(pathname: string, pageCreator: PageCreator): Router {
-        const route = new Route(pathname, pageCreator, { rootQuery: this._rootQuery });
+    public use(pathname: string, pageCreator: PageCreator, isPrivate = false): Router {
+        const route = new Route(pathname, pageCreator, { isPrivate, rootQuery: this._rootQuery });
         this.routes.push(route);
         return this;
     }
@@ -81,10 +95,29 @@ export default class Router {
         });
     }
 
-    private _onRoute(pathname: string) {
-        const route = this._getRoute(pathname);
+    private _isValidRoute(route: Route | undefined): route is Route {
         if (!route) {
             this._onRoute('/404');
+            return false;
+        }
+        if (this._isUserLoggedIn === false && route.isPrivate) {
+            this.go('/login');
+            return false;
+        }
+        if (this._isUserLoggedIn === true && (route.path === '/login' || route.path === '/signup')) {
+            this.go('/chat-select');
+            return false;
+        }
+        if (this._isChatSelected === false && route.path === '/chat-active') {
+            this.go('/chat-select');
+            return false;
+        }
+        return true;
+    }
+
+    private _onRoute(pathname: string) {
+        const route = this._getRoute(pathname);
+        if (!this._isValidRoute(route)) {
             return;
         }
 

@@ -9,8 +9,8 @@ import messagesStore from '../../core/store/app-stores/main/store-main';
 import { MainStoreState, MessagesStoreState } from '../../core/types';
 
 export default function createPageChatActive(): Page {
-    const mainStoreInitialState = mainStore.getState as MainStoreState;
-    const messagesStoreInitialState = messagesStore.getState as MessagesStoreState;
+    const mainStoreInitialState = mainStore.state as MainStoreState;
+    const messagesStoreInitialState = messagesStore.state as MessagesStoreState;
 
     const chat = new Chat({ chatModeActive: true });
 

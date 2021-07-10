@@ -12,7 +12,7 @@ import mainStore from '../../core/store/app-stores/main/store-main';
 import { MainStoreState } from '../../core/types';
 
 export default function createPageProfileEditAvatar(): Page {
-    const mainStoreInitialState = mainStore.getState as MainStoreState;
+    const mainStoreInitialState = mainStore.state as MainStoreState;
 
     const profile = new Profile({
         isAvatarUploadMode: true,

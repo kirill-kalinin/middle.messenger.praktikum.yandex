@@ -72,7 +72,7 @@ export default class ProfileDataService {
             oldPassword: {
                 label: 'Старый пароль',
                 value: '',
-                name: '',
+                name: 'oldPassword',
                 validationKey: 'password',
                 validationText: 'Введите от 8 до 25 букв или цифр',
             },

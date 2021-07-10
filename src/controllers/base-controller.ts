@@ -5,28 +5,32 @@ const router = new Router();
 const popupHandler = new PopupHandler();
 
 export default abstract class BaseController {
-    protected handleBadResponce(responce: XMLHttpRequest): void {
-        if (responce.status === 500) {
+    protected handleBadResponse({ status, response}: XMLHttpRequest): void {
+        const message = JSON.parse(response).reason;
+        if (status === 500) {
             this.redirect500();
 
-        } else if (responce.status === 400) {
+        } else if (status === 400) {
             const props = popupHandler.getWarningPreset(
-                'Ошибка',
-                `Некорректный запрос к серверу, код ошибки ${responce.status}`
+                `Ошибка ${status}`,
+                message || 'Переданы некорректные данные'
             );
             popupHandler.pushPopup(props, PopupTypes.WARNING);
 
-        } else if (responce.status === 401) {
+        } else if (status === 401) {
             const props = popupHandler.getWarningPreset(
-                'Ошибка',
-                `Ошибка авторизации, код ошибки ${responce.status}`
+                `Ошибка ${status}`,
+                message || 'Вы не авторизованы'
             );
             popupHandler.pushPopup(props, PopupTypes.WARNING);
+
+        } else {
+            this.pushErrorWarning('Неизвестная ошибка в работе приложения');
         }
     }
 
     protected pushErrorWarning(message: string): void {
-        const props = popupHandler.getWarningPreset('Произошла ошибка:', message);
+        const props = popupHandler.getWarningPreset('Произошла ошибка', message);
         popupHandler.pushPopup(props, PopupTypes.WARNING);
     }
 
@@ -45,5 +49,9 @@ export default abstract class BaseController {
 
     protected redirectChats(): void {
         router.go('/chat-select');
+    }
+
+    protected redirectLogin(): void {
+        router.go('/login');
     }
 }

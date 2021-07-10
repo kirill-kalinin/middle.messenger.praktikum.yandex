@@ -7,12 +7,12 @@ const userAPI = new UserAPI();
 export default class UserController extends BaseController {
     public async changeProfile(formData: FormData): Promise<void> {
         try {
-            const responce = await userAPI.changeProfile(formData);
-            console.log(responce);
-            if (responce.status === 200) {
-                mainStore.dispatch('setUserInfo', JSON.parse(responce.response));
+            const response = await userAPI.changeProfile(formData);
+            console.log(response);
+            if (response.status === 200) {
+                mainStore.dispatch('setUserInfo', JSON.parse(response.response));
             } else {
-                this.handleBadResponce(responce);
+                this.handleBadResponse(response);
             }
         } catch (error) {
             this.pushErrorWarning(error.message);
@@ -21,12 +21,12 @@ export default class UserController extends BaseController {
 
     public async changeAvatar(formData: FormData): Promise<void> {
         try {
-            const responce = await userAPI.changeAvatar(formData);
-            console.log(responce);
-            if (responce.status === 200) {
-                mainStore.dispatch('setUserInfo', JSON.parse(responce.response));
+            const response = await userAPI.changeAvatar(formData);
+            console.log(response);
+            if (response.status === 200) {
+                mainStore.dispatch('setUserInfo', JSON.parse(response.response));
             } else {
-                this.handleBadResponce(responce);
+                this.handleBadResponse(response);
             }
         } catch (error) {
             this.pushErrorWarning(error.message);
@@ -35,12 +35,12 @@ export default class UserController extends BaseController {
 
     public async changePassword(formData: FormData): Promise<void> {
         try {
-            const responce = await userAPI.changePassword(formData);
-            console.log(responce);
-            if (responce.status === 200) {
+            const response = await userAPI.changePassword(formData);
+            console.log(response);
+            if (response.status === 200) {
                 this.pushSuccesWarning();
             } else {
-                this.handleBadResponce(responce);
+                this.handleBadResponse(response);
             }
         } catch (error) {
             this.pushErrorWarning(error.message);

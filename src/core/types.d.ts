@@ -77,7 +77,16 @@ interface Validators {
     [propName: string]: RegExp
 }
 
+type RoutePathname = string
+
+type AppRoutes = [
+    RoutePathname,
+    PageCreator,
+    RouterProps['isPrivate']?
+][]
+
 interface RouterProps {
+    isPrivate: boolean;
     rootQuery: string;
 }
 
@@ -127,10 +136,10 @@ type StoreParams = {
 
 type StoreStatus = 'resting' | 'action' | 'mutation'
 
-type Action = (context: Store, payload: State) => void
+type Action = (context: Store, payload: unknown) => void
 type Actions = { [action: string]: Action }
 
-type Mutation = (state: State, payload: State) => State
+type Mutation = (state: State, payload: unknown) => State
 type Mutations = { [mutation: string]: Mutation }
 
 type Selector = (state: State) => BlockProps
@@ -143,6 +152,7 @@ interface MainStoreParams extends StoreParams {
 }
 
 interface MainStoreState extends State {
+    isLoggedIn: boolean | null,
     userInfo: UserInfo,
     contacts: Contact[],
     activeContactId: number | null

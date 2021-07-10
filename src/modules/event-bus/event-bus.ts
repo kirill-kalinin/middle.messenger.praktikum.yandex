@@ -30,9 +30,6 @@ export default class EventBus {
     }
     
     private _isRegistered(event: string) {
-        if (!this.listeners[event]) {
-            throw new Error(`Error: Нет события: ${event}`);
-        }
-        return true;
+        return !!this.listeners[event];
     }
 }

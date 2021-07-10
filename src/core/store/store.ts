@@ -44,7 +44,7 @@ export default class Store {
         });
     }
 
-    public dispatch(actionKey: string, payload: State): boolean {
+    public dispatch(actionKey: string, payload: unknown): boolean {
         if (typeof this._actions[actionKey] !== 'function') {
             console.error(`Action "${actionKey} не найден`);
             return false;
@@ -60,7 +60,7 @@ export default class Store {
         return true;
     }
 
-    public commit(mutationKey: string, payload: State): boolean {
+    public commit(mutationKey: string, payload: unknown): boolean {
         if (typeof this._mutations[mutationKey] !== 'function') {
             console.log(`Mutation "${mutationKey}" не найден`);
             return false;
@@ -73,7 +73,7 @@ export default class Store {
         return true;
     }
 
-    public get getState(): State {
+    public get state(): State {
         return this._state;
     }
 

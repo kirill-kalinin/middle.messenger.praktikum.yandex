@@ -7,7 +7,7 @@ import mainStore from '../../core/store/app-stores/main/store-main';
 import { MainStoreState } from '../../core/types';
 
 export default function createPageChatSelect(): Page {
-    const mainStoreInitialState = mainStore.getState as MainStoreState;
+    const mainStoreInitialState = mainStore.state as MainStoreState;
 
     const chat = new Chat({ chatModeSelect: true });
 

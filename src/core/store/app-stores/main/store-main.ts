@@ -13,6 +13,7 @@ const mainStore = new MainStore({
     actions,
     mutations,
     state: {
+        isLoggedIn: null,
         userInfo: {
             id: null,
             first_name: '',
