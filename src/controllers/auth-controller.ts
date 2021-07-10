@@ -1,7 +1,6 @@
 import BaseController from './base-controller';
 import AuthAPI from '../api/auth-api';
 import mainStore from '../core/store/app-stores/main/store-main';
-import mainActions from '../core/store/app-stores/main/actions-main';
 
 const authAPI = new AuthAPI();
 
@@ -39,7 +38,7 @@ export default class AuthController extends BaseController {
             const responce = await authAPI.getUserInfo();
             console.log(responce);
             if (responce.status === 200) {
-                mainActions.setUserInfo(mainStore, JSON.parse(responce.response));
+                mainStore.dispatch('setUserInfo', JSON.parse(responce.response));
                 return true;
             } else {
                 this.handleBadResponce(responce);

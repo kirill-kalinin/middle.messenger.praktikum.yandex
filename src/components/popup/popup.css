@@ -46,6 +46,8 @@
 
 .popup__content {
     max-width: 90%;
+    display: flex;
+    justify-content: center;
 }
 
 .popup__label {
@@ -79,4 +81,14 @@
     @media (--width-md), (--height-md) {
         font-size: 1em;
     }
+}
+
+.popup__buttons {
+    display: flex;
+}
+
+.popup__button,
+.popup__button-secondary {
+    min-width: 100px;
+    margin: 0 25px;
 }

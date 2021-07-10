@@ -1,5 +1,4 @@
 import EventBus from '../../modules/event-bus/event-bus';
-import merge from '../../utils/mydash/merge/merge';
 import { Actions, Mutations, State, StoreStatus, StoreParams, StateUpdateCallback } from '../types';
 
 export default class Store {
@@ -69,7 +68,7 @@ export default class Store {
 
         this._status = 'mutation';
         const newState = this._mutations[mutationKey](this._state, payload);
-        this._state = merge(this._state, newState);
+        this._state = Object.assign(this._state, newState);
 
         return true;
     }

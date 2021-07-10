@@ -1,7 +1,9 @@
 import Page from '../../core/k-react/page';
 import Profile from '../../components/profile/profile';
-import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar';
-import Button, { profileSidebarButtonPreset } from '../../components/button/button';
+import Sidebar from '../../components/sidebar/sidebar';
+import { sidebarProfileMenuPreset } from '../../components/sidebar/presets/sidebars';
+import Button from '../../components/button/button';
+import { profileSidebarButtonPreset } from '../../components/button/presets/special-buttons';
 
 import ProfileDataService from '../../modules/profile-data-service/profile-data-service';
 

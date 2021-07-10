@@ -1,11 +1,13 @@
-import { popupAddContactPreset, popupPromptContactPreset } from '../../../components/popup/popup';
-import PopupHandler, { PopupTypes } from '../../../modules/popup-handler/popup-handler';
 import Router from '../../../core/router/router';
+import PopupHandler, { PopupTypes } from '../../../modules/popup-handler/popup-handler';
+import {
+    popupAddSelectorPreset, popupRemoveSelectorPreset
+} from '../../../components/popup/presets/chat-toolbar-popups';
 
 export default class ToolbarButtonsHandler {
 
-    private _buttonAddContact: HTMLElement | null;
-    private _buttonRemoveContact: HTMLElement | null;
+    private _buttonAdd: HTMLElement | null;
+    private _buttonRemove: HTMLElement | null;
     private _Router: Router;
     private _popupHandler: PopupHandler;
 
@@ -15,35 +17,35 @@ export default class ToolbarButtonsHandler {
     }
 
     init(chatSidebarElement: HTMLElement): void {
-        this._buttonAddContact = chatSidebarElement.querySelector('.chat-sidebar__button_add');
-        this._buttonRemoveContact = chatSidebarElement.querySelector('.chat-sidebar__button_remove');
+        this._buttonAdd = chatSidebarElement.querySelector('.chat-sidebar__button_add');
+        this._buttonRemove = chatSidebarElement.querySelector('.chat-sidebar__button_remove');
 
-        if (!this._buttonAddContact || !this._buttonRemoveContact) {
+        if (!this._buttonAdd || !this._buttonRemove) {
             return;
         }
 
-        this._buttonAddContact.addEventListener('click', this._handlerAddContact);
-        this._buttonRemoveContact.addEventListener('click', this._handlerRemoveContact);
+        this._buttonAdd.addEventListener('click', this._handlerAdd);
+        this._buttonRemove.addEventListener('click', this._handlerRemove);
     }
 
     update(chatSidebarElement: HTMLElement): void {
-        this._buttonAddContact && this._buttonAddContact.removeEventListener('click', this._handlerAddContact);
-        this._buttonRemoveContact && this._buttonRemoveContact.removeEventListener('click', this._handlerAddContact);
+        this._buttonAdd && this._buttonAdd.removeEventListener('click', this._handlerAdd);
+        this._buttonRemove && this._buttonRemove.removeEventListener('click', this._handlerAdd);
         this.init(chatSidebarElement);
     }
 
-    _handlerAddContact = (): void => {
+    _handlerAdd = (): void => {
         if (this._Router.isDisabled) {
             return;
         }
-        this._popupHandler.pushPopup(popupAddContactPreset, PopupTypes.CONTACT_ADD);
+        this._popupHandler.pushPopup(popupAddSelectorPreset, PopupTypes.SELECT_ADD);
     }
 
-    _handlerRemoveContact = (): void => {
+    _handlerRemove = (): void => {
         if (this._Router.isDisabled) {
             return;
         }
-        this._popupHandler.pushPopup(popupPromptContactPreset, PopupTypes.CONTACT_PROMPT);
+        this._popupHandler.pushPopup(popupRemoveSelectorPreset, PopupTypes.SELECT_REMOVE);
     }
 
 }

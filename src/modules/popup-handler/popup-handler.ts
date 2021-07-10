@@ -1,15 +1,17 @@
 import Router from '../../core/router/router';
 import DOMService from '../../core/k-react/dom-service';
-import Popup, {
-    popupRemoveContactPreset,
-    popupWarningContactPreset
-} from '../../components/popup/popup';
+import Popup from '../../components/popup/popup';
+import * as presets from '../../components/popup/presets/chat-toolbar-popups';
 import type { BlockProps } from '../../core/types';
 
 export enum PopupTypes {
-    CONTACT_ADD,
-    CONTACT_REMOVE,
-    CONTACT_PROMPT,
+    SELECT_ADD,
+    SELECT_REMOVE,
+    CHAT_ADD,
+    CHAT_REMOVE,
+    CHAT_PROMPT,
+    USER_ADD,
+    USER_REMOVE,
     WARNING
 }
 
@@ -48,37 +50,74 @@ export default class PopupHandler {
             console.error('Главная кнопка поп-апа не найдена, возможно он неправильно настроен');
             return;
         }
+        let secondaryButton;
 
         switch (popupType) {
-            
-        case PopupTypes.CONTACT_ADD:
+
+        case PopupTypes.SELECT_ADD:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
-                console.log('Здесь будет функция, добавляющая контакт');
+                this.pushPopup(presets.popupAddChatPreset, PopupTypes.CHAT_ADD);
+            }));
+            secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
+            secondaryButton ? secondaryButton.addEventListener('click', () => this._detachPopup(() => {
+                this.pushPopup(presets.popupAddUserPreset, PopupTypes.USER_ADD);
+            })) : console.error('Дополнительная кнопка поп-апа не найдена');
+            break;
+
+        case PopupTypes.SELECT_REMOVE:
+            mainButton.addEventListener('click', () => this._detachPopup(() => {
+                this.pushPopup(presets.popupPromptChatPreset, PopupTypes.CHAT_PROMPT);
+            }));
+            secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
+            secondaryButton ? secondaryButton.addEventListener('click', () => this._detachPopup(() => {
+                this.pushPopup(presets.popupRemoveUserPreset, PopupTypes.USER_REMOVE);
+            })) : console.error('Дополнительная кнопка поп-апа не найдена');
+            break;
+
+        case PopupTypes.USER_ADD:
+            mainButton.addEventListener('click', () => this._detachPopup(() => {
+                // Метод контроллера - удалить пользователя из активного чата
+                console.log('Добавляем пользователя');
             }));
             break;
 
-        case PopupTypes.CONTACT_REMOVE:
+        case PopupTypes.USER_REMOVE:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
-                console.log('Здесь будет функция, удаляющая контакт');
+                // Метод контроллера - удалить пользователя из активного чата
+                console.log('Удаляем пользователя');
             }));
             break;
 
-        case PopupTypes.CONTACT_PROMPT:
+        case PopupTypes.CHAT_ADD:
             mainButton.addEventListener('click', () => this._detachPopup(() => {
-                this._contactSelect();
+                // Метод контроллера - создать чат
+                console.log('Добавляем чат');
+            }));
+            break;
+
+        case PopupTypes.CHAT_REMOVE:
+            mainButton.addEventListener('click', () => this._detachPopup(() => {
+                // Метод контроллера - удалить  чат
+                console.log('Удаляем чат');
+            }));
+            break;
+
+        case PopupTypes.CHAT_PROMPT:
+            mainButton.addEventListener('click', () => this._detachPopup(() => {
+                this._chatRemove();
             }));
             break;
 
         case PopupTypes.WARNING:
             mainButton.addEventListener('click', this._detachPopup.bind(this));
             break;
-            
+
         default:
             console.error('Неправильно указан тип поп-апа');
         }
     }
 
-    private _contactSelect() {
+    private _chatRemove() {
         document.addEventListener('mouseup', (e: Event) => {
             this._Router.disable();
             const contact = (e.target as HTMLElement).closest('.contact');
@@ -90,9 +129,9 @@ export default class PopupHandler {
                 } else {
                     throw new Error('Ошибка в шаблоне контакта');
                 }
-                this.pushPopup({...popupRemoveContactPreset, contactToRemove: name}, PopupTypes.CONTACT_REMOVE);
+                this.pushPopup({...presets.popupRemoveChatPreset, value: name}, PopupTypes.CHAT_REMOVE);
             } else {
-                this.pushPopup(popupWarningContactPreset, PopupTypes.WARNING);
+                this.pushPopup(presets.popupWarningChatPreset, PopupTypes.WARNING);
             }
         }, {once: true});
     }

@@ -1,7 +1,9 @@
 import Page from '../../core/k-react/page';
 import Auth from '../../components/auth/auth';
-import Form, { formSigninPreset } from '../../components/form/form';
-import Sidebar, { sidebarSigninPreset } from '../../components/sidebar/sidebar';
+import Form from '../../components/form/form';
+import { formSigninPreset } from '../../components/form/presets/auth-forms';
+import Sidebar from '../../components/sidebar/sidebar';
+import { sidebarSigninPreset } from '../../components/sidebar/presets/sidebars';
 import Button from '../../components/button/button';
 
 export default function createPageSignup(): Page {

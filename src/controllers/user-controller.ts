@@ -1,7 +1,6 @@
 import BaseController from './base-controller';
 import UserAPI from '../api/user-api';
 import mainStore from '../core/store/app-stores/main/store-main';
-import mainActions from '../core/store/app-stores/main/actions-main';
 
 const userAPI = new UserAPI();
 
@@ -11,7 +10,7 @@ export default class UserController extends BaseController {
             const responce = await userAPI.changeProfile(formData);
             console.log(responce);
             if (responce.status === 200) {
-                mainActions.setUserInfo(mainStore, JSON.parse(responce.response));
+                mainStore.dispatch('setUserInfo', JSON.parse(responce.response));
             } else {
                 this.handleBadResponce(responce);
             }
@@ -25,7 +24,7 @@ export default class UserController extends BaseController {
             const responce = await userAPI.changeAvatar(formData);
             console.log(responce);
             if (responce.status === 200) {
-                mainActions.setUserInfo(mainStore, JSON.parse(responce.response));
+                mainStore.dispatch('setUserInfo', JSON.parse(responce.response));
             } else {
                 this.handleBadResponce(responce);
             }
