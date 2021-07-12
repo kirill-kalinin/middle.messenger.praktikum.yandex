@@ -6,6 +6,9 @@ const mainActions: Actions = {
     },
     setAuthStatus(context, payload) {
         context.commit('setAuthStatus', payload);
+    },
+    setChatsList(context, payload) {
+        context.commit('setChatsList', payload);
     }
 };
 

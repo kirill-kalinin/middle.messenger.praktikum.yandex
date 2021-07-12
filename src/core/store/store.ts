@@ -23,8 +23,6 @@ export default class Store {
                 }
                 state[key] = value;
 
-                console.log(`State changed: ${key}: ${value}`);
-
                 this._eventBus().emit(key, this._state);
                 if (this._status !== 'mutation') {
                     console.warn(`Следует использовать mutation для изменения ${key}`);
@@ -50,19 +48,15 @@ export default class Store {
             return false;
         }
 
-        console.groupCollapsed(`Action: ${actionKey}`);
-
         this._status = 'action';
         this._actions[actionKey](this, payload);
-
-        console.groupEnd();
 
         return true;
     }
 
     public commit(mutationKey: string, payload: unknown): boolean {
         if (typeof this._mutations[mutationKey] !== 'function') {
-            console.log(`Mutation "${mutationKey}" не найден`);
+            console.error(`Mutation "${mutationKey}" не найден`);
             return false;
         }
 

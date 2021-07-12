@@ -86,6 +86,8 @@ export default class Router {
                     case RouterDirections.FORWARD:
                         this.forward();
                         break;
+                    case '':
+                        break;
                     default:
                         this.go(link);
                         break;

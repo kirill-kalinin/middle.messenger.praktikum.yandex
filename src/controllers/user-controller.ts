@@ -8,7 +8,6 @@ export default class UserController extends BaseController {
     public async changeProfile(formData: FormData): Promise<void> {
         try {
             const response = await userAPI.changeProfile(formData);
-            console.log(response);
             if (response.status === 200) {
                 mainStore.dispatch('setUserInfo', JSON.parse(response.response));
             } else {
@@ -22,7 +21,6 @@ export default class UserController extends BaseController {
     public async changeAvatar(formData: FormData): Promise<void> {
         try {
             const response = await userAPI.changeAvatar(formData);
-            console.log(response);
             if (response.status === 200) {
                 mainStore.dispatch('setUserInfo', JSON.parse(response.response));
             } else {
@@ -36,7 +34,6 @@ export default class UserController extends BaseController {
     public async changePassword(formData: FormData): Promise<void> {
         try {
             const response = await userAPI.changePassword(formData);
-            console.log(response);
             if (response.status === 200) {
                 this.pushSuccesWarning();
             } else {

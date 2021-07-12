@@ -56,10 +56,16 @@ interface Message extends BlockProps {
 
 interface SidebarMenu extends BlockProps {
     menuItems: {
-        link: string,
         text: string,
-        active?: boolean
+        link: string,
+        active?: boolean,
+        event?: string
     }[]
+}
+
+type PopupEvents = {
+    primary?: Function,
+    secondary?: Function
 }
 
 type BlockChild = Block | Array<Block>;
@@ -155,7 +161,8 @@ interface MainStoreState extends State {
     isLoggedIn: boolean | null,
     userInfo: UserInfo,
     contacts: Contact[],
-    activeContactId: number | null
+    activeContactId: number | null,
+    filter: string
 }
 
 interface MessagesStoreParams extends StoreParams {

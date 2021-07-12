@@ -1,4 +1,4 @@
-import { Mutations } from '../../../types';
+import { Mutations, MainStoreState } from '../../../types';
 
 const mainMutations: Mutations = {
     setUserInfo(_state, payload) {
@@ -6,6 +6,14 @@ const mainMutations: Mutations = {
     },
     setAuthStatus(_state, payload) {
         return { isLoggedIn: payload };
+    },
+    setChatsList(state, payload) {
+        const chats = payload as MainStoreState['contacts'];
+        const currentActiveContact = chats.find(contact => contact.id === state.activeContactId);
+        return {
+            contacts: chats,
+            activeContactId: currentActiveContact ? state.activeContactId : null
+        };
     }
 };
 

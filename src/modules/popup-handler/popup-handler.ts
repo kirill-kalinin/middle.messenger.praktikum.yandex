@@ -1,19 +1,7 @@
 import Router from '../../core/router/router';
 import DOMService from '../../core/k-react/dom-service';
 import Popup from '../../components/popup/popup';
-import * as presets from '../../components/popup/presets/chat-toolbar-popups';
-import type { BlockProps } from '../../core/types';
-
-export enum PopupTypes {
-    SELECT_ADD,
-    SELECT_REMOVE,
-    CHAT_ADD,
-    CHAT_REMOVE,
-    CHAT_PROMPT,
-    USER_ADD,
-    USER_REMOVE,
-    WARNING
-}
+import type { BlockProps, PopupEvents } from '../../core/types';
 
 export default class PopupHandler {
 
@@ -26,9 +14,9 @@ export default class PopupHandler {
         this._Router = new Router();
     }
 
-    public pushPopup(props: BlockProps, type: PopupTypes): void {
+    public pushPopup(props: BlockProps, events: PopupEvents): void {
         this._popup = new Popup(props);
-        this._handlePopup(type);
+        this._handlePopup(events);
         this._DOMService.attachComponent(this._popup, 'body');
     }
 
@@ -40,100 +28,54 @@ export default class PopupHandler {
         }
     };
 
-    private _handlePopup(popupType: PopupTypes) {
+    private _handlePopup(events: PopupEvents) {
         const closeButton = this._popup.element.querySelector('.popup__close');
-        if (closeButton && closeButton instanceof HTMLElement) {
+        if (closeButton instanceof HTMLElement) {
             closeButton.addEventListener('click', this._detachPopup.bind(this));
         }
-        const mainButton = this._popup.element.querySelector('.popup__button button');
-        if (!mainButton) {
-            console.error('Главная кнопка поп-апа не найдена, возможно он неправильно настроен');
-            return;
+
+        const primaryButton = this._popup.element.querySelector('.popup__button button');
+        if (primaryButton instanceof HTMLElement) {
+            primaryButton.addEventListener('click', () => this._detachPopup(() => {
+                if (events.primary) {
+                    this._invokeCallback(events.primary);
+                }
+            }));
         }
-        let secondaryButton;
 
-        switch (popupType) {
-
-        case PopupTypes.SELECT_ADD:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                this.pushPopup(presets.popupAddChatPreset, PopupTypes.CHAT_ADD);
+        const secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
+        if (secondaryButton instanceof HTMLElement) {
+            secondaryButton.addEventListener('click', () => this._detachPopup(() => {
+                if (events.secondary) {
+                    this._invokeCallback(events.secondary);
+                }
             }));
-            secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
-            secondaryButton ? secondaryButton.addEventListener('click', () => this._detachPopup(() => {
-                this.pushPopup(presets.popupAddUserPreset, PopupTypes.USER_ADD);
-            })) : console.error('Дополнительная кнопка поп-апа не найдена');
-            break;
-
-        case PopupTypes.SELECT_REMOVE:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                this.pushPopup(presets.popupPromptChatPreset, PopupTypes.CHAT_PROMPT);
-            }));
-            secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
-            secondaryButton ? secondaryButton.addEventListener('click', () => this._detachPopup(() => {
-                this.pushPopup(presets.popupRemoveUserPreset, PopupTypes.USER_REMOVE);
-            })) : console.error('Дополнительная кнопка поп-апа не найдена');
-            break;
-
-        case PopupTypes.USER_ADD:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                // Метод контроллера - удалить пользователя из активного чата
-                console.log('Добавляем пользователя');
-            }));
-            break;
-
-        case PopupTypes.USER_REMOVE:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                // Метод контроллера - удалить пользователя из активного чата
-                console.log('Удаляем пользователя');
-            }));
-            break;
-
-        case PopupTypes.CHAT_ADD:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                // Метод контроллера - создать чат
-                console.log('Добавляем чат');
-            }));
-            break;
-
-        case PopupTypes.CHAT_REMOVE:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                // Метод контроллера - удалить  чат
-                console.log('Удаляем чат');
-            }));
-            break;
-
-        case PopupTypes.CHAT_PROMPT:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                this._chatRemove();
-            }));
-            break;
-
-        case PopupTypes.WARNING:
-            mainButton.addEventListener('click', this._detachPopup.bind(this));
-            break;
-
-        default:
-            console.error('Неправильно указан тип поп-апа');
         }
     }
 
-    private _chatRemove() {
-        document.addEventListener('mouseup', (e: Event) => {
-            this._Router.disable();
-            const contact = (e.target as HTMLElement).closest('.contact');
-            if (contact) {
-                const contactName = contact.querySelector('.contact__name');
-                let name;
-                if (contactName && contactName instanceof HTMLElement) {
-                    name = contactName.innerText;
-                } else {
-                    throw new Error('Ошибка в шаблоне контакта');
-                }
-                this.pushPopup({...presets.popupRemoveChatPreset, value: name}, PopupTypes.CHAT_REMOVE);
-            } else {
-                this.pushPopup(presets.popupWarningChatPreset, PopupTypes.WARNING);
-            }
-        }, {once: true});
+    private _invokeCallback(callback: Function) {
+        try {
+            callback(this._getInput());
+        } catch (error) {
+            const props = this.getWarningPreset('Ошибка', error.message);
+            this.pushPopup(props, {});
+        }
+    }
+
+    private _getInput(): string | undefined {
+        const input = this._popup.element.querySelector('.popup__input');
+        if (input instanceof HTMLInputElement && input.dataset.validator) {
+            return this._validateInput(input.value, input.dataset.validator);
+        }
+    }
+
+    private _validateInput(value: string, validator: string): string | never {
+        const regExp = new RegExp(validator);
+        if (regExp.test(value)) {
+            return value;
+        } else {
+            throw new Error('Введены некорректные данные');
+        }
     }
 
     public getWarningPreset(title: string, message: string | number): BlockProps {

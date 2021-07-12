@@ -23,7 +23,8 @@ export const popupAddChatPreset: BlockProps = {
     isCloseable: true,
     title: 'Добавить чат',
     label: 'Название нового чата',
-    placeholder: 'Введите название',
+    placeholder: 'От 3 до 20 букв или цифр',
+    validator: '^[a-zA-Zа-яёА-ЯЁ0-9 ]{3,20}$',
     buttonText: 'Добавить'
 };
 
@@ -57,6 +58,7 @@ export const popupAddUserPreset: BlockProps = {
     title: 'Добавить в чат',
     label: 'Логин добавляемого участника',
     placeholder: 'Введите логин',
+    validator: '^[a-zA-Z][a-zA-Z0-9]{4,20}$',
     buttonText: 'Добавить'
 };
 
@@ -66,5 +68,6 @@ export const popupRemoveUserPreset: BlockProps = {
     title: 'Удалить из чата',
     label: 'Логин удаляемого участника',
     placeholder: 'Введите логин',
+    validator: '^[a-zA-Z][a-zA-Z0-9]{4,20}$',
     buttonText: 'Удалить'
 };

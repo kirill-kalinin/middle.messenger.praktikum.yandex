@@ -2,6 +2,7 @@ import Router from './core/router/router';
 import appRoutes from './core/router/routes';
 import FormHandler from './modules/form-handler/form-handler';
 import AuthController from './controllers/auth-controller';
+import ChatsController from './controllers/chats-controller';
 import { PageCreator } from './core/types';
 
 const router = new Router();
@@ -12,12 +13,10 @@ const formHandler = new FormHandler();
 formHandler.handleSubmit();
 
 const authControllerInstance = new AuthController();
-const isLoggedIn = authControllerInstance.getUserInfo();
-// Инстанцируем контроллер чатов, если isLoggedIn - загружаем чаты
-// Активный чат сбрасывается при перезагрузке страницы
-// Сообщения подгружаются после выбора активного чата
+const chatsController = new ChatsController();
 
-// debug
-Object.defineProperty(window, 'logout', {
-    value: authControllerInstance.logout
+authControllerInstance.getUserInfo().then(isLoggedIn => {
+    if (isLoggedIn) {
+        chatsController.getChats();
+    }
 });

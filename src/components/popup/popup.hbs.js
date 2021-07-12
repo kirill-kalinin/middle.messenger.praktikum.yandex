@@ -7,7 +7,8 @@ export default `
             <div class="popup__content">
                 {{#if typeIsInput}}
                 <label class="popup__label">{{label}}
-                    <input class="popup__input" type="text" placeholder="{{placeholder}}" />
+                    <input class="popup__input" type="text" placeholder="{{placeholder}}" 
+                        data-validator="{{validator}}"/>
                 </label>
                 {{/if}}
 

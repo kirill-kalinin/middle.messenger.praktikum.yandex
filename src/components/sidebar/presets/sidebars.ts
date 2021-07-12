@@ -1,4 +1,7 @@
 import { BlockProps, SidebarMenu } from '../../../core/types';
+import AuthController from '../../../controllers/auth-controller';
+
+const authController = new AuthController();
 
 export const sidebarProfileMenuPreset: SidebarMenu = {
     parent: 'profile',
@@ -7,8 +10,15 @@ export const sidebarProfileMenuPreset: SidebarMenu = {
         { link: '/profile-edit-avatar', text: 'Изменить аватар' },
         { link: '/profile-edit-data', text: 'Изменить данные' },
         { link: '/profile-edit-password', text: 'Изменить пароль' },
-        { link: '/login', text: 'Выйти' }
-    ]
+        { link: '', text: 'Выйти', event: 'logout' }
+    ],
+    events: {
+        click: e => {
+            if (e.target instanceof HTMLElement && e.target.dataset.event === 'logout') {
+                authController.logout();
+            }
+        }
+    }
 };
 
 export const sidebarLoginPreset: BlockProps = {

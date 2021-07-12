@@ -8,9 +8,8 @@ export default class AuthController extends BaseController {
     public async login(formData: FormData): Promise<void> {
         try {
             const response = await authAPI.login(formData);
-            console.log(response);
             if (response.status === 200) {
-                this.getUserInfo() && this.redirectChats();
+                this.getUserInfo();
             } else if(response.status === 401) {
                 this.pushErrorWarning('Неправильный логин или пароль');
             } else {
@@ -24,9 +23,8 @@ export default class AuthController extends BaseController {
     public async signup(formData: FormData): Promise<void> {
         try {
             const response = await authAPI.signup(formData);
-            console.log(response);
             if (response.status === 200) {
-                this.getUserInfo() && this.redirectChats();
+                this.getUserInfo();
             } else {
                 this.handleBadResponse(response);
             }
@@ -38,7 +36,6 @@ export default class AuthController extends BaseController {
     public async getUserInfo(): Promise<boolean | undefined> {
         try {
             const response = await authAPI.getUserInfo();
-            console.log(response);
             if (response.status === 200) {
                 mainStore.dispatch('setUserInfo', JSON.parse(response.response));
                 mainStore.dispatch('setAuthStatus', true);
@@ -57,7 +54,6 @@ export default class AuthController extends BaseController {
     public async logout(): Promise<void> {
         try {
             const response = await authAPI.logout();
-            console.log(response);
             if (response.status === 200) {
                 location.reload();
             } else {

@@ -3,15 +3,17 @@ import HTTPService from '../modules/http-services/http-service';
 const chatsAPIInstance = new HTTPService();
 
 export default class ChatsAPI {
-    getChats(offset: number, limit: number, title: string): Promise<XMLHttpRequest> {
+    getChats(title: string, limit: number, offset: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.get('/chats', {
-            data: { offset, limit, title }
+            data: { title, limit, offset },
+            credentials: true
         });
     }
 
     createChat(title: string): Promise<XMLHttpRequest> {
         return chatsAPIInstance.post('/chats', {
-            data: JSON.stringify({ title }), 
+            data: JSON.stringify({ title }),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]
@@ -20,7 +22,8 @@ export default class ChatsAPI {
 
     deleteChat(chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.delete('/chats', {
-            data: JSON.stringify({ chatId }), 
+            data: JSON.stringify({ chatId }),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]
@@ -29,7 +32,8 @@ export default class ChatsAPI {
 
     addUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.put('/chats/users', {
-            data: JSON.stringify({ users, chatId }), 
+            data: JSON.stringify({ users, chatId }),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]
@@ -38,7 +42,8 @@ export default class ChatsAPI {
 
     deleteUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.delete('/chats/users', {
-            data: JSON.stringify({ users, chatId }), 
+            data: JSON.stringify({ users, chatId }),
+            credentials: true,
             headers: [
                 ['Content-type', 'application/json; charset=utf-8']
             ]

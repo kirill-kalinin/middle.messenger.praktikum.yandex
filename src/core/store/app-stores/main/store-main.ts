@@ -25,7 +25,8 @@ const mainStore = new MainStore({
             avatar: null
         },
         contacts: [],
-        activeContactId: null
+        activeContactId: null,
+        filter: ''
     }
 });
 
