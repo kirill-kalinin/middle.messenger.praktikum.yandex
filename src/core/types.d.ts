@@ -33,7 +33,16 @@ interface UserInfo extends BlockProps {
     avatar: string | null
 }
 
-interface Contact extends BlockProps {
+interface ChatProps extends BlockProps {
+    messages: MessageProps[]
+}
+
+interface ChatSidebarProps extends BlockProps {
+    contacts: ContactProps[],
+    activeContactId: ContactProps['id'] | null
+}
+
+interface ContactProps extends BlockProps {
     id: number,
     link: string,
     avatar: string,
@@ -45,7 +54,7 @@ interface Contact extends BlockProps {
     active?: boolean
 }
 
-interface Message extends BlockProps {
+interface MessageProps extends BlockProps {
     isOwn: boolean,
     isImage: boolean,
     isReaded: boolean,
@@ -160,7 +169,7 @@ interface MainStoreParams extends StoreParams {
 interface MainStoreState extends State {
     isLoggedIn: boolean | null,
     userInfo: UserInfo,
-    contacts: Contact[],
+    contacts: ContactProps[],
     activeContactId: number | null,
     filter: string
 }
@@ -170,5 +179,5 @@ interface MessagesStoreParams extends StoreParams {
 }
 
 interface MessagesStoreState extends State {
-    [contactId: number]: Message[]
+    [contactId: number]: MessageProps[]
 }

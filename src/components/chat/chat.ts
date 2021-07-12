@@ -1,16 +1,25 @@
 import Template from './chat.hbs.js';
 import Block from '../../core/k-react/block';
+import Message from '../message/message.js';
+import DOMService from '../../core/k-react/dom-service.js';
 import FormHandler from '../../modules/form-handler/form-handler';
 import HiddenBlockHandler from './modules/hidden-block-handler';
-import type { BlockProps } from '../../core/types';
+import type { ChatProps } from '../../core/types';
+
+const DOM = new DOMService();
 
 export default class Chat extends Block {
 
     private _formHandler: FormHandler;
     private _hiddenBlockHandler: HiddenBlockHandler;
 
-    constructor(props: BlockProps = {}, className = 'fragment') {
+    constructor(props: ChatProps, className = 'fragment') {
         super('div', className, props);
+    }
+
+    private _renderMessages(messages: ChatProps['messages']): void {
+        const components = messages.map(message => new Message(message));
+        DOM.attachComponent(components, '.chat__messages-list', this);
     }
 
     private _setInputListeners() {
@@ -30,6 +39,7 @@ export default class Chat extends Block {
     componentDidUpdate(): void {
         this._hiddenBlockHandler.update(this.element);
         this._setInputListeners();
+        this._renderMessages(this.props.messages as ChatProps['messages']);
     }
 
     render(): string {
