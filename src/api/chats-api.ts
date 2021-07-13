@@ -30,6 +30,16 @@ export default class ChatsAPI {
         });
     }
 
+    findUsers(login: string): Promise<XMLHttpRequest> {
+        return chatsAPIInstance.post('/user/search', {
+            data: JSON.stringify({ login }),
+            credentials: true,
+            headers: [
+                ['Content-type', 'application/json; charset=utf-8']
+            ]
+        });
+    }
+
     addUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.put('/chats/users', {
             data: JSON.stringify({ users, chatId }),

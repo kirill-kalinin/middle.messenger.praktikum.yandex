@@ -114,6 +114,10 @@ export default class Router {
             this.go('/chat-select');
             return false;
         }
+        if (this._isChatSelected === true && route.path === '/chat-select') {
+            this.go('/chat-active');
+            return false;
+        }
         return true;
     }
 

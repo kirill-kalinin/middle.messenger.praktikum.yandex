@@ -9,6 +9,9 @@ const mainActions: Actions = {
     },
     setChatsList(context, payload) {
         context.commit('setChatsList', payload);
+    },
+    selectActiveChat(context, payload) {
+        context.commit('selectActiveChat', payload);
     }
 };
 

@@ -1,15 +1,18 @@
 export default `
-    <a class="contact{{#if active}} contact_active{{/if}}" href="{{link}}" data-route="{{link}}" data-id="{{id}}" >
+    <div class="contact{{#if active}} contact_active{{/if}}" data-id="{{id}}" >
         <img class="contact__image" src="{{avatar}}" alt=" ">
         <div class="contact__primary-info">
-            <p class="contact__name">{{name}}</p>
-            <p class="contact__last-message">{{message}}</p>
+            <p class="contact__name">{{title}}</p>
+            <p class="contact__last-message">{{lastMessage}}</p>
         </div>
         <div class="contact__secondary-info">
-            <div class="contact__unreaded-counter{{#if readed}} contact__unreaded-counter_empty{{/if}}">
-                {{counter}}
+            <div class="contact__unreaded-counter{{#if unreadCount}} contact__unreaded-counter_visible{{/if}}">
+                {{unreadCount}}
             </div>
-            <p class="contact__last-date">{{date}}</p>
+            <p class="contact__last-date">
+                <span>{{date.[1]}}</span>
+                <span>{{date.[0]}}</span>
+            </p>
         </div>
-    </a>
+    </div>
 `;

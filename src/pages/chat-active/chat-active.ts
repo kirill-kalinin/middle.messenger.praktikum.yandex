@@ -6,6 +6,10 @@ import mainStore from '../../core/store/app-stores/main/store-main';
 import messagesStore from '../../core/store/app-stores/main/store-main';
 import { MainStoreState, MessagesStoreState, MessageProps } from '../../core/types';
 
+import ChatsController from '../../controllers/chats-controller';
+
+const chatsController = new ChatsController();
+
 export default function createPageChatActive(): Page {
     const mainStoreInitialState = mainStore.state as MainStoreState;
     const messagesStoreInitialState = messagesStore.state as MessagesStoreState;
@@ -13,12 +17,18 @@ export default function createPageChatActive(): Page {
     const contacts = mainStoreInitialState.contacts;
     const activeContactId = mainStoreInitialState.activeContactId;
 
-    const chatSidebar = new ChatSidebar({contacts, activeContactId});
+    const chatSidebar = new ChatSidebar({contacts, activeContactId, events: {
+        click: e => {
+            const contact = e.target instanceof HTMLElement && e.target.closest('.contact');
+            if (contact instanceof HTMLElement && contact.dataset.id) {
+                chatsController.selectChat(Number(contact.dataset.id));
+            }
+        }
+    }});
 
-    const messagesList = messagesStoreInitialState;
     let messages: MessageProps[] = [];
-    if (activeContactId !== null && messagesList[activeContactId]) {
-        messages = messagesList[activeContactId];
+    if (activeContactId !== null && messagesStoreInitialState[activeContactId]) {
+        messages = messagesStoreInitialState[activeContactId];
     }
 
     const chat = new Chat({ chatModeActive: true, messages });

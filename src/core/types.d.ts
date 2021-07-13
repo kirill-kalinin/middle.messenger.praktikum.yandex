@@ -34,24 +34,38 @@ interface UserInfo extends BlockProps {
 }
 
 interface ChatProps extends BlockProps {
+    chatModeActive?: boolean,
+    chatModeSelect?: boolean,
     messages: MessageProps[]
 }
 
 interface ChatSidebarProps extends BlockProps {
     contacts: ContactProps[],
-    activeContactId: ContactProps['id'] | null
+    activeContactId: ContactProps['id'] | null,
 }
 
 interface ContactProps extends BlockProps {
     id: number,
-    link: string,
+    title: string,
     avatar: string,
-    name: string,
-    message: string,
-    counter: number,
-    date: string,
-    readed: boolean,
-    active?: boolean
+    unreadCount: number,
+    lastMessage: string,
+    date: string[],
+    active: boolean
+}
+
+interface ContactFromServer {
+    id: number,
+    title: string,
+    avatar: string,
+    unread_count: number,
+    last_message?: {
+        user: {
+            [data: string]: string
+        },
+        time: string,
+        content: string
+    }
 }
 
 interface MessageProps extends BlockProps {
