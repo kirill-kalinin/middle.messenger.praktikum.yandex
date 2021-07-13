@@ -54,7 +54,7 @@ interface ContactProps extends BlockProps {
     active: boolean
 }
 
-interface ContactFromServer {
+interface ContactResponse {
     id: number,
     title: string,
     avatar: string,
@@ -66,6 +66,18 @@ interface ContactFromServer {
         time: string,
         content: string
     }
+}
+
+interface ChatUserResponse {
+    id: number,
+    first_name: string,
+    second_name: string,
+    display_name: string,
+    login: string,
+    email: string,
+    phone: string,
+    avatar: string,
+    role: string
 }
 
 interface MessageProps extends BlockProps {

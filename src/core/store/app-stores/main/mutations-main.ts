@@ -1,4 +1,4 @@
-import { Mutations, ContactProps, ContactFromServer, MainStoreState } from '../../../types';
+import { Mutations, ContactProps, ContactResponse, MainStoreState } from '../../../types';
 import AvatarPlaceholder from 'url:../../../../../static/images/avatar-placeholder.svg';
 
 const AVATAR_BASE_URL = 'https://ya-praktikum.tech/api/v2/resources/';
@@ -13,7 +13,7 @@ const mainMutations: Mutations = {
     },
 
     setChatsList(state: MainStoreState, payload) {
-        const chats = payload as ContactFromServer[];
+        const chats = payload as ContactResponse[];
         let isActiveContactRemains = false;
         const transformedChats = chats.map(chat => {
             if (chat.id === state.activeContactId) {

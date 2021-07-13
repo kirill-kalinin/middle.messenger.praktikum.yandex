@@ -2,7 +2,7 @@ import Template from './chat-sidebar.hbs.js';
 import Block from '../../core/k-react/block';
 import Contact from '../contact/contact';
 import DOMService from '../../core/k-react/dom-service';
-import ToolbarButtonsHandler from './modules/toolbar-buttons-handler';
+import ChatSidebarHandler from './modules/chat-sidebar-handler';
 import type { ChatSidebarProps } from '../../core/types';
 
 import mainStore from '../../core/store/app-stores/main/store-main';
@@ -12,7 +12,7 @@ const DOM = new DOMService();
 
 export default class ChatSidebar extends Block {
 
-    private _toolbarButtonsHandler: ToolbarButtonsHandler;
+    private _sidebarHandler: ChatSidebarHandler;
     private _contacts: Contact[] | null;
 
     constructor(props: ChatSidebarProps, className = 'fragment') {
@@ -32,12 +32,12 @@ export default class ChatSidebar extends Block {
     }
 
     componentDidMount(): void {
-        this._toolbarButtonsHandler = new ToolbarButtonsHandler();
-        this._toolbarButtonsHandler.init(this.element);
+        this._sidebarHandler = new ChatSidebarHandler();
+        this._sidebarHandler.init(this.element);
     }
 
     componentDidUpdate(): void {
-        this._toolbarButtonsHandler.update(this.element);
+        this._sidebarHandler.update(this.element);
         this._renderContacts(this.props as ChatSidebarProps);
     }
 

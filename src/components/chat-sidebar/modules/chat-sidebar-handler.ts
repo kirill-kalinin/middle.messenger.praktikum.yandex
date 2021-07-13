@@ -5,10 +5,11 @@ import ChatsController from '../../../controllers/chats-controller';
 
 const chatsController = new ChatsController();
 
-export default class ToolbarButtonsHandler {
+export default class ChatSidebarHandler {
 
     private _buttonAdd: HTMLElement | null;
     private _buttonRemove: HTMLElement | null;
+    private _contacts: HTMLElement | null;
     private _Router: Router;
     private _popupHandler: PopupHandler;
 
@@ -20,22 +21,25 @@ export default class ToolbarButtonsHandler {
     public init(chatSidebarElement: HTMLElement): void {
         this._buttonAdd = chatSidebarElement.querySelector('.chat-sidebar__button_add');
         this._buttonRemove = chatSidebarElement.querySelector('.chat-sidebar__button_remove');
+        this._contacts = chatSidebarElement.querySelector('.chat-sidebar__contacts');
 
-        if (!this._buttonAdd || !this._buttonRemove) {
+        if (!this._buttonAdd || !this._buttonRemove || !this._contacts) {
             return;
         }
 
-        this._buttonAdd.addEventListener('click', this._handlerAdd);
-        this._buttonRemove.addEventListener('click', this._handlerRemove);
+        this._buttonAdd.addEventListener('click', this._handlerButtonAdd);
+        this._buttonRemove.addEventListener('click', this._handlerButtonRemove);
+        this._contacts.addEventListener('click', this._handlerContactClick);
     }
 
     public update(chatSidebarElement: HTMLElement): void {
-        this._buttonAdd && this._buttonAdd.removeEventListener('click', this._handlerAdd);
-        this._buttonRemove && this._buttonRemove.removeEventListener('click', this._handlerAdd);
+        this._buttonAdd && this._buttonAdd.removeEventListener('click', this._handlerButtonAdd);
+        this._buttonRemove && this._buttonRemove.removeEventListener('click', this._handlerButtonRemove);
+        this._contacts && this._contacts.removeEventListener('click', this._handlerContactClick);
         this.init(chatSidebarElement);
     }
 
-    private _handlerAdd = (): void => {
+    private _handlerButtonAdd = (): void => {
         if (this._Router.isDisabled) {
             return;
         }
@@ -45,7 +49,7 @@ export default class ToolbarButtonsHandler {
         });
     }
 
-    private _handlerRemove = (): void => {
+    private _handlerButtonRemove = (): void => {
         if (this._Router.isDisabled) {
             return;
         }
@@ -53,6 +57,24 @@ export default class ToolbarButtonsHandler {
             primary: this._removeChatPrompt.bind(this),
             secondary: this._removeUser.bind(this)
         });
+    }
+
+    private _handlerContactClick = (e: Event): void => {
+        if (this._Router.isDisabled) {
+            return;
+        }
+        const contact = e.target instanceof HTMLElement && e.target.closest('.contact');
+        if (contact instanceof HTMLElement && contact.dataset.id) {
+            const id = Number(contact.dataset.id);
+            contact.classList.contains('contact_active')
+                ? this._showUsersList(id)
+                : chatsController.selectChat(id);
+        }
+    }
+
+    private _showUsersList(id: number): void {
+        const list = chatsController.getChatUsers(id);
+        console.log(list); // Показать попап
     }
 
     private _addUser(): void {

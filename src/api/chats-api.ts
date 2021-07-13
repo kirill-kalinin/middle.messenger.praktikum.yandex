@@ -30,7 +30,7 @@ export default class ChatsAPI {
         });
     }
 
-    findUsers(login: string): Promise<XMLHttpRequest> {
+    findChatUsers(login: string): Promise<XMLHttpRequest> {
         return chatsAPIInstance.post('/user/search', {
             data: JSON.stringify({ login }),
             credentials: true,
@@ -40,7 +40,14 @@ export default class ChatsAPI {
         });
     }
 
-    addUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
+    getChatUsers(id: number, limit?: number, offset?: number, name?: string, email?: string): Promise<XMLHttpRequest> {
+        return chatsAPIInstance.get(`/chats/${id}/users`, {
+            data: { id, limit, offset, name, email },
+            credentials: true
+        });
+    }
+
+    addChatUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.put('/chats/users', {
             data: JSON.stringify({ users, chatId }),
             credentials: true,
@@ -50,7 +57,7 @@ export default class ChatsAPI {
         });
     }
 
-    deleteUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
+    deleteChatUsers(users: number[], chatId: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.delete('/chats/users', {
             data: JSON.stringify({ users, chatId }),
             credentials: true,
