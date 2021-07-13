@@ -111,7 +111,10 @@ export default class ChatsController extends BaseController {
                 throw new Error('Сначала нужно выбрать чат');
             }
             const chatUsers = await this.getChatUsers(chatId);
-            const user = chatUsers && chatUsers.find(user => user.login === login);
+            if (chatUsers === undefined) {
+                return; // Сообщение об ошибке уже показано в getChatUsers
+            }
+            const user = chatUsers.find(user => user.login === login);
             if (!user) {
                 throw new Error('Пользователь не найден');
             }

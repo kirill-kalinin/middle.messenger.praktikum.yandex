@@ -71,3 +71,11 @@ export const popupRemoveUserPreset: BlockProps = {
     validator: '^[a-zA-Z][a-zA-Z0-9]{4,20}$',
     buttonText: 'Удалить'
 };
+
+export const popupUsersListPreset: BlockProps = {
+    typeIsList: true,
+    isCloseable: true,
+    title: 'Участники чата',
+    list: [],
+    buttonText: 'Закрыть'
+};

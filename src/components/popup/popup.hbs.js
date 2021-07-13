@@ -16,6 +16,14 @@ export default `
                 <p class="popup__alert">{{description}}</p>
                 {{/if}}
 
+                {{#if typeIsList}}
+                <ul class="popup__list">
+                    {{#each list}}
+                    <li>{{this}}</li>
+                    {{/each}}
+                </ul>
+                {{/if}}
+
                 {{#if typeIsConfirm}}
                 <p class="popup__alert">{{description}}</p>
                 <p class="popup__confirm-value">{{value}}</p>

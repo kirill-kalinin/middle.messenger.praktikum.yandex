@@ -1,11 +1,10 @@
 import EventBus from '../../modules/event-bus/event-bus';
-import { Actions, Mutations, State, StoreStatus, StoreParams, StateUpdateCallback } from '../types';
+import { Actions, Mutations, State, StoreParams, StateUpdateCallback } from '../types';
 
 export default class Store {
     private _actions: Actions;
     private _mutations: Mutations;
     private _state: State;
-    private _status: StoreStatus;
     private _eventBus: () => EventBus;
 
     constructor(params: StoreParams) {
@@ -13,7 +12,6 @@ export default class Store {
 
         this._actions = params.actions;
         this._mutations = params.mutations;
-        this._status = 'resting';
         this._eventBus = () => eventBus;
 
         this._state = new Proxy(params.state || {}, {
@@ -24,10 +22,6 @@ export default class Store {
                 state[key] = value;
 
                 this._eventBus().emit(key, this._state);
-                if (this._status !== 'mutation') {
-                    console.warn(`Следует использовать mutation для изменения ${key}`);
-                }
-                this._status = 'resting';
 
                 return true;
             }
@@ -48,7 +42,6 @@ export default class Store {
             return false;
         }
 
-        this._status = 'action';
         this._actions[actionKey](this, payload);
 
         return true;
@@ -60,7 +53,6 @@ export default class Store {
             return false;
         }
 
-        this._status = 'mutation';
         const newState = this._mutations[mutationKey](this._state, payload);
         this._state = Object.assign(this._state, newState);
 

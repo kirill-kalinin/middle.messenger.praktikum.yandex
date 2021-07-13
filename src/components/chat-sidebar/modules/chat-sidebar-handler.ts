@@ -73,8 +73,13 @@ export default class ChatSidebarHandler {
     }
 
     private _showUsersList(id: number): void {
-        const list = chatsController.getChatUsers(id);
-        console.log(list); // Показать попап
+        chatsController.getChatUsers(id).then(users => {
+            return users && users.map(user => {
+                return `${user.display_name || user.first_name} (${user.login})`;
+            });
+        }).then(list => {
+            list && this._popupHandler.pushPopup({...popupPresets.popupUsersListPreset, list}, {});
+        });
     }
 
     private _addUser(): void {

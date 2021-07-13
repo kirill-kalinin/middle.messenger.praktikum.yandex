@@ -84,6 +84,18 @@
     }
 }
 
+.popup__list {
+    display: flex;
+    flex-direction: column;
+    max-height: 180px;
+    overflow-y: scroll;
+    padding: 10px 20px;
+    border: 2px solid $main;
+    list-style: none;
+    line-height: 2;
+    text-align: left;
+}
+
 .popup__buttons {
     display: flex;
 }

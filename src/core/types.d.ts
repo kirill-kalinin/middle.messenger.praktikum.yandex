@@ -175,8 +175,6 @@ type StoreParams = {
     state: State
 }
 
-type StoreStatus = 'resting' | 'action' | 'mutation'
-
 type Action = (context: Store, payload: unknown) => void
 type Actions = { [action: string]: Action }
 

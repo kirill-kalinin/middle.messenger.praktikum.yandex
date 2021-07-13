@@ -40,7 +40,7 @@ export default class ChatsAPI {
         });
     }
 
-    getChatUsers(id: number, limit?: number, offset?: number, name?: string, email?: string): Promise<XMLHttpRequest> {
+    getChatUsers(id: number, limit = 100, offset = 0, name = '', email = ''): Promise<XMLHttpRequest> {
         return chatsAPIInstance.get(`/chats/${id}/users`, {
             data: { id, limit, offset, name, email },
             credentials: true
