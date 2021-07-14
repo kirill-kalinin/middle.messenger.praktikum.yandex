@@ -6,11 +6,13 @@ import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 // https://github.com/handlebars-lang/handlebars.js/issues/1593
 // https://github.com/parcel-bundler/parcel/issues/1747
 
-// Для запуска приложения
-// const handlebars = window.Handlebars;
-
-// Для тестов
-const handlebars = require('handlebars');
+const handlebars = typeof window === 'object'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
+    ? (window as any).Handlebars
+    : require('handlebars');
+if (handlebars === undefined) {
+    throw new Error('Шаблонизатор не был загружен');
+}
 
 export default class Block {
     static EVENTS = {
@@ -138,7 +140,7 @@ export default class Block {
     }
 
     public render(): string {
-        return `<div>Default Template</div>`;
+        return '<div>Default Template</div>';
     }
 
     private _makePropsProxy(props: BlockProps) {

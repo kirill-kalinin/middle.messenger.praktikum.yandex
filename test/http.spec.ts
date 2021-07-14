@@ -1,5 +1,5 @@
-import HTTPService from "../src/modules/http-services/http-service";
-import { assert } from "chai";
+import HTTPService from '../src/modules/http-services/http-service';
+import { assert } from 'chai';
 
 let httpService: HTTPService | undefined;
 

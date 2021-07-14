@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Block from '../src/core/k-react/block';
 import { assert } from 'chai';
 import { JSDOM } from 'jsdom';
@@ -8,6 +9,7 @@ describe('Block test', function () {
 
     let componentLink: Block;
     let componentDiv: Block;
+    let componentButton: Block;
 
     before('Create DOM', function () {
         const dom = new JSDOM(
@@ -23,9 +25,12 @@ describe('Block test', function () {
         (global as any).document = dom.window.document;
 
         componentLink = new Block('a', 'link-element', { text: 'first test' });
-        componentDiv = new Block(undefined, undefined, { events: {
+
+        componentDiv = new Block();
+
+        componentButton = new Block('button', '', { events: {
             click: (e) => {
-                dom.window.block = e.target;
+                dom.window.button = e.target;
             }
         }});
     });
@@ -61,9 +66,32 @@ describe('Block test', function () {
             assert.equal(componentDiv?.element.classList.length, 0);
         });
 
+        it('Created component has no props by default', function () {
+            const propsCount = componentDiv && Object.keys(componentDiv.props).length;
+            assert.equal(propsCount, 0);
+        });
+
+    });
+
+    describe('Create a button element', function () {
+
+        it('Created component is button', function () {
+            assert.isTrue(componentButton?.element instanceof window.HTMLButtonElement);
+        });
+
         it('Created component has click event on itself', function () {
-            componentDiv?.element.click();
-            assert.equal((window as any).block, componentDiv.element);
+            componentButton?.element.click();
+            assert.equal((window as any).button, componentButton.element);
+        });
+
+        it('Created component can hide', function () {
+            componentButton.hide();
+            assert.equal(componentButton?.element.style.display, 'none');
+        });
+
+        it('Created component can become visible again', function () {
+            componentButton.show();
+            assert.equal(componentButton?.element.style.display, 'block');
         });
 
     });
