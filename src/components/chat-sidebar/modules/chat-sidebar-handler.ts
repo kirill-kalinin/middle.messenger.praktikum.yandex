@@ -2,6 +2,8 @@ import Router from '../../../core/router/router';
 import PopupHandler from '../../../modules/popup-handler/popup-handler';
 import * as popupPresets from '../../../components/popup/presets/chat-toolbar-popups';
 import ChatsController from '../../../controllers/chats-controller';
+import Contact from '../../contact/contact';
+import { ContactProps } from '../../../core/types';
 
 const chatsController = new ChatsController();
 
@@ -10,33 +12,52 @@ export default class ChatSidebarHandler {
     private _buttonAdd: HTMLElement | null;
     private _buttonRemove: HTMLElement | null;
     private _contacts: HTMLElement | null;
+    private _input: HTMLInputElement | null;
     private _Router: Router;
     private _popupHandler: PopupHandler;
+    private _contactElements: Contact[] | undefined;
 
     constructor() {
         this._Router = new Router();
         this._popupHandler = new PopupHandler();
     }
 
-    public init(chatSidebarElement: HTMLElement): void {
+    public init(chatSidebarElement: HTMLElement, contactElements?: Contact[]): void {
         this._buttonAdd = chatSidebarElement.querySelector('.chat-sidebar__button_add');
         this._buttonRemove = chatSidebarElement.querySelector('.chat-sidebar__button_remove');
         this._contacts = chatSidebarElement.querySelector('.chat-sidebar__contacts');
+        this._input = chatSidebarElement.querySelector('.chat-sidebar__input');
 
-        if (!this._buttonAdd || !this._buttonRemove || !this._contacts) {
-            return;
+        if (!this._buttonAdd || !this._buttonRemove || !this._contacts || !this._input) {
+            throw new Error('Ошибка в шаблоне сайдбара');
         }
 
         this._buttonAdd.addEventListener('click', this._handlerButtonAdd);
         this._buttonRemove.addEventListener('click', this._handlerButtonRemove);
         this._contacts.addEventListener('click', this._handlerContactClick);
+        this._input.addEventListener('input', this._filterContacts);
+
+        this._contactElements = contactElements;
+        this._filterContacts();
     }
 
-    public update(chatSidebarElement: HTMLElement): void {
+    public update(chatSidebarElement: HTMLElement, contactElements?: Contact[]): void {
         this._buttonAdd && this._buttonAdd.removeEventListener('click', this._handlerButtonAdd);
         this._buttonRemove && this._buttonRemove.removeEventListener('click', this._handlerButtonRemove);
         this._contacts && this._contacts.removeEventListener('click', this._handlerContactClick);
-        this.init(chatSidebarElement);
+        this.init(chatSidebarElement, contactElements);
+    }
+
+    private _filterContacts = (): void => {
+        if (!this._contactElements) {
+            return;
+        }
+        const filter = this._input?.value.toLowerCase() || '';
+        this._contactElements.forEach(element => {
+            (element.props as ContactProps).title.toLocaleLowerCase().includes(filter)
+                ? element.show()
+                : element.hide();
+        });
     }
 
     private _handlerButtonAdd = (): void => {

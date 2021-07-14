@@ -194,8 +194,7 @@ interface MainStoreState extends State {
     isLoggedIn: boolean | null,
     userInfo: UserInfo,
     contacts: ContactProps[],
-    activeContactId: number | null,
-    filter: string
+    activeContactId: number | null
 }
 
 interface MessagesStoreParams extends StoreParams {

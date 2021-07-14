@@ -13,14 +13,13 @@ const DOM = new DOMService();
 export default class ChatSidebar extends Block {
 
     private _sidebarHandler: ChatSidebarHandler;
-    private _contacts: Contact[] | null;
+    private _contacts: Contact[] | undefined;
 
     constructor(props: ChatSidebarProps, className = 'fragment') {
         super('div', className, props);
         mainStore.subscribe('contacts', newState => {
             this.setProps(mainSelectors.getContacts(newState));
         });
-        this._renderContacts(this.props as ChatSidebarProps);
     }
 
     _renderContacts(props: ChatSidebarProps): void {
@@ -33,12 +32,13 @@ export default class ChatSidebar extends Block {
 
     componentDidMount(): void {
         this._sidebarHandler = new ChatSidebarHandler();
-        this._sidebarHandler.init(this.element);
+        this._renderContacts(this.props as ChatSidebarProps);
+        this._sidebarHandler.init(this.element, this._contacts);
     }
 
     componentDidUpdate(): void {
-        this._sidebarHandler.update(this.element);
         this._renderContacts(this.props as ChatSidebarProps);
+        this._sidebarHandler.update(this.element, this._contacts);
     }
 
     render(): string {
