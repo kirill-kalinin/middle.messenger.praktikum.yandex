@@ -1,3 +1,5 @@
+import AvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
+
 export default `
     <div class="wrapper">
         <div class="profile container bordered-block">
@@ -5,7 +7,8 @@ export default `
             <main class="profile__main-block">
                 <div class="profile__header">
                     <div class="profile__user-name">{{header.name}}</div>
-                    <img class="profile__user-avatar" src="{{header.avatarSrc}}" alt=" ">
+                    <img class="profile__user-avatar"  alt=" "
+                        src="{{#if header.avatarSrc}}{{header.avatarSrc}}{{else}}${AvatarPlaceholder}{{/if}}">
                 </div>
 
                 {{#if isMainInfoMode}}

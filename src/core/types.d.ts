@@ -30,7 +30,7 @@ interface UserInfo extends BlockProps {
     login: string,
     email: string,
     phone: string,
-    avatar: string | null
+    avatar: string
 }
 
 interface ChatProps extends BlockProps {

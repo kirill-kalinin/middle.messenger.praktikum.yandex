@@ -16,7 +16,7 @@ export default class Store {
 
         this._state = new Proxy(params.state || {}, {
             set: (state, key, value) => {
-                if (typeof key === 'symbol') {
+                if (typeof key !== 'string') {
                     throw new Error('Нельзя использовать символы');
                 }
                 state[key] = value;

@@ -5,9 +5,14 @@ import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 // Подключение через CDN пока нет Webpack, с Parcel сборка получается с багом
 // https://github.com/handlebars-lang/handlebars.js/issues/1593
 // https://github.com/parcel-bundler/parcel/issues/1747
-const Handlebars = window.Handlebars;
 
-export default abstract class Block {
+// Для запуска приложения
+// const handlebars = window.Handlebars;
+
+// Для тестов
+const handlebars = require('handlebars');
+
+export default class Block {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -127,12 +132,14 @@ export default abstract class Block {
     private _render() {
         const block = this.render();
         this._removeEvents();
-        this._element.innerHTML = Handlebars.compile(block)(this.props);
+        this._element.innerHTML = handlebars.compile(block)(this.props);
         this._updateChildren();
         this._addEvents();
     }
 
-    public render(): string | void {}
+    public render(): string {
+        return `<div>Default Template</div>`;
+    }
 
     private _makePropsProxy(props: BlockProps) {
         const proxyProps = new Proxy(props, {

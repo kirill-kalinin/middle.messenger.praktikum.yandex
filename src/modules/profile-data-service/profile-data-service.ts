@@ -1,5 +1,4 @@
 import { BlockProps, UserInfo } from '../../core/types';
-import ImageUrlAvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
 
 const AVATAR_BASE_URL = 'https://ya-praktikum.tech/api/v2/resources/';
 
@@ -10,7 +9,7 @@ export default class ProfileDataService {
             name: userInfo.display_name || userInfo.first_name,
             avatarSrc: userInfo.avatar 
                 ? `${AVATAR_BASE_URL}${userInfo.avatar}` 
-                : ImageUrlAvatarPlaceholder
+                : ''
         };
     }
 

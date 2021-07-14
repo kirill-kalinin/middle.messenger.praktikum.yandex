@@ -22,7 +22,7 @@ const mainStore = new MainStore({
             login: '',
             email: '',
             phone: '',
-            avatar: null
+            avatar: ''
         },
         contacts: [],
         activeContactId: null,
