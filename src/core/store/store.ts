@@ -26,14 +26,6 @@ export default class Store {
                 return true;
             }
         });
-
-        // debug
-        Object.defineProperty(window, 'store', {
-            get: () => ({
-                listeners: this._eventBus().listeners,
-                store: this
-            })
-        });
     }
 
     public dispatch(actionKey: string, payload: unknown): boolean {

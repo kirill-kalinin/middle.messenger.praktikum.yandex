@@ -54,7 +54,6 @@ export default class ChatsController extends BaseController {
     public async findUser(login: string): Promise<number | undefined> {
         try {
             const response = await chatsAPI.findChatUsers(login);
-            console.log('findUser', response);
             if (response.status === 200) {
                 const users = JSON.parse(response.response);
                 return users[0]?.id;
@@ -69,10 +68,8 @@ export default class ChatsController extends BaseController {
     public async getChatUsers(id: number): Promise<ChatUserResponse[] | undefined> {
         try {
             const response = await chatsAPI.getChatUsers(id);
-            console.log('getChatUsers', response);
             if (response.status === 200) {
-                const chatUsers = JSON.parse(response.response);
-                return chatUsers;
+                return JSON.parse(response.response);
             } else {
                 this.pushErrorWarning('Не удалось получить список участников чата');
             }
@@ -92,7 +89,6 @@ export default class ChatsController extends BaseController {
                 throw new Error('Пользователь не найден');
             }
             const response = await chatsAPI.addChatUsers([ userId ], chatId);
-            console.log('addUser', response);
             if (response.status === 200) {
                 this.pushSuccesWarning();
                 this.getChats();
@@ -119,10 +115,22 @@ export default class ChatsController extends BaseController {
                 throw new Error('Пользователь не найден');
             }
             const response = await chatsAPI.deleteChatUsers([ user.id ], chatId);
-            console.log('deleteUser', response);
             if (response.status === 200) {
                 this.pushSuccesWarning();
                 this.getChats();
+            } else {
+                this.handleBadResponse(response);
+            }
+        } catch (error) {
+            this.pushErrorWarning(error.message);
+        }
+    }
+
+    public async getToken(id: number): Promise<string | undefined> {
+        try {
+            const response = await chatsAPI.getToken(id);
+            if (response.status === 200) {
+                return JSON.parse(response.response).token;
             } else {
                 this.handleBadResponse(response);
             }

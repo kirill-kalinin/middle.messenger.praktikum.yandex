@@ -67,7 +67,7 @@ export default class ChatsAPI {
         });
     }
 
-    getToken(id: string): Promise<XMLHttpRequest> {
+    getToken(id: number): Promise<XMLHttpRequest> {
         return chatsAPIInstance.post(`/chats/token/${id}`, {
             credentials: true
         });
