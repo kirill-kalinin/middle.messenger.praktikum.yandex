@@ -72,4 +72,11 @@ export default class ChatsAPI {
             credentials: true
         });
     }
+
+    getNewMessagesCount(id: number): Promise<XMLHttpRequest> {
+        return chatsAPIInstance.post(`/chats/new/${id}`, {
+            credentials: true
+        });
+    }
+
 }

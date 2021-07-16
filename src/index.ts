@@ -3,6 +3,7 @@ import appRoutes from './core/router/routes';
 import FormHandler from './modules/form-handler/form-handler';
 import AuthController from './controllers/auth-controller';
 import ChatsController from './controllers/chats-controller';
+import WebSocketHandler from './modules/websocket/websocket-handler';
 import { PageCreator } from './core/types';
 
 const router = new Router();
@@ -14,6 +15,8 @@ formHandler.handleSubmit();
 
 const authControllerInstance = new AuthController();
 const chatsController = new ChatsController();
+
+new WebSocketHandler();
 
 authControllerInstance.getUserInfo().then(isLoggedIn => {
     if (isLoggedIn) {

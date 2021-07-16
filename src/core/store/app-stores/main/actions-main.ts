@@ -12,6 +12,12 @@ const mainActions: Actions = {
     },
     selectActiveChat(context, payload) {
         context.commit('selectActiveChat', payload);
+    },
+    addSocket(context, payload) {
+        context.commit('addSocket', payload);
+    },
+    removeSocket(context, payload) {
+        context.commit('removeSocket', payload);
     }
 };
 

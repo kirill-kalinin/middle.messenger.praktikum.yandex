@@ -25,7 +25,8 @@ const mainStore = new MainStore({
             avatar: ''
         },
         contacts: [],
-        activeContactId: null
+        activeContactId: null,
+        sockets: {}
     }
 });
 

@@ -1,11 +1,11 @@
 import { Actions } from '../../../types';
 
 const messagesActions: Actions = {
-    addChat(context, payload) {
-        context.commit('addChat', payload);
+    pushMessage(context, payload) {
+        context.commit('pushMessage', payload);
     },
-    removeChat(context, payload) {
-        context.commit('removeChat', payload);
+    cleanMessages(context, payload) {
+        context.commit('cleanMessages', payload);
     }
 };
 

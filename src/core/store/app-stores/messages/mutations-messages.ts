@@ -1,13 +1,18 @@
-import { Mutations } from '../../../types';
+import { Mutations, MessagesStoreState, MessageProps } from '../../../types';
 
 const messagesMutations: Mutations = {
-    addChat(state, payload) {
-        console.log('Make some changes in state with payload', payload);
-        return state;
+    pushMessage(state, payload: { chatId: number, message: MessageProps}) {
+        const chatId = payload.chatId;
+        const oldMessages = (state as MessagesStoreState)[chatId] || [];
+        return {
+            [chatId]: [...oldMessages, payload.message]
+        };
     },
-    removeChat(state, payload) {
-        console.log('Make some changes in state with payload', payload);
-        return state;
+    cleanMessages(_state, payload: number) {
+        const chatId = payload;
+        return {
+            [chatId]: undefined
+        };
     }
 };
 

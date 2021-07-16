@@ -1,3 +1,4 @@
+import merge from '../../../../utils/mydash/merge/merge';
 import { Mutations, ContactProps, ContactResponse, MainStoreState } from '../../../types';
 
 const AVATAR_BASE_URL = 'https://ya-praktikum.tech/api/v2/resources/';
@@ -47,6 +48,21 @@ const mainMutations: Mutations = {
         return {
             contacts: contacts,
             activeContactId: payload
+        };
+    },
+
+    addSocket(state: MainStoreState, payload: { id: number, socket: unknown }) {
+        const newSocket = { [payload.id]: payload.socket };
+        return {
+            sockets: merge(state.sockets, newSocket)
+        };
+    },
+
+    removeSocket(state: MainStoreState, payload: number) {
+        const newSocketsState = Object.assign({}, state.sockets);
+        delete newSocketsState[payload];
+        return {
+            sockets: newSocketsState
         };
     }
 };

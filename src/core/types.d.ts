@@ -1,6 +1,7 @@
 import Block from './k-react/block';
 import Page from './k-react/page';
 import Store from './store/store';
+import WebSocketConnection from '../modules/websocket/websocket-connection';
 import { METHODS } from '../modules/http-services/http-service';
 
 interface EventBusListeners {
@@ -181,7 +182,7 @@ type Actions = { [action: string]: Action }
 type Mutation = (state: State, payload: unknown) => State
 type Mutations = { [mutation: string]: Mutation }
 
-type Selector = (state: State) => BlockProps
+type Selector = (state: State, payload?: unknown) => BlockProps
 type Selectors = { [selector: string]: Selector }
 
 type StateUpdateCallback = (state: State) => void
@@ -194,7 +195,8 @@ interface MainStoreState extends State {
     isLoggedIn: boolean | null,
     userInfo: UserInfo,
     contacts: ContactProps[],
-    activeContactId: number | null
+    activeContactId: number | null,
+    sockets: { [contactId: string]: WebSocketConnection }
 }
 
 interface MessagesStoreParams extends StoreParams {
@@ -202,5 +204,5 @@ interface MessagesStoreParams extends StoreParams {
 }
 
 interface MessagesStoreState extends State {
-    [contactId: number]: MessageProps[]
+    [contactIdAsString: string]: MessageProps[]
 }
