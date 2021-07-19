@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import Block from '../src/core/k-react/block';
+import Block from './block';
 import { assert } from 'chai';
 import { JSDOM } from 'jsdom';
 const sinon = require('sinon');
@@ -25,23 +25,17 @@ describe('Block test', function () {
         dom.window.handlebars = handlebars;
         (global as any).window = dom.window;
         (global as any).document = dom.window.document;
-
-        componentLink = new Block('a', 'link-element', { text: 'first test' });
-
-        componentDiv = new Block();
-
-        componentButton = new Block('button', '', { events: {
-            click: (e) => {
-                dom.window.button = e.target;
-            }
-        }});
-        
-        fake = sinon.replace(
-            componentLink, 'componentDidUpdate', sinon.fake(componentLink.componentDidUpdate)
-        );
     });
 
     describe('Create a link element', function () {
+
+        before(function() {
+            componentLink = new Block('a', 'link-element', { text: 'first test' });
+        
+            fake = sinon.replace(
+                componentLink, 'componentDidUpdate', sinon.fake(componentLink.componentDidUpdate)
+            );
+        });
 
         it('Created component is link', function () {
             assert.isTrue(componentLink?.element instanceof window.HTMLAnchorElement);
@@ -69,6 +63,10 @@ describe('Block test', function () {
 
     describe('Create a default element', function () {
 
+        before(function() {
+            componentDiv = new Block();
+        });
+
         it('Created component is div by default', function () {
             assert.isTrue(componentDiv?.element instanceof window.HTMLDivElement);
         });
@@ -86,13 +84,21 @@ describe('Block test', function () {
 
     describe('Create a button element', function () {
 
+        before(function() {
+            componentButton = new Block('button', '', { events: {
+                click: (e) => {
+                    (global as any).button = e.target;
+                }
+            }});
+        });
+
         it('Created component is button', function () {
             assert.isTrue(componentButton?.element instanceof window.HTMLButtonElement);
         });
 
         it('Created component has click event on itself', function () {
             componentButton?.element.click();
-            assert.equal((window as any).button, componentButton.element);
+            assert.equal((global as any).button, componentButton.element);
         });
 
         it('Created component can hide', function () {

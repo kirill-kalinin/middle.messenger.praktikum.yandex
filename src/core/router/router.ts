@@ -2,6 +2,8 @@ import Route from './route';
 import mainStore from '../store/app-stores/main/store-main';
 import type { PageCreator } from '../types';
 
+const window = globalThis;
+
 export enum RouterDirections {
     BACK = 'BACK',
     FORWARD = 'FORWARD'
