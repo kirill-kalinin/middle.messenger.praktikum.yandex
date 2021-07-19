@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import HTTPService from './http-service';
 import { assert } from 'chai';
 import { JSDOM } from 'jsdom';

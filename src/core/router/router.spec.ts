@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import Router from './router';
 import { assert } from 'chai';
 import { JSDOM } from 'jsdom';
 import Page from '../k-react/page';
 import Block from '../k-react/block';
-// const sinon = require('sinon');
+const sinon = require('sinon');
 
 describe('Router test', function () {
 
@@ -21,6 +22,10 @@ describe('Router test', function () {
         );
         (global as any).window = dom.window;
         (global as any).document = dom.window.document;
+
+        sinon.createSandbox().replaceGetter(
+            router, 'history', () => dom.window.history
+        );
     });
 
     describe('Base tests', function () {
@@ -56,12 +61,16 @@ describe('Router test', function () {
     describe('Navigation tests', function () {
 
         before(function() {
-            //pageStub = new Page({ root: new Block() });
+            router.go('/login');
+            router.go('/signup');
         });
 
-        it('1', function () {
-            router.go('/signup');
-            assert.equal(router.history.state.url, '/signup');
+        it('History length increased after redirection', function () {
+            assert.equal(router.history.length, 3);
+        });
+
+        it('Location changed correctly', function () {
+            assert.equal(window.location.pathname, '/signup');
         });
 
     });

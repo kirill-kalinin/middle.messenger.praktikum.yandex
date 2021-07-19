@@ -2,8 +2,6 @@ import Route from './route';
 import mainStore from '../store/app-stores/main/store-main';
 import type { PageCreator } from '../types';
 
-const window = globalThis;
-
 export enum RouterDirections {
     BACK = 'BACK',
     FORWARD = 'FORWARD'
@@ -12,7 +10,6 @@ export enum RouterDirections {
 export default class Router {
     private static __instance: Router | undefined;
     public routes: Route[];
-    public history: History;
     private _currentRoute: Route | null;
     private _rootQuery: string;
     private _isDisabled: boolean;
@@ -25,7 +22,6 @@ export default class Router {
         }
 
         this.routes = [];
-        this.history = window.history;
         this._currentRoute = null;
         this._rootQuery = rootQuery;
         this._isDisabled = false;
@@ -42,6 +38,10 @@ export default class Router {
         });
 
         Router.__instance = this;
+    }
+
+    get history(): History {
+        return window.history;
     }
 
     public use(pathname: string, pageCreator: PageCreator, isPrivate = false): Router {
