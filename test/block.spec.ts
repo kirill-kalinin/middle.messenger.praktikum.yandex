@@ -2,6 +2,7 @@
 import Block from '../src/core/k-react/block';
 import { assert } from 'chai';
 import { JSDOM } from 'jsdom';
+const sinon = require('sinon');
 
 const handlebars = require('handlebars');
 
@@ -10,6 +11,7 @@ describe('Block test', function () {
     let componentLink: Block;
     let componentDiv: Block;
     let componentButton: Block;
+    let fake: { callCount: any; };
 
     before('Create DOM', function () {
         const dom = new JSDOM(
@@ -33,6 +35,10 @@ describe('Block test', function () {
                 dom.window.button = e.target;
             }
         }});
+        
+        fake = sinon.replace(
+            componentLink, 'componentDidUpdate', sinon.fake(componentLink.componentDidUpdate)
+        );
     });
 
     describe('Create a link element', function () {
@@ -52,6 +58,11 @@ describe('Block test', function () {
         it('Created component props may be changed', function () {
             componentLink?.setProps({ text: 'second test'});
             assert.equal(componentLink?.props.text, 'second test');
+        });
+
+        it('Changing props calls method componentDidUpdate', function () {
+            componentLink?.setProps({ text: 'third test'});
+            assert.equal(fake.callCount, 2);
         });
 
     });

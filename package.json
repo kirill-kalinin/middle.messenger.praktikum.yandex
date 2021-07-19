@@ -32,6 +32,7 @@
     "@types/chai": "^4.2.21",
     "@types/jsdom": "^16.2.13",
     "@types/mocha": "^8.2.3",
+    "@types/sinon": "^10.0.2",
     "@typescript-eslint/eslint-plugin": "^4.28.0",
     "@typescript-eslint/parser": "^4.28.0",
     "autoprefixer": "^10.2.4",
@@ -47,6 +48,7 @@
     "postcss-import": "^14.0.0",
     "postcss-nested": "^5.0.3",
     "precss": "^4.0.0",
+    "sinon": "^11.1.1",
     "stylelint": "^13.13.1",
     "ts-node": "^10.1.0",
     "typescript": "^4.1.3"
