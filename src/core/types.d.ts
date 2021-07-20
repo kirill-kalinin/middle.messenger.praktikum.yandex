@@ -81,6 +81,25 @@ interface ChatUserResponse {
     role: string
 }
 
+interface MessageResponse {
+    id: number,
+    user_id: number,
+    chat_id: number,
+    type: string,
+    time: string,
+    content: string,
+    is_read: boolean,
+    file?: {
+        id: number,
+        user_id: number,
+        path: string,
+        filename: string,
+        content_type: string,
+        content_size: number,
+        upload_date: string
+    }  
+}
+
 interface MessageProps extends BlockProps {
     isOwn: boolean,
     isImage: boolean,

@@ -25,19 +25,22 @@ export default class Chat extends Block {
             return;
         }
 
-        this._activeContactId = (mainStore.state as MainStoreState).activeContactId;
+        const mainStoreState = mainStore.state as MainStoreState;
+        this._activeContactId = mainStoreState.activeContactId;
 
-        messagesStore.subscribe(String(this._activeContactId), this._newMessagesListener);
+        mainStore.subscribe('activeContactId', this._activeIdListener);
 
-        mainStore.subscribe('activeContactId', newState => {
-            messagesStore.unsubscribe(String(this._activeContactId), this._newMessagesListener);
-            this._activeContactId = (newState as MainStoreState).activeContactId;
-            this.setProps(messagesSelectors.getMessages(messagesStore.state, this._activeContactId));
-            messagesStore.subscribe(String(this._activeContactId), this._newMessagesListener);
-        });
+        this._activeIdListener(mainStoreState);
     }
 
-    private _newMessagesListener(newState: MessagesStoreState): void {
+    private _activeIdListener = (newState: MainStoreState): void => {
+        messagesStore.unsubscribe(String(this._activeContactId), this._newMessagesListener);
+        this._activeContactId = newState.activeContactId;
+        this.setProps(messagesSelectors.getMessages(messagesStore.state, this._activeContactId));
+        messagesStore.subscribe(String(this._activeContactId), this._newMessagesListener);
+    }
+
+    private _newMessagesListener = (newState: MessagesStoreState): void => {
         this.setProps(messagesSelectors.getMessages(newState, this._activeContactId));
     }
 
@@ -50,6 +53,9 @@ export default class Chat extends Block {
         }
         this._messages = props.messages.map(message => new Message(message));
         DOM.attachComponent(this._messages, '.chat__messages-list', this);
+
+        const messagesList = this.element.querySelector('.chat__messages-list');
+        messagesList && messagesList.scrollTo(0, messagesList.scrollHeight);
     }
 
     private _sendMessage(form: FormData) {

@@ -1,5 +1,6 @@
 import EventBus from '../event-bus/event-bus';
 import type { Validators } from '../../core/types';
+import * as sanitizeHtml from 'sanitize-html';
 
 export default class FormHandler {
 
@@ -16,7 +17,7 @@ export default class FormHandler {
         this._eventBus = () => eventBus;
         this._validationRegex = {
             name: /^[a-zA-Zа-яёА-ЯЁ]{2,20}$/,
-            email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+            email: /^[a-zA-Z0-9_.+-]{2,20}@[a-zA-Z0-9-]{2,20}\.[a-z]{2,10}$/,
             login: /^[a-zA-Z][a-zA-Z0-9]{4,20}$/,
             password: /^[a-zA-Zа-яёА-ЯЁ0-9]{8,25}$/,
             tel: /^(\+{1}7{1}|8) ?\(?\d{3}\)? ?\d{3}[ -]?\d{2}[ -]?\d{2}$/
@@ -65,6 +66,7 @@ export default class FormHandler {
 
         let isFormValid = true;
         inputs.forEach(input => {
+            input.value = sanitizeHtml(input.value);
             if (!this._isValidInput(input, equalDataInputs)) {
                 isFormValid = false;
                 input.classList.add('invalid-input');

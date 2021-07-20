@@ -83,3 +83,11 @@
 .message__img_own {
     margin-left: auto;
 }
+
+.message__mark {
+    filter: grayscale(1) opacity(0.3);
+}
+
+.message__mark_readed {
+    filter: unset;
+}

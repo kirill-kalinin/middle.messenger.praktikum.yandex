@@ -2,6 +2,7 @@ import Router from '../../core/router/router';
 import DOMService from '../../core/k-react/dom-service';
 import Popup from '../../components/popup/popup';
 import type { BlockProps, PopupEvents } from '../../core/types';
+import * as sanitizeHtml from 'sanitize-html';
 
 export default class PopupHandler {
 
@@ -65,6 +66,7 @@ export default class PopupHandler {
     private _getInput(): string | undefined {
         const input = this._popup.element.querySelector('.popup__input');
         if (input instanceof HTMLInputElement && input.dataset.validator) {
+            input.value = sanitizeHtml(input.value);
             return this._validateInput(input.value, input.dataset.validator);
         }
     }

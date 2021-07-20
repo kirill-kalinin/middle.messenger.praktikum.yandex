@@ -1,6 +1,9 @@
 import { Actions } from '../../../types';
 
 const messagesActions: Actions = {
+    loadMessages(context, payload) {
+        context.commit('loadMessages', payload);
+    },
     pushMessage(context, payload) {
         context.commit('pushMessage', payload);
     },

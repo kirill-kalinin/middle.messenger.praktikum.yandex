@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 import EventBus from '../../modules/event-bus/event-bus';
+import isEqual from '../../utils/mydash/is-equal/is-equal';
 import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 
 // Подключение через CDN пока нет Webpack, с Parcel сборка получается с багом
@@ -81,8 +82,11 @@ export default class Block {
         if (!nextProps) {
             return;
         }
+        const newProps = Object.assign({}, this.props, nextProps);
 
-        Object.assign(this.props, nextProps);
+        if (!isEqual(this.props, newProps)) {
+            Object.assign(this.props, nextProps);
+        }
     };
 
     public setChild = (child: BlockChild, cssSelector: string): void => {

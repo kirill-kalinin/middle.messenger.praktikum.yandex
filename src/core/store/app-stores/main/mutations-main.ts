@@ -19,21 +19,8 @@ const mainMutations: Mutations = {
             if (chat.id === state.activeContactId) {
                 isActiveContactRemains = true;
             }
-            return {
-                id: chat.id,
-                title: chat.title,
-                avatar: chat.last_message?.user.avatar 
-                    ? AVATAR_BASE_URL + chat.last_message.user.avatar
-                    : '',
-                unreadCount: chat.unread_count,
-                lastMessage: chat.last_message?.content || 'Сообщений пока нет!',
-                date: chat.last_message?.time
-                    ? new Date(chat.last_message.time).toLocaleString().split(', ')
-                    : ['', ''],
-                active: chat.id === state.activeContactId
-            } as ContactProps;
+            return transformContact(state, chat);
         });
-
         return {
             contacts: transformedChats,
             activeContactId: isActiveContactRemains ? state.activeContactId : null
@@ -64,6 +51,22 @@ const mainMutations: Mutations = {
         return {
             sockets: newSocketsState
         };
+    }
+};
+
+function transformContact(state: MainStoreState, chat: ContactResponse): ContactProps {
+    return {
+        id: chat.id,
+        title: chat.title,
+        avatar: chat.last_message?.user.avatar 
+            ? AVATAR_BASE_URL + chat.last_message.user.avatar
+            : '',
+        unreadCount: chat.unread_count,
+        lastMessage: chat.last_message?.content || 'Сообщений пока нет!',
+        date: chat.last_message?.time
+            ? new Date(chat.last_message.time).toLocaleString().split(', ')
+            : ['', ''],
+        active: chat.id === state.activeContactId
     }
 };
 

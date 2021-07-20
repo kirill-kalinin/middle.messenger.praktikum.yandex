@@ -6,6 +6,8 @@ import ChatsController from './controllers/chats-controller';
 import WebSocketHandler from './modules/websocket/websocket-handler';
 import { PageCreator } from './core/types';
 
+import mainStore from './core/store/app-stores/main/store-main';
+
 const router = new Router();
 appRoutes.forEach((route: [string, PageCreator]) => router.use(...route));
 router.start();
@@ -23,3 +25,9 @@ authControllerInstance.getUserInfo().then(isLoggedIn => {
         chatsController.getChats();
     }
 });
+
+setInterval(() => {
+    if (mainStore.state.isLoggedIn) {
+        chatsController.getChats()
+    }
+}, 10000);

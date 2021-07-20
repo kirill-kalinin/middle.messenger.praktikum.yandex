@@ -12,7 +12,9 @@ export default `
         </div>
         <p class="message__date{{#if isOwn}} message__date_own{{/if}}">
             {{date}}
-            {{#if isReaded}}<img src="${ImageUrlMark}" alt="V">{{/if}}
+            {{#if isOwn}}
+            <img src="${ImageUrlMark}" alt="V" class="message__mark{{#if isReaded}} message__mark_readed{{/if}}">
+            {{/if}}
         </p>
     </div>
 `;
