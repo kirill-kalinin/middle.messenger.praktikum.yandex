@@ -1,5 +1,8 @@
 Это тренировочный проект курса Яндекс.Практикум "Мидл фронтенд-разработчик".
 
+## Ссылка на pull request (sprint_3)
+https://github.com/kirill-kalinin/mf.messenger.praktikum.yandex/pull/1
+
 ## K-Chat
 
 Мессенджер для обмена сообщениями и пользовательскими файлами.
