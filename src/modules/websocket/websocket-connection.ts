@@ -1,4 +1,8 @@
+import * as sanitizeHtml from 'sanitize-html';
+import MessagesController from '../../controllers/messages-controller';
 import messagesStore from '../../core/store/app-stores/messages/store-messages';
+
+const messagesController = new MessagesController();
 
 export default class WebSocketConnection {
 
@@ -49,13 +53,25 @@ export default class WebSocketConnection {
 
     public send(form: FormData): void {
         const data = Object.fromEntries(form.entries());
-        if (data.message === '') {
-            return;
+        const message = sanitizeHtml(data.message as string);
+        if (message !== '') {
+            this._soket.send(JSON.stringify({
+                content: message,
+                type: 'message',
+            }));
         }
-        this._soket.send(JSON.stringify({
-            content: data.message,
-            type: 'message',
-        }));
+        if ((data.photo as File).name) {
+            const resourceForm = new FormData();
+            resourceForm.append('resource', data.photo);
+            messagesController.createResource(resourceForm).then(id => {
+                if (id) {
+                    this._soket.send(JSON.stringify({
+                        content: id,
+                        type: 'file',
+                    }));
+                }
+            });
+        }
     }
 
     public close(): void {

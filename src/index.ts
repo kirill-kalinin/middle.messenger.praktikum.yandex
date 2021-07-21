@@ -28,6 +28,6 @@ authControllerInstance.getUserInfo().then(isLoggedIn => {
 
 setInterval(() => {
     if (mainStore.state.isLoggedIn) {
-        chatsController.getChats()
+        chatsController.getChats();
     }
 }, 10000);

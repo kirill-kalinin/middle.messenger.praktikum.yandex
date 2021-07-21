@@ -17,18 +17,18 @@ export default `
                 <form class="chat__form" name="message">
                     <ul class="chat__attach bordered-block">
                         <li class="chat__attach-option">
-                            <label class="chat__attach-label">Фото или видео
-                                <input class="chat__attach-input" type="file" name="photo-video" accept="video/*,image/*">
+                            <label class="chat__attach-label">Изображение
+                                <input class="chat__attach-input" type="file" name="photo" accept="image/jpeg">
                             </label>
                         </li>
                         <li class="chat__attach-option">
                             <label class="chat__attach-label">Файл
-                                <input class="chat__attach-input" type="file" name="file" accept=".doc,.zip">
+                                <input class="chat__attach-input" type="file" name="file" accept=".doc,.zip" disabled="true">
                             </label>
                         </li>
                         <li class="chat__attach-option">
                             <label class="chat__attach-label">Локация
-                                <input class="chat__attach-input" type="file" name="location" accept=".txt">
+                                <input class="chat__attach-input" type="file" name="location" accept=".txt" disabled="true">
                             </label>
                         </li>
                     </ul>

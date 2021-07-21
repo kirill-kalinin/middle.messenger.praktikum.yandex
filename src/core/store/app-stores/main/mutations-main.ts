@@ -67,7 +67,7 @@ function transformContact(state: MainStoreState, chat: ContactResponse): Contact
             ? new Date(chat.last_message.time).toLocaleString().split(', ')
             : ['', ''],
         active: chat.id === state.activeContactId
-    }
-};
+    };
+}
 
 export default mainMutations;

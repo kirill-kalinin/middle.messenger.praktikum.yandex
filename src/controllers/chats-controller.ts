@@ -125,30 +125,4 @@ export default class ChatsController extends BaseController {
             this.pushErrorWarning(error.message);
         }
     }
-
-    public async getToken(id: number): Promise<string | undefined> {
-        try {
-            const response = await chatsAPI.getToken(id);
-            if (response.status === 200) {
-                return JSON.parse(response.response).token;
-            } else {
-                this.handleBadResponse(response);
-            }
-        } catch (error) {
-            this.pushErrorWarning(error.message);
-        }
-    }
-
-    public async getNewMessagesCount(id: number): Promise<string | undefined> {
-        try {
-            const response = await chatsAPI.getNewMessagesCount(id);
-            if (response.status === 200) {
-                return JSON.parse(response.response).unread_count;
-            } else {
-                this.handleBadResponse(response);
-            }
-        } catch (error) {
-            this.pushErrorWarning(error.message);
-        }
-    }
 }

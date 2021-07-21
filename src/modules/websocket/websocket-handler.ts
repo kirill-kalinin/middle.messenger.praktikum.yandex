@@ -1,10 +1,10 @@
 import WebSocketConnection from './websocket-connection';
-import ChatsController from '../../controllers/chats-controller';
+import MessagesController from '../../controllers/messages-controller';
 import mainStore from '../../core/store/app-stores/main/store-main';
 import messagesStore from '../../core/store/app-stores/messages/store-messages';
 import { ContactProps, MainStoreState } from '../../core/types';
 
-const chatsController = new ChatsController();
+const messagesController = new MessagesController();
 
 export default class WebSocketHandler {
     private static __instance: WebSocketHandler | undefined;
@@ -41,7 +41,7 @@ export default class WebSocketHandler {
     }
 
     private _establishConnection(userId: number, contact: ContactProps): void {
-        chatsController.getToken(contact.id).then(token => {
+        messagesController.getToken(contact.id).then(token => {
             if (!token) {
                 console.error('Не получен токен для чата', contact);
             } else {

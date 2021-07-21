@@ -54,8 +54,10 @@ export default class Chat extends Block {
         this._messages = props.messages.map(message => new Message(message));
         DOM.attachComponent(this._messages, '.chat__messages-list', this);
 
-        const messagesList = this.element.querySelector('.chat__messages-list');
-        messagesList && messagesList.scrollTo(0, messagesList.scrollHeight);
+        setTimeout(() => {
+            const messagesList = this.element.querySelector('.chat__messages-list');
+            messagesList && messagesList.scrollTo(0, messagesList.scrollHeight);
+        }, 0);
     }
 
     private _sendMessage(form: FormData) {

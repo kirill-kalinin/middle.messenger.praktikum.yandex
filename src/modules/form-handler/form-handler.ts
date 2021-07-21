@@ -66,7 +66,9 @@ export default class FormHandler {
 
         let isFormValid = true;
         inputs.forEach(input => {
-            input.value = sanitizeHtml(input.value);
+            if (input.type === 'text') {
+                input.value = sanitizeHtml(input.value);
+            }
             if (!this._isValidInput(input, equalDataInputs)) {
                 isFormValid = false;
                 input.classList.add('invalid-input');
