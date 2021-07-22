@@ -26,7 +26,7 @@ export default `
             <ul class="sidebar__menu"></ul>
                 {{#each menuItems}}
                 <li class="sidebar__menu-item">
-                    <a data-route="{{link}}" href="{{link}}"
+                    <a data-route="{{link}}" data-event="{{event}}" href="{{link}}"
                     class="sidebar__link sidebar__link_menu{{#if active}} sidebar__link_active{{/if}}">
                         {{text}}
                     </a>

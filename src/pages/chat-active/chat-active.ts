@@ -1,35 +1,31 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../core/services/dummy-service';
 import Chat from '../../components/chat/chat';
 import ChatSidebar from '../../components/chat-sidebar/chat-sidebar';
-import Contact from '../../components/contact/contact';
-import Message from '../../components/message/message';
+
+import mainStore from '../../core/store/app-stores/main/store-main';
+import messagesStore from '../../core/store/app-stores/main/store-main';
+import { MainStoreState, MessagesStoreState, MessageProps } from '../../core/types';
 
 export default function createPageChatActive(): Page {
-    const dummyService = new DummyService();
-  
-    const chat = new Chat({ chatModeActive: true });
+    const mainStoreInitialState = mainStore.state as MainStoreState;
+    const messagesStoreInitialState = messagesStore.state as MessagesStoreState;
 
-    const chatSidebar = new ChatSidebar();
+    const contacts = mainStoreInitialState.contacts;
+    const activeContactId = mainStoreInitialState.activeContactId;
 
-    const contactsData = dummyService.fetchContacts();
-    const activeContactId = dummyService.getActiveContactId();
-    const contacts = contactsData.map(data => {
-        if (data.id === activeContactId) {
-            data.active = true;
-        }
-        return new Contact(data);
-    });
+    const chatSidebar = new ChatSidebar({contacts, activeContactId});
 
-    const messagesList = dummyService.fetchMessages();
-    const messages = messagesList.map(item => new Message(item));
+    let messages: MessageProps[] = [];
+    if (activeContactId !== null && messagesStoreInitialState[activeContactId]) {
+        messages = messagesStoreInitialState[activeContactId];
+    }
+
+    const chat = new Chat({ chatModeActive: true, messages });
 
     return new Page({
         root: chat,
         children: {
-            chatSidebar: [chatSidebar, '.chat__sidebar', chat],
-            contacts: [contacts, '.chat-sidebar__contacts', chatSidebar],
-            messages: [messages, '.chat__messages-list', chat]
+            chatSidebar: [chatSidebar, '.chat__sidebar', chat]
         }
     });
 }

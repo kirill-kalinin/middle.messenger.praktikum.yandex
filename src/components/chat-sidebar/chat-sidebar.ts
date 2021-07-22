@@ -1,50 +1,44 @@
 import Template from './chat-sidebar.hbs.js';
 import Block from '../../core/k-react/block';
-import { popupAddContactPreset, popupPromptContactPreset } from '../../components/popup/popup';
-import PopupHandler, { PopupTypes } from '../../modules/popup-handler/popup-handler';
-import Router from '../../core/router/router';
-import type { BlockProps } from '../../core/types';
+import Contact from '../contact/contact';
+import DOMService from '../../core/k-react/dom-service';
+import ChatSidebarHandler from './modules/chat-sidebar-handler';
+import type { ChatSidebarProps } from '../../core/types';
+
+import mainStore from '../../core/store/app-stores/main/store-main';
+import mainSelectors from '../../core/store/app-stores/main/selectors-main';
+
+const DOM = new DOMService();
 
 export default class ChatSidebar extends Block {
 
-    private _Router: Router;
-    private _popupHandler: PopupHandler;
+    private _sidebarHandler: ChatSidebarHandler;
+    private _contacts: Contact[] | undefined;
 
-    constructor(props: BlockProps = {}, className = 'fragment') {
+    constructor(props: ChatSidebarProps, className = 'fragment') {
         super('div', className, props);
-        this._popupHandler = new PopupHandler();
+        mainStore.subscribe('contacts', newState => {
+            this.setProps(mainSelectors.getContacts(newState));
+        });
     }
 
-    private _toolbarButtonsHandler() {
-        const buttonAddContact = this.element.querySelector('.chat-sidebar__button_add');
-        const buttonRemoveContact = this.element.querySelector('.chat-sidebar__button_remove');
-
-        if (buttonAddContact) {
-            buttonAddContact.addEventListener('click', () => {
-                if (this._Router.isDisabled) {
-                    return;
-                }
-                this._popupHandler.pushPopup(popupAddContactPreset, PopupTypes.CONTACT_ADD);
-            });
+    _renderContacts(props: ChatSidebarProps): void {
+        if (this._contacts) {
+            DOM.detachComponent(this._contacts, this);
         }
-
-        if (buttonRemoveContact) {
-            buttonRemoveContact.addEventListener('click', () => {
-                if (this._Router.isDisabled) {
-                    return;
-                }
-                this._popupHandler.pushPopup(popupPromptContactPreset, PopupTypes.CONTACT_PROMPT);
-            });
-        }
+        this._contacts = props.contacts.map(contact => new Contact(contact));
+        DOM.attachComponent(this._contacts, '.chat-sidebar__contacts', this);
     }
 
     componentDidMount(): void {
-        this._Router = new Router();
-        this._toolbarButtonsHandler();
+        this._sidebarHandler = new ChatSidebarHandler();
+        this._renderContacts(this.props as ChatSidebarProps);
+        this._sidebarHandler.init(this.element, this._contacts);
     }
 
     componentDidUpdate(): void {
-        this._toolbarButtonsHandler();
+        this._renderContacts(this.props as ChatSidebarProps);
+        this._sidebarHandler.update(this.element, this._contacts);
     }
 
     render(): string {

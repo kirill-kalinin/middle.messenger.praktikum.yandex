@@ -1,3 +1,5 @@
+import AvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
+
 export default `
     <div class="wrapper">
         <div class="profile container bordered-block">
@@ -5,7 +7,8 @@ export default `
             <main class="profile__main-block">
                 <div class="profile__header">
                     <div class="profile__user-name">{{header.name}}</div>
-                    <img class="profile__user-avatar" src="{{header.avatarSrc}}" alt=" ">
+                    <img class="profile__user-avatar"  alt=" "
+                        src="{{#if header.avatarSrc}}{{header.avatarSrc}}{{else}}${AvatarPlaceholder}{{/if}}">
                 </div>
 
                 {{#if isMainInfoMode}}
@@ -20,7 +23,7 @@ export default `
                 {{/if}}
 
                 {{#if isEditInfoMode}}
-                <form class="profile__data" name="profile-data">
+                <form class="profile__data" name="{{formName}}">
                     {{#each userData}}
                     <p class="profile__data-item">
                         <label class="profile__data-label">{{this.label}}</label>
@@ -34,7 +37,7 @@ export default `
                 {{/if}}
 
                 {{#if isEditPasswordMode}}
-                <form class="profile__data profile__data_password" name="user-password">
+                <form class="profile__data profile__data_password" name="{{formName}}">
                     {{#each userPasswordFields}}
                     <p class="profile__data-item">
                         <label class="profile__data-label">{{this.label}}</label>
@@ -48,7 +51,7 @@ export default `
                 {{/if}}
 
                 {{#if isAvatarUploadMode}}
-                <form class="profile__data profile__data_avatar-upload" name="avatar-upload">
+                <form class="profile__data profile__data_avatar-upload" name="{{formName}}">
                     <p class="profile__avatar-uplaod-title">Загрузите файл</p>
                     <p class="profile__avatar-upload-filename" title="Нажмите, чтобы выбрать другое изображение"></p>
                     <label class="profile__avatar-upload-label">Выбрать файл на компьютере

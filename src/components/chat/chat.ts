@@ -1,42 +1,95 @@
 import Template from './chat.hbs.js';
 import Block from '../../core/k-react/block';
+import Message from '../message/message';
+import DOMService from '../../core/k-react/dom-service';
 import FormHandler from '../../modules/form-handler/form-handler';
-import type { BlockProps } from '../../core/types';
+import HiddenBlockHandler from './modules/hidden-block-handler';
+import type { ChatProps, MainStoreState, MessagesStoreState } from '../../core/types';
+
+import mainStore from '../../core/store/app-stores/main/store-main';
+import messagesStore from '../../core/store/app-stores/messages/store-messages';
+import messagesSelectors from '../../core/store/app-stores/messages/selectors-messages';
+
+const DOM = new DOMService();
 
 export default class Chat extends Block {
 
-    private _formHandler: FormHandler;
+    private _formHandler: FormHandler | undefined;
+    private _hiddenBlockHandler: HiddenBlockHandler;
+    private _messages: Message[] | null;
+    private _activeContactId: MainStoreState['activeContactId'];
 
-    constructor(props: BlockProps = {}, className = 'fragment') {
+    constructor(props: ChatProps, className = 'fragment') {
         super('div', className, props);
-    }
-
-    private _hiddenBlockHandler() {
-        const attachToMessageButton = this.element.querySelector('.chat__form-button_attach');
-        const attachToMessageInputs = this.element.querySelector('.chat__attach');
-        if (!attachToMessageButton || !attachToMessageInputs) {
+        if (!props.chatModeActive) {
             return;
         }
-        attachToMessageButton.addEventListener('click', function() {
-            attachToMessageInputs.classList.toggle('chat__attach_visible');
-        });
+
+        const mainStoreState = mainStore.state as MainStoreState;
+        this._activeContactId = mainStoreState.activeContactId;
+
+        mainStore.subscribe('activeContactId', this._activeIdListener);
+
+        this._activeIdListener(mainStoreState);
+    }
+
+    private _activeIdListener = (newState: MainStoreState): void => {
+        messagesStore.unsubscribe(String(this._activeContactId), this._newMessagesListener);
+        this._activeContactId = newState.activeContactId;
+        this.setProps(messagesSelectors.getMessages(messagesStore.state, this._activeContactId));
+        messagesStore.subscribe(String(this._activeContactId), this._newMessagesListener);
+    }
+
+    private _newMessagesListener = (newState: MessagesStoreState): void => {
+        this.setProps(messagesSelectors.getMessages(newState, this._activeContactId));
+    }
+
+    private _renderMessages(props: ChatProps): void {
+        if (!props.chatModeActive) {
+            return;
+        }
+        if (this._messages) {
+            DOM.detachComponent(this._messages, this);
+        }
+        this._messages = props.messages.map(message => new Message(message));
+        DOM.attachComponent(this._messages, '.chat__messages-list', this);
+
+        setTimeout(() => {
+            const messagesList = this.element.querySelector('.chat__messages-list');
+            messagesList && messagesList.scrollTo(0, messagesList.scrollHeight);
+        }, 0);
+    }
+
+    private _sendMessage(form: FormData) {
+        const socket = (mainStore.state as MainStoreState).sockets[String(this._activeContactId)];
+        socket.send(form);
     }
 
     private _setInputListeners() {
         const form = this.element.querySelector('form');
         if (form instanceof HTMLFormElement) {
-            this._formHandler.addValidationListeners(form);
+            this._formHandler && this._formHandler.setValidationListeners(form);
         }
     }
 
     componentDidMount(): void {
+        this._hiddenBlockHandler = new HiddenBlockHandler();
+        this._hiddenBlockHandler.init(this.element);
+        if (!this.props.chatModeActive) {
+            return;
+        }
+        this._renderMessages(this.props as ChatProps);
         this._formHandler = new FormHandler();
-        this._hiddenBlockHandler();
         this._setInputListeners();
+        this._formHandler.subscribeSubmit('message', this._sendMessage.bind(this));
     }
 
-    componentDidUpdate():void {
-        this._hiddenBlockHandler();
+    componentDidUpdate(): void {
+        this._hiddenBlockHandler.update(this.element);
+        if (!this.props.chatModeActive) {
+            return;
+        }
+        this._renderMessages(this.props as ChatProps);
         this._setInputListeners();
     }
 

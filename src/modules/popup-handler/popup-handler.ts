@@ -1,17 +1,8 @@
 import Router from '../../core/router/router';
 import DOMService from '../../core/k-react/dom-service';
-import Popup, {
-    popupRemoveContactPreset,
-    popupWarningContactPreset
-} from '../../components/popup/popup';
-import type { BlockProps } from '../../core/types';
-
-export enum PopupTypes {
-    CONTACT_ADD,
-    CONTACT_REMOVE,
-    CONTACT_PROMPT,
-    CONTACT_ERROR
-}
+import Popup from '../../components/popup/popup';
+import type { BlockProps, PopupEvents } from '../../core/types';
+import * as sanitizeHtml from 'sanitize-html';
 
 export default class PopupHandler {
 
@@ -24,13 +15,13 @@ export default class PopupHandler {
         this._Router = new Router();
     }
 
-    public pushPopup(props: BlockProps, type: PopupTypes): void {
+    public pushPopup(props: BlockProps, events: PopupEvents): void {
         this._popup = new Popup(props);
-        this._handlePopup(type);
+        this._handlePopup(events);
         this._DOMService.attachComponent(this._popup, 'body');
     }
 
-    private _detachPopup = (callback?: unknown) => {
+    private _detachPopup = (callback?: Function) => {
         this._DOMService.detachComponent(this._popup);
         this._Router.enable();
         if (typeof callback === 'function') {
@@ -38,59 +29,65 @@ export default class PopupHandler {
         }
     };
 
-    private _handlePopup(popupType: PopupTypes) {
+    private _handlePopup(events: PopupEvents) {
         const closeButton = this._popup.element.querySelector('.popup__close');
-        if (closeButton && closeButton instanceof HTMLElement) {
+        if (closeButton instanceof HTMLElement) {
             closeButton.addEventListener('click', this._detachPopup.bind(this));
         }
-        const mainButton = this._popup.element.querySelector('.popup__button button');
-        if (!mainButton) {
-            console.error('Главная кнопка поп-апа не найдена, возможно он неправильно настроен');
-            return;
+
+        const primaryButton = this._popup.element.querySelector('.popup__button button');
+        if (primaryButton instanceof HTMLElement) {
+            primaryButton.addEventListener('click', () => this._detachPopup(() => {
+                if (events.primary) {
+                    this._invokeCallback(events.primary);
+                }
+            }));
         }
 
-        switch (popupType) {
-            
-        case PopupTypes.CONTACT_ADD:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                console.log('Здесь будет функция, добавляющая контакт');
+        const secondaryButton = this._popup.element.querySelector('.popup__button-secondary button');
+        if (secondaryButton instanceof HTMLElement) {
+            secondaryButton.addEventListener('click', () => this._detachPopup(() => {
+                if (events.secondary) {
+                    this._invokeCallback(events.secondary);
+                }
             }));
-            break;
-
-        case PopupTypes.CONTACT_REMOVE:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                console.log('Здесь будет функция, удаляющая контакт');
-            }));
-            break;
-
-        case PopupTypes.CONTACT_PROMPT:
-            mainButton.addEventListener('click', () => this._detachPopup(() => {
-                document.addEventListener('mouseup', (e: Event) => {
-                    this._Router.disable();
-                    const contact = (e.target as HTMLElement).closest('.contact');
-                    if (contact) {
-                        const contactName = contact.querySelector('.contact__name');
-                        let name;
-                        if (contactName && contactName instanceof HTMLElement) {
-                            name = contactName.innerText;
-                        } else {
-                            throw new Error('Ошибка в шаблоне контакта');
-                        }
-                        this.pushPopup({...popupRemoveContactPreset, contactToRemove: name}, PopupTypes.CONTACT_REMOVE);
-                    } else {
-                        this.pushPopup(popupWarningContactPreset, PopupTypes.CONTACT_ERROR);
-                    }
-                }, {once: true});
-            }));
-            break;
-
-        case PopupTypes.CONTACT_ERROR:
-            mainButton.addEventListener('click', this._detachPopup.bind(this));
-            break;
-            
-        default:
-            console.error('Неправильно указан тип поп-апа');
         }
+    }
+
+    private _invokeCallback(callback: Function) {
+        try {
+            callback(this._getInput());
+        } catch (error) {
+            const props = this.getWarningPreset('Ошибка', error.message);
+            this.pushPopup(props, {});
+        }
+    }
+
+    private _getInput(): string | undefined {
+        const input = this._popup.element.querySelector('.popup__input');
+        if (input instanceof HTMLInputElement && input.dataset.validator) {
+            input.value = sanitizeHtml(input.value);
+            return this._validateInput(input.value, input.dataset.validator);
+        }
+    }
+
+    private _validateInput(value: string, validator: string): string | never {
+        const regExp = new RegExp(validator);
+        if (regExp.test(value)) {
+            return value;
+        } else {
+            throw new Error('Введены некорректные данные');
+        }
+    }
+
+    public getWarningPreset(title: string, message: string | number): BlockProps {
+        return {
+            typeIsWarning: true,
+            isCloseable: false,
+            title: title,
+            warningMessage: message,
+            buttonText: 'Закрыть'
+        };
     }
 
 }

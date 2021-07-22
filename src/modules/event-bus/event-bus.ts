@@ -1,4 +1,4 @@
-import { EventBusListeners } from '../types';
+import { EventBusListeners } from '../../core/types';
 
 export default class EventBus {
     listeners: EventBusListeners;
@@ -21,7 +21,7 @@ export default class EventBus {
         }
     }
 
-    emit(event: string, ...args: []): void {
+    emit(event: string, ...args: unknown[]): void {
         if (this._isRegistered(event)) {
             this.listeners[event].forEach(callback => {
                 callback(...args);
@@ -30,9 +30,6 @@ export default class EventBus {
     }
     
     private _isRegistered(event: string) {
-        if (!this.listeners[event]) {
-            throw new Error(`Error: Нет события: ${event}`);
-        }
-        return true;
+        return !!this.listeners[event];
     }
 }

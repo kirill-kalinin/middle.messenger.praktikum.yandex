@@ -1,4 +1,5 @@
 .button {
+    width: 100%;
     font-family: 'Roboto', sans-serif;
     cursor: pointer;
     text-decoration: none;

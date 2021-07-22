@@ -14,6 +14,14 @@ export default class Route {
         this._props = props;
     }
 
+    get path(): string {
+        return this._pathname;
+    }
+
+    get isPrivate(): boolean {
+        return this._props.isPrivate;
+    }
+
     navigate(pathname: string): void {
         if (this.match(pathname)) {
             this._pathname = pathname;

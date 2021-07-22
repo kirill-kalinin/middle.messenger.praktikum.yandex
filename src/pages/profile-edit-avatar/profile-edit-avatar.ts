@@ -1,16 +1,23 @@
 import Page from '../../core/k-react/page';
-import DummyService from '../../core/services/dummy-service';
 import Profile from '../../components/profile/profile';
-import Sidebar, { sidebarProfileMenuPreset } from '../../components/sidebar/sidebar';
-import Button, { profileSidebarButtonPreset } from '../../components/button/button';
+import Sidebar from '../../components/sidebar/sidebar';
+import { sidebarProfileMenuPreset } from '../../components/sidebar/presets/sidebars';
+import Button from '../../components/button/button';
+import { profileSidebarButtonPreset } from '../../components/button/presets/special-buttons';
+
 import cloneDeep from '../../utils/mydash/clone-deep/clone-deep';
+import ProfileDataService from '../../modules/profile-data-service/profile-data-service';
+
+import mainStore from '../../core/store/app-stores/main/store-main';
+import { MainStoreState } from '../../core/types';
 
 export default function createPageProfileEditAvatar(): Page {
-    const dummyService = new DummyService();
+    const mainStoreInitialState = mainStore.state as MainStoreState;
 
     const profile = new Profile({
-        header: dummyService.getProfileHeaderData(),
-        isAvatarUploadMode: true
+        isAvatarUploadMode: true,
+        formName: 'avatar',
+        header: ProfileDataService.getHeader(mainStoreInitialState.userInfo),
     });
 
     const sidebarPreset = cloneDeep(sidebarProfileMenuPreset);

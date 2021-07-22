@@ -1,26 +1,40 @@
-import Router from '../../core/router/router';
-import HTTPService from '../../core/services/http-service';
-import type { Validators, RequestOptions } from '../../core/types';
+import EventBus from '../event-bus/event-bus';
+import type { Validators } from '../../core/types';
+import * as sanitizeHtml from 'sanitize-html';
 
 export default class FormHandler {
 
-    private _router: Router;
-    private _http: HTTPService;
+    private static __instance: FormHandler | undefined;
+    private _eventBus: () => EventBus;
     private _validationRegex: Validators;
 
     constructor() {
-        this._router = new Router();
-        this._http = new HTTPService();
+        if (FormHandler.__instance) {
+            return FormHandler.__instance;
+        }
+
+        const eventBus = new EventBus();
+        this._eventBus = () => eventBus;
         this._validationRegex = {
             name: /^[a-zA-Zа-яёА-ЯЁ]{2,20}$/,
-            email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+            email: /^[a-zA-Z0-9_.+-]{2,20}@[a-zA-Z0-9-]{2,20}\.[a-z]{2,10}$/,
             login: /^[a-zA-Z][a-zA-Z0-9]{4,20}$/,
             password: /^[a-zA-Zа-яёА-ЯЁ0-9]{8,25}$/,
             tel: /^(\+{1}7{1}|8) ?\(?\d{3}\)? ?\d{3}[ -]?\d{2}[ -]?\d{2}$/
         };
+
+        FormHandler.__instance = this;
     }
 
-    public addValidationListeners(form: HTMLFormElement): void {
+    public subscribeSubmit(formName: string, callback: Function): void {
+        this._eventBus().on(formName, callback);
+    }
+
+    public unsubscribeSubmit(formName: string, callback: Function): void {
+        this._eventBus().off(formName, callback);
+    }
+
+    public setValidationListeners(form: HTMLFormElement): void {
         const [inputs, equalDataInputs] = this._queryElements(form);
         inputs.forEach(input => {
             input.addEventListener('focus', (e) => {
@@ -52,6 +66,9 @@ export default class FormHandler {
 
         let isFormValid = true;
         inputs.forEach(input => {
+            if (input.type === 'text') {
+                input.value = sanitizeHtml(input.value);
+            }
             if (!this._isValidInput(input, equalDataInputs)) {
                 isFormValid = false;
                 input.classList.add('invalid-input');
@@ -62,39 +79,7 @@ export default class FormHandler {
         }
 
         const formData = new FormData(form);
-        const jsonData = JSON.stringify(Object.fromEntries(formData.entries()));
-        console.log(form.name, jsonData);
-
-        let url: string;
-        switch (form.name) {
-        case 'login':
-            url = '/auth/signin';
-            break;
-        case 'signin':
-            url = '/auth/signup';
-            break;
-        default:
-            console.error('Попытка отправить неизвестную форму', form.name);
-            return;
-        }
-        const options: RequestOptions = {
-            data: jsonData,
-            headers: [
-                ['Content-type', 'application/json; charset=utf-8']
-            ]
-        };
-
-        const response = await this._http.post(url, options);
-
-        if (response instanceof XMLHttpRequest) {
-            console.log('response', response);
-            console.log('status', response.status);
-            if (response.status === 500) {
-                this._router.go('/500');
-            }
-        } else {
-            console.error('response is not XMLHttpRequest', response);
-        }
+        this._eventBus().emit(form.name, formData);
     }
 
     private _isValidInput(inputElement: HTMLInputElement, equalDataInputs: Array<HTMLInputElement>) {

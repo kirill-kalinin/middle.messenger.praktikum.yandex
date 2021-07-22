@@ -7,19 +7,29 @@ import type { BlockProps } from '../../core/types';
 export default class Popup extends Block {
 
     private _button: Button;
+    private _buttonSecondary: Button;
 
     constructor(props: BlockProps = {}, className = '') {
         super('div', className, props);
         this._button = new Button({
-            text: props.buttonText || 'Ок',
+            text: props.buttonText,
             additionClass: ''
         });
+        if (props.buttonSecondaryText) {
+            this._buttonSecondary = new Button({
+                text: props.buttonSecondaryText,
+                additionClass: ''
+            });
+        }
         this._attachButton();
     }
 
     private _attachButton() {
         const DOM = new DOMService();
         DOM.attachComponent(this._button, '.popup__button', this);
+        if (this._buttonSecondary) {
+            DOM.attachComponent(this._buttonSecondary, '.popup__button-secondary', this);
+        }
     }
 
     render(): string {
@@ -27,33 +37,3 @@ export default class Popup extends Block {
     }
 
 }
-
-export const popupAddContactPreset: BlockProps = {
-    typeIsContactAdd: true,
-    isCloseable: true,
-    title: 'Добавить контакт',
-    buttonText: 'Добавить'
-};
-
-export const popupRemoveContactPreset: BlockProps = {
-    typeIsContactRemove: true,
-    isCloseable: true,
-    title: 'Удалить контакт',
-    buttonText: 'Удалить'
-};
-
-export const popupPromptContactPreset: BlockProps = {
-    typeIsWarning: true,
-    isCloseable: false,
-    title: 'Удаление контакта',
-    warningMessage: 'Теперь кликните на контакт из списка',
-    buttonText: 'Понятно'
-};
-
-export const popupWarningContactPreset: BlockProps = {
-    typeIsWarning: true,
-    isCloseable: false,
-    title: 'Ошибка',
-    warningMessage: 'Нужно указать на один из контактов в списке',
-    buttonText: 'Понятно'
-};

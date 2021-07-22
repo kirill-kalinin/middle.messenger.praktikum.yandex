@@ -1,13 +1,21 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import EventBus from './event-bus';
+import EventBus from '../../modules/event-bus/event-bus';
+import isEqual from '../../utils/mydash/is-equal/is-equal';
 import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 
 // Подключение через CDN пока нет Webpack, с Parcel сборка получается с багом
 // https://github.com/handlebars-lang/handlebars.js/issues/1593
 // https://github.com/parcel-bundler/parcel/issues/1747
-const Handlebars = window.Handlebars;
 
-export default abstract class Block {
+const handlebars = typeof window === 'object'
+// eslint-disable-next-line @typescript-eslint/no-explicit-any 
+    ? (window as any).Handlebars
+    : require('handlebars');
+if (handlebars === undefined) {
+    throw new Error('Шаблонизатор не был загружен');
+}
+
+export default class Block {
     static EVENTS = {
         INIT: 'init',
         FLOW_CDM: 'flow:component-did-mount',
@@ -74,8 +82,11 @@ export default abstract class Block {
         if (!nextProps) {
             return;
         }
+        const newProps = Object.assign({}, this.props, nextProps);
 
-        Object.assign(this.props, nextProps);
+        if (!isEqual(this.props, newProps)) {
+            Object.assign(this.props, nextProps);
+        }
     };
 
     public setChild = (child: BlockChild, cssSelector: string): void => {
@@ -104,17 +115,37 @@ export default abstract class Block {
         }
     };
 
+    private _addEvents(): void {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach(eventName => {
+            this._element.addEventListener(eventName, events[eventName]);
+        });
+    }
+
+    private _removeEvents(): void {
+        const { events = {} } = this.props;
+
+        Object.keys(events).forEach(eventName => {
+            this._element.removeEventListener(eventName, events[eventName]);
+        });
+    }
+
     get element(): HTMLElement {
         return this._element;
     }
 
     private _render() {
         const block = this.render();
-        this._element.innerHTML = Handlebars.compile(block)(this.props);
+        this._removeEvents();
+        this._element.innerHTML = handlebars.compile(block)(this.props);
         this._updateChildren();
+        this._addEvents();
     }
 
-    public render(): string | void {}
+    public render(): string {
+        return '<div>Default Template</div>';
+    }
 
     private _makePropsProxy(props: BlockProps) {
         const proxyProps = new Proxy(props, {

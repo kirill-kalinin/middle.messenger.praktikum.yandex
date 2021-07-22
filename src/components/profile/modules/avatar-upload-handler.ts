@@ -32,7 +32,7 @@ export default class AvatarUploadHandler {
     }
 
     private _queryElements() {
-        this._form = this._component.querySelector('form[name=avatar-upload]');
+        this._form = this._component.querySelector('form[name=avatar]');
         if (this._form === null) {
             return;
         }

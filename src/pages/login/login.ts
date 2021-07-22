@@ -1,7 +1,9 @@
 import Page from '../../core/k-react/page';
 import Auth from '../../components/auth/auth';
-import Form, { formLoginPreset } from '../../components/form/form';
-import Sidebar, { sidebarLoginPreset } from '../../components/sidebar/sidebar';
+import Form from '../../components/form/form';
+import { formLoginPreset } from '../../components/form/presets/auth-forms';
+import Sidebar from '../../components/sidebar/sidebar';
+import { sidebarLoginPreset } from '../../components/sidebar/presets/sidebars';
 import Button from '../../components/button/button';
 
 export default function createPageLogin(): Page {
