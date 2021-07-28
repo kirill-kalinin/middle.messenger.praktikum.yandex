@@ -1,4 +1,4 @@
-import AvatarPlaceholder from 'url:../../../static/images/avatar-placeholder.svg';
+import AvatarPlaceholder from '../../../static/images/avatar-placeholder.svg';
 
 export default `
     <div class="contact{{#if active}} contact_active{{/if}}" data-id="{{id}}" >

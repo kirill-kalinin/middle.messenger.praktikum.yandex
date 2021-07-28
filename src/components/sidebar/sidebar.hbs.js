@@ -1,4 +1,4 @@
-import ImageUrlLogo from 'url:../../../static/images/logo.svg';
+import ImageUrlLogo from '../../../static/images/logo.svg';
 
 export default `
     <aside class="sidebar {{parent}}__sidebar">

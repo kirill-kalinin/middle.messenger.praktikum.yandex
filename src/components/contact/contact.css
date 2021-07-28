@@ -89,11 +89,6 @@
     visibility: visible;
 }
 
-.contact__last-date {
-    display: flex;
-    flex-direction: column;
-}
-
 .contact__name,
 .contact__last-message,
 .contact__last-date {
@@ -125,6 +120,8 @@
 }
 
 .contact__last-date {
+    display: flex;
+    flex-direction: column;
     text-align: right;
     font-size: 0.875em;
     @media (--width-md), (--height-md) {

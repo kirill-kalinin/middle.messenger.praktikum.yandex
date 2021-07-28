@@ -1,5 +1,5 @@
-import ImageUrlButtonAttach from 'url:../../../static/images/button-attach.svg';
-import ImageUrlButtonSend from 'url:../../../static/images/button-send.svg';
+import ImageUrlButtonAttach from '../../../static/images/button-attach.svg';
+import ImageUrlButtonSend from '../../../static/images/button-send.svg';
 
 export default `
     <div class="wrapper wrapper_wide">
