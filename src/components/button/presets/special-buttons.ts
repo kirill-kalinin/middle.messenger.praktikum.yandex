@@ -1,4 +1,4 @@
-import ImageUrlArrow from 'url:../../../../static/images/arrow.svg';
+import ImageUrlArrow from '../../../../static/images/arrow.svg';
 import { BlockProps } from '../../../core/types';
 
 export const profileSidebarButtonPreset: BlockProps = {

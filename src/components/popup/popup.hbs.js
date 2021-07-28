@@ -1,4 +1,4 @@
-import ImageUrlClose from 'url:../../../static/images/popup-close.svg';
+import ImageUrlClose from '../../../static/images/popup-close.svg';
 
 export default `
     <div class="popup">

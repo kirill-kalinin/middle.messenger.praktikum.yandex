@@ -1,4 +1,4 @@
-import ImageUrlMark from 'url:../../../static/images/mark-as-readed.svg';
+import ImageUrlMark from '../../../static/images/mark-as-readed.svg';
 
 export default `
     <div class="message{{#if isOwn}} message_own{{/if}}{{#if isImage}} message_image{{/if}}">

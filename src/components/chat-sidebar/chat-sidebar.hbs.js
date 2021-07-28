@@ -1,6 +1,6 @@
-import ImageUrlToolbarRemove from 'url:../../../static/images/toolbar-remove.svg';
-import ImageUrlToolbarAdd from 'url:../../../static/images/toolbar-add.svg';
-import ImageUrlToolbarProfile from 'url:../../../static/images/toolbar-profile.svg';
+import ImageUrlToolbarRemove from '../../../static/images/toolbar-remove.svg';
+import ImageUrlToolbarAdd from '../../../static/images/toolbar-add.svg';
+import ImageUrlToolbarProfile from '../../../static/images/toolbar-profile.svg';
 
 export default `
     <div class="chat-sidebar">

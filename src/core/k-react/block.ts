@@ -3,17 +3,7 @@ import EventBus from '../../modules/event-bus/event-bus';
 import isEqual from '../../utils/mydash/is-equal/is-equal';
 import type { BlockChild, BlockMeta, BlockProps } from '../../core/types';
 
-// Подключение через CDN пока нет Webpack, с Parcel сборка получается с багом
-// https://github.com/handlebars-lang/handlebars.js/issues/1593
-// https://github.com/parcel-bundler/parcel/issues/1747
-
-const handlebars = typeof window === 'object'
-// eslint-disable-next-line @typescript-eslint/no-explicit-any 
-    ? (window as any).Handlebars
-    : require('handlebars');
-if (handlebars === undefined) {
-    throw new Error('Шаблонизатор не был загружен');
-}
+import * as handlebars from 'handlebars';
 
 export default class Block {
     static EVENTS = {
