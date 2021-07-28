@@ -1,3 +1,5 @@
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 
@@ -8,11 +10,11 @@ module.exports = {
     ],
     output: {
         path: path.resolve(__dirname, 'dist'),
-        publicPath: '',
         filename: 'bundle.js'
     },
     devServer: {
-        static: path.join(__dirname, 'dist'),
+        static: path.resolve(__dirname, 'dist'),
+        historyApiFallback: true,
         compress: true,
         port: 9000
     },
@@ -23,6 +25,8 @@ module.exports = {
         }
     },
     plugins: [
+        new CleanWebpackPlugin(),
+        new MiniCssExtractPlugin(),
         new CopyWebpackPlugin({
             patterns: [
                 {
@@ -50,7 +54,7 @@ module.exports = {
             }, {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
